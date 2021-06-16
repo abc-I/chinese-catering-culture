@@ -17,3 +17,4 @@
 - 6.15 22:37 FanHoozy Update SearchPage
 - 6.15 23:24 FanHoozy Add Personal,BrowsingHistory
 - 6.15 23:49 FanHoozy Add Administrator
+- 6.16 13:55 abc-I Update ShiroConfig
