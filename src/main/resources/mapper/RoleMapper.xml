@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bearer.mapper.RoleMapper">
+
+    <select id="selectRolesByUserId" resultType="java.lang.String">
+        select `role`.`role`
+        from `cul_user_role` AS `ur`
+            INNER JOIN `cul_user` AS `user`
+                ON `user`.`id` = `ur`.`user_id`
+            INNER JOIN `cul_role` AS `role`
+                ON `role`.`id` = `ur`.`role_id`
+        where `user`.`id` = #{id};
+    </select>
+</mapper>

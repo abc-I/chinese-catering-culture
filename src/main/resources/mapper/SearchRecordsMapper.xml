@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bearer.mapper.SearchRecordsMapper">
+
+    <insert id="save">
+        insert into `cul_search_records`
+            (`user_id`, `search_content`, `search_time`)
+        VALUES
+            (#{userId},#{searchContent},#{searchTime})
+    </insert>
+
+    <select id="selectSearchRecordsByUserId" resultType="java.lang.String">
+        select `search_content`
+        from `cul_search_records`
+        where `user_id` = #{userId};
+    </select>
+</mapper>

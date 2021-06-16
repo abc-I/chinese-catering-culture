@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  ssl:
+    enabled: true
+    key-store-type: JKS
+    key-store: classpath:SpringBoot.keystore
+    key-alias: SpringBoot
+    key-password: 123456
+    key-store-password: 123456
+
+spring:
+  profiles:
+    include: mapper,service
+
+logging:
+  file:
+    name: log/warn.log
+  level:
+    com.inet: warn
