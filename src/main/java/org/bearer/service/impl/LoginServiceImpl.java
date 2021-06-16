@@ -17,15 +17,6 @@ import java.util.HashMap;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    @Value("login.appId")
-    private String appId;
-
-    @Value("login.secret")
-    private String secret;
-
-    @Value("login.grant_type")
-    private String grantType;
-
     private OpenIdJson openIdJson;
 
     public void setLoginServiceImpl(OpenIdJson openIdJson) {
@@ -36,10 +27,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String weChatLogin(String code) {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("appid=", appId);
-        params.put("secret=", secret);
+        params.put("appid=", "wxdee121275a45d41c");
+        params.put("secret=", "eca8da38d547096c1341e6263519a617");
         params.put("js_code=", "003uVK0w3Md5zW2O0V0w3L9oR60uVK06");
-        params.put("grant_type", grantType);
+        params.put("grant_type", "authorization_code");
 
         try {
             String result = HttpUtil.doGet("https://api.weixin.qq.com/sns/jscode2session?", params);
