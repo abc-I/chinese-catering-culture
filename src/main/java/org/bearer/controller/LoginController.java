@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.bearer.entity.Result;
 import org.bearer.entity.dto.UserLogin;
 import org.bearer.service.LoginService;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +23,10 @@ public class LoginController {
     @PostMapping("/weChatLogin")
     public String weChatLogin(@RequestBody UserLogin userLogin) {
         return loginService.weChatLogin(userLogin);
+    }
+
+    @PostMapping("/adminLogin")
+    public Result adminLogin(@RequestBody UserLogin userLogin) {
+        return loginService.adminLogin(userLogin);
     }
 }

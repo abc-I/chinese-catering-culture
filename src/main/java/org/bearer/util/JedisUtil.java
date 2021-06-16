@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 
 /**
@@ -14,10 +15,15 @@ import java.io.Serializable;
 @Component
 public class JedisUtil {
 
-    @Autowired
-    private static RedisTemplate<Serializable, Object> redisTemplate;
+    private RedisTemplate<Serializable, Object> redisTemplate;
 
-    public static RedisTemplate<Serializable,Object> getRedisTemplate() {
+    @Resource(name = "template")
+    public void setJedisUtil(RedisTemplate<Serializable, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    public RedisTemplate<Serializable,Object> getRedisTemplate() {
+        System.out.println(redisTemplate);
         return redisTemplate;
     }
 }

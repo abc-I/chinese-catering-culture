@@ -19,4 +19,8 @@ public class UserLogin implements Serializable {
     private String secret;
 
     private String code;
+
+    private String account;
+
+    private String password;
 }

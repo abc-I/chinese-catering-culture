@@ -1,5 +1,6 @@
 package org.bearer.service;
 
+import org.bearer.entity.Result;
 import org.bearer.entity.dto.UserLogin;
 
 /**
@@ -9,4 +10,6 @@ import org.bearer.entity.dto.UserLogin;
  */
 public interface LoginService {
     String weChatLogin(UserLogin login);
+
+    Result adminLogin(UserLogin userLogin);
 }

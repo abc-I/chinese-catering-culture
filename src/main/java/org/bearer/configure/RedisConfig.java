@@ -58,7 +58,7 @@ public class RedisConfig {
 
     @Primary
     @Bean
-    public RedisTemplate<Serializable, Object> redisTemplate() {
+    public RedisTemplate<Serializable, Object> template() {
         RedisTemplate<Serializable, Object> redisTemplateObject = new RedisTemplate<>();
         redisTemplateObject.setConnectionFactory(redisConnectionFactory());
         setSerializer(redisTemplateObject);
@@ -115,7 +115,11 @@ public class RedisConfig {
         //通过构造器来构造jedis客户端配置
         JedisClientConfiguration jedisClientConfiguration = jpcb.build();
         //单机配置 + 客户端配置 = jedis连接工厂
-        return new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration);
+        JedisConnectionFactory factory =
+                new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration);
+        factory.afterPropertiesSet();
+
+        return factory;
     }
 
     /**

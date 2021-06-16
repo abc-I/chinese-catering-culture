@@ -39,7 +39,6 @@ public class MyRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         User user = (User) principalCollection.getPrimaryPrincipal();
-        System.out.println(user);
 
         Set<String> roles = roleMapper.selectRolesByUserId(user.getId());
 
@@ -51,9 +50,9 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
-        String username = (String) authenticationToken.getPrincipal();
+        String account = (String) authenticationToken.getPrincipal();
 
-        User user = userMapper.selectOne(username);
+        User user = userMapper.selectOne(account);
 
         if (user == null) {
             throw new UnknownAccountException("用户不存在！");

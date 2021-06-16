@@ -10,5 +10,5 @@ import org.bearer.entity.po.User;
  */
 @Mapper
 public interface UserMapper {
-    User selectOne(String username);
+    User selectOne(String account);
 }

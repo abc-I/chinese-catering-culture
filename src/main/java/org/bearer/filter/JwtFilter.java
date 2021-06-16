@@ -83,7 +83,8 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
                                      ServletRequest request, ServletResponse response) {
-        RedisTemplate<Serializable,Object> template = JedisUtil.getRedisTemplate();
+
+        RedisTemplate<Serializable,Object> template = new JedisUtil().getRedisTemplate();
 
         Boolean bool = template.hasKey(token);
         if (bool != null && bool) {
