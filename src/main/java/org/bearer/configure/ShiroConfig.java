@@ -42,11 +42,9 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig extends ShiroConfiguration {
     private final AuthorizingRealm myRealm;
-    private final JedisPoolConfig jedisPoolConfig;
 
-    public ShiroConfig(AuthorizingRealm myRealm, JedisPoolConfig jedisPoolConfig) {
+    public ShiroConfig(AuthorizingRealm myRealm) {
         this.myRealm = myRealm;
-        this.jedisPoolConfig = jedisPoolConfig;
     }
 
     @Bean
@@ -88,10 +86,6 @@ public class ShiroConfig extends ShiroConfiguration {
     public DefaultWebSecurityManager mySecurityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(myRealm());
-        defaultWebSecurityManager.setSubjectDAO(subjectDAO());
-        defaultWebSecurityManager.setSessionManager(sessionManager());
-        defaultWebSecurityManager.setAuthenticator(authenticator());
-        defaultWebSecurityManager.setCacheManager(cacheManager());
         return defaultWebSecurityManager;
     }
 
@@ -100,59 +94,5 @@ public class ShiroConfig extends ShiroConfiguration {
         matcher.setHashIterations(10);
         myRealm.setCredentialsMatcher(matcher);
         return myRealm;
-    }
-
-    @Override
-    protected SubjectDAO subjectDAO() {
-        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-        subjectDAO.setSessionStorageEvaluator(sessionStorageEvaluator());
-        return subjectDAO;
-    }
-
-    @Override
-    public SessionStorageEvaluator sessionStorageEvaluator() {
-        DefaultSessionStorageEvaluator sessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-        sessionStorageEvaluator.setSessionStorageEnabled(true);
-        return sessionStorageEvaluator;
-    }
-
-    @Override
-    protected Authenticator authenticator() {
-        ModularRealmAuthenticator modularRealmAuthenticator = new ModularRealmAuthenticator();
-        modularRealmAuthenticator.setRealms(Collections.singletonList(myRealm()));
-        modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
-        return modularRealmAuthenticator;
-    }
-
-    @Override
-    protected SessionManager sessionManager() {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setSessionDAO(sessionDAO());
-        sessionManager.setCacheManager(cacheManager());
-        return sessionManager;
-    }
-
-    @Override
-    protected SessionDAO sessionDAO() {
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
-        redisSessionDAO.setExpire(60 * 60 * 24);
-        return redisSessionDAO;
-    }
-
-    @Bean
-    public CacheManager cacheManager() {
-        RedisCacheManager cacheManager = new RedisCacheManager();
-        cacheManager.setRedisManager(redisManager());
-        cacheManager.setPrincipalIdFieldName("username");
-        cacheManager.setExpire(60 * 60 * 24);
-        return cacheManager;
-    }
-
-    @Bean
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        redisManager.setJedisPoolConfig(jedisPoolConfig);
-        return redisManager;
     }
 }

@@ -20,8 +20,8 @@ public class TestController {
         this.testMapper = testMapper;
     }
 
-    @GetMapping("/test/{id}")
-    public void test(@PathVariable String id) {
+    @GetMapping("/test")
+    public void test() {
         testMapper.get();
         System.out.println("a");
     }

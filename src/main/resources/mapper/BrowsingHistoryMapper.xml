@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.bearer.mapper.BrowsingHistoryMapper">
+    <select id="selectBrowsingHistoryByUserId" resultType="org.bearer.entity.vo.BrowsingHistory">
+        select `art`.`id`,`video`.`id`,`art`.`picture_url`,`video`.`picture_url`,`art`.`title`,`video`.`title`
+             ,`user`.`username`,`mat`.`material`,`cui`.`category`
+        from `cul_article` AS `art`
+            INNER JOIN `cul_user` AS `user`
+                ON `user`.`id` = `art`.`author_id`
+            INNER JOIN `cul_cuisine` AS `cui`
+                ON `cui`.`id` = `art`.`cuisine_id`
+            INNER JOIN `cul_material` AS `mat`
+                ON `mat`.`id` = `art`.`material_id`
+            INNER JOIN `cul_browsing_history` AS `bh`
+                ON `bh`.`article_id`=`art`.`id`
+            INNER JOIN `cul_video` AS `video`
+                ON `bh`.`video_id`=`video`.`id`
+        where `bh`.`user_id` = ${userId};
+    </select>
+</mapper>

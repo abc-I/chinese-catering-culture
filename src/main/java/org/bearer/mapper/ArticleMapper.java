@@ -37,4 +37,8 @@ public interface ArticleMapper {
      * @return List<Article>
      */
     List<Article> selectArticleSearchByTitle(String searchContent);
+
+    List<Article> selectArticleSearchByAuthorId(String authorId);
+
+    Boolean deleteById(String id);
 }

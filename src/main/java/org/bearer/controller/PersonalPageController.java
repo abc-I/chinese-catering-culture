@@ -37,5 +37,4 @@ public class PersonalPageController {
         List<BrowsingHistory> browsingHistories = personalService.getBrowsingHistory(userId);
         return Result.result200(browsingHistories);
     }
-
 }

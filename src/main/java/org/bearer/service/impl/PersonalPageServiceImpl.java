@@ -3,6 +3,7 @@ package org.bearer.service.impl;
 import org.bearer.entity.vo.Article;
 import org.bearer.entity.vo.BrowsingHistory;
 import org.bearer.mapper.ArticleMapper;
+import org.bearer.mapper.BrowsingHistoryMapper;
 import org.bearer.service.PersonalPageService;
 import org.springframework.stereotype.Service;
 
