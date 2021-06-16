@@ -1,5 +1,6 @@
 package org.bearer.service.impl;
 
+import org.bearer.entity.dto.UserLogin;
 import org.bearer.entity.po.OpenIdJson;
 import org.bearer.service.LoginService;
 import org.bearer.util.HttpUtil;
@@ -25,11 +26,11 @@ public class LoginServiceImpl implements LoginService {
 
 
     @Override
-    public String weChatLogin(String code) {
+    public String weChatLogin(UserLogin login) {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("appid=", "wxdee121275a45d41c");
-        params.put("secret=", "eca8da38d547096c1341e6263519a617");
-        params.put("js_code=", "003uVK0w3Md5zW2O0V0w3L9oR60uVK06");
+        params.put("appid=", login.getAppId());
+        params.put("secret=", login.getSecret());
+        params.put("js_code=", login.getCode());
         params.put("grant_type", "authorization_code");
 
         try {

@@ -19,3 +19,4 @@
 - 6.15 23:49 FanHoozy Add Administrator
 - 6.16 13:55 abc-I Update ShiroConfig
 - 6.16 15:10 abc-I Update ShiroConfig;Add BrowsingHistoryMapper
+- 6.16 18:10 abc-I Update Video,SearchRecordsDTO,LoginController,LoginService

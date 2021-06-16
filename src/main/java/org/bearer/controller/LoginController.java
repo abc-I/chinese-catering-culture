@@ -1,10 +1,8 @@
 package org.bearer.controller;
 
+import org.bearer.entity.dto.UserLogin;
 import org.bearer.service.LoginService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Li
@@ -22,7 +20,7 @@ public class LoginController {
     }
 
     @PostMapping("/weChatLogin")
-    public String weChatLogin(@RequestParam("code") String code) {
-        return loginService.weChatLogin(code);
+    public String weChatLogin(@RequestBody UserLogin userLogin) {
+        return loginService.weChatLogin(userLogin);
     }
 }

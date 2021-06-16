@@ -39,8 +39,8 @@ public class Video implements Serializable {
     /**
      * 视频截图
      */
-    @TableField(value = "video_img")
-    private String videoImg;
+    @TableField(value = "picture_url")
+    private String pictureUrl;
 
     /**
      * 是否审核
