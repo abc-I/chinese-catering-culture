@@ -23,6 +23,7 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPoolConfig;
@@ -37,6 +38,7 @@ import java.util.Map;
  * @version 1.0
  * @date Created in 2021/4/7 13:23
  */
+@ConditionalOnClass({RedisConfig.class})
 @Configuration
 public class ShiroConfig extends ShiroConfiguration {
     private final AuthorizingRealm myRealm;
