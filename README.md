@@ -20,3 +20,4 @@
 - 6.16 13:55 abc-I Update ShiroConfig
 - 6.16 15:10 abc-I Update ShiroConfig;Add BrowsingHistoryMapper
 - 6.16 18:10 abc-I Update Video,SearchRecordsDTO,LoginController,LoginService
+- 6.16 22:45 abc-I Update Login,RedisConfig,ShiroConfig
