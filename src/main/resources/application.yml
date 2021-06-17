@@ -1,12 +1,8 @@
 server:
   port: 8080
   ssl:
-    enabled: true
-    key-store-type: JKS
-    key-store: classpath:SpringBoot.keystore
-    key-alias: SpringBoot
-    key-password: 123456
-    key-store-password: 123456
+    key-store: classpath:www.lizhanfeng.xyz.jks
+    key-store-password: 4ok86us6853608
 
 spring:
   datasource:

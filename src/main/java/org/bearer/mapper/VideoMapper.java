@@ -42,4 +42,10 @@ public interface VideoMapper {
     int selectPraise(String id);
 
     int updatePraise(Ids ids);
+
+    List<Video> selectListByIsExamined(int start, int end);
+
+    int selectCount();
+
+    Boolean updateIsExaminedById(String id);
 }

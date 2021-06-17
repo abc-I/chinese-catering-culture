@@ -1,9 +1,9 @@
 package org.bearer.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author fanyuhongzhe
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @date 6/17/21 9:38 AM
  */
 @Data
-public class User implements Serializable {
+public class UserVO implements Serializable {
 
     private static final long serialVersionUID = -5846953716457613252L;
 
@@ -29,4 +29,9 @@ public class User implements Serializable {
      * 是否封号
      */
     private Boolean locked;
+
+    /**
+     * 角色
+     */
+    private List<String> roles;
 }

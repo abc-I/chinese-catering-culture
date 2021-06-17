@@ -13,9 +13,85 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
+    <resultMap id="userVO" type="org.bearer.entity.vo.UserVO">
+        <result property="account" column="account"/>
+        <result property="locked" column="is_locked"/>
+        <result property="username" column="username"/>
+
+        <collection property="roles" ofType="string" resultMap="roles"/>
+    </resultMap>
+
+    <resultMap id="roles" type="list">
+        <result column="role"/>
+    </resultMap>
+
+    <update id="updateIsLockedByAccount">
+        update `cul_user`
+        set `is_locked` = 1
+        where `account` = ${account};
+    </update>
+
+    <update id="updatePasswordByAccount">
+        update `cul_user`
+        set `password`
+    </update>
+
     <select id="selectOne" resultMap="userMap">
         select *
         from `cul_user`
         where `account` = #{account};
+    </select>
+
+    <select id="selectUserList" resultMap="userVO">
+        select `account`, `is_locked`, `username`
+        from `cul_user` LIMIT ${start},${end};
+    </select>
+
+    <select id="selectCountUser" resultType="java.lang.Integer">
+        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        from `cul_user` AS `user`
+            INNER JOIN `cul_user_role` AS `ur`
+                ON `ur`.`user_id` = `user`.`id`
+            INNER JOIN `cul_role` AS `role`
+                ON `ur`.`role_id` = `role`.`id`
+        where `user`.`account` = ${account}
+          AND `role`.`role` = 'user';
+    </select>
+
+    <select id="selectUserByAccount" resultMap="userVO">
+        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        from `cul_user` AS `user`
+            INNER JOIN `cul_user_role` AS `ur`
+                ON `ur`.`user_id` = `user`.`id`
+            INNER JOIN `cul_role` AS `role`
+                ON `ur`.`role_id` = `role`.`id`
+        where `user`.`account` = ${account}
+          AND `role`.`role` = 'user';
+    </select>
+
+    <select id="selectUserByUserRole" resultMap="userVO">
+        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        from `cul_user` AS `user`
+            INNER JOIN `cul_user_role` AS `ur`
+                ON `ur`.`user_id` = `user`.`id`
+            INNER JOIN `cul_role` AS `role`
+                ON `ur`.`role_id` = `role`.`id`
+        where `user`.`account` = ${account}
+          AND `role`.`role` = 'admin';
+    </select>
+
+    <select id="selectCountAdmin" resultType="java.lang.Integer">
+        select count(*) from `cul_user` AS `user`
+        INNER JOIN `cul_user_role` AS `ur`
+            ON `ur`.`user_id` = `user`.`id`
+        INNER JOIN `cul_role` AS `role`
+            ON `ur`.`role_id` = `role`.`id`
+        where `role`.`role` = 'admin';
+    </select>
+
+    <select id="selectByAccountAndPassword" resultType="org.bearer.entity.po.User">
+        select *
+        from `cul_user`
+        where `account` = ${account};
     </select>
 </mapper>

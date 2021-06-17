@@ -46,4 +46,12 @@ public interface ArticleMapper {
     int selectPraise(String id);
 
     int updatePraise(Ids ids);
+
+    List<Article> selectListByIsExamined(int start, int end);
+
+    int selectCount();
+
+    String selectArticleById(String id);
+
+    Boolean updateIsExaminedById(String id);
 }

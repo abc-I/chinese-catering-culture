@@ -9,4 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserRoleMapper {
+    Boolean updateAdminByAccount(String account);
+
+    Boolean updateUserByAccount(String account);
 }

@@ -1,13 +1,8 @@
 package org.bearer.service;
 
 
-import org.bearer.entity.dto.UserDTO;
-import org.bearer.entity.vo.Admin;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.User;
-import org.bearer.entity.vo.Video;
-
-import java.util.List;
+import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.vo.*;
 
 /**
  * @author fanyuhongzhe
@@ -27,14 +22,14 @@ public interface AdministratorService {
      * get users
      * @return
      */
-    List<User> getUsers(int item, int page);
+    Page getUsers(int currentPage, int pageSize);
 
     /**
      * get users by account
      * @param account
      * @return
      */
-    List<User> getUsersByAccount(String account);
+    UserVO getUsersByAccount(String account);
 
     /**
      * lock users account
@@ -47,7 +42,7 @@ public interface AdministratorService {
      * get admins
      * @return list of admins
      */
-    List<Admin> getAdmins();
+    Page getAdmins(int currentPage, int pageSize);
 
     /**
      * add admins
@@ -64,16 +59,16 @@ public interface AdministratorService {
 
     /**
      * change password
-     * @param userDTO
+     * @param login
      * @return if changed
      */
-    Boolean changePassword(UserDTO userDTO);
+    Boolean changePassword(UserLogin login);
 
     /**
      * get article list
      * @return List of Articles
      */
-    List<Article> getArticleList();
+    Page getArticleList(int currentPage, int pageSize);
 
     /**
      * get article content by id
@@ -93,7 +88,7 @@ public interface AdministratorService {
      * get videos
      * @return list of videos
      */
-    List<Video> getVideos();
+    Page getVideos(int currentPage, int pageSize);
 
     /**
      * examine video by id

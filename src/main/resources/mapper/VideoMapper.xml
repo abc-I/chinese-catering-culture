@@ -7,6 +7,11 @@
         set `praise`=`praise` + 1;
     </update>
 
+    <update id="updateIsExaminedById">
+        update `cul_video`
+        set `is_examined` = 1;
+    </update>
+
     <select id="selectList" resultType="org.bearer.entity.vo.Video">
         select `video`.`id`, `video`.`title`, `video`.`picture_url`, `user`.`username`
              , `cui`.`category`, `mat`.`material`
@@ -53,5 +58,24 @@
         select `praise`
         from `cul_video`
         where `id` = #{id};
+    </select>
+
+    <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.Video">
+        select `video`.`id`, `video`.`title`, `video`.`picture_url`, `user`.`username`
+             , `cui`.`category`, `mat`.`material`
+        from `cul_video` AS `video`
+            INNER JOIN `cul_user` AS `user`
+                ON `user`.`id` = `video`.`author_id`
+            INNER JOIN `cul_cuisine` AS `cui`
+                ON `cui`.`id` = `video`.`cuisine_id`
+            INNER JOIN `cul_material` AS `mat`
+                ON `mat`.`id` = `video`.`material_id`
+        where `is_examined` = 0 LIMIT ${start},${end};
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from `cul_video`
+        where `is_examined` = 0;
     </select>
 </mapper>

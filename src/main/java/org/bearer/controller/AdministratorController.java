@@ -2,7 +2,7 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
-import org.bearer.entity.dto.UserDTO;
+import org.bearer.entity.dto.UserLogin;
 import org.bearer.service.AdministratorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,16 +27,16 @@ public class AdministratorController {
      */
     @DeleteMapping(value = "/articleDelete")
     public Result deleteArticle(@RequestBody Ids id) {
-        return Result.result200(administratorService.deleteArticle(id.getArticleId()));
+        return Result.result200(administratorService.deleteArticle(id.getId()));
     }
 
     /**
      * get all users
      * @return Result contains list of users
      */
-    @GetMapping(value = "/getUsers/{item}/{page}")
-    public Result getUsers(@PathVariable int item, @PathVariable int page) {
-        return Result.result200(administratorService.getUsers(item, page));
+    @GetMapping(value = "/getUsers/{currentPage}/{pageSize}")
+    public Result getUsers(@PathVariable int currentPage, @PathVariable int pageSize) {
+        return Result.result200(administratorService.getUsers(currentPage, pageSize));
     }
 
 
@@ -64,9 +64,9 @@ public class AdministratorController {
      * get admins
      * @return Result contains list of admins
      */
-    @GetMapping(value = "/getAdmin")
-    public Result getAdmins() {
-        return Result.result200(administratorService.getAdmins());
+    @GetMapping(value = "/getAdmin/{currentPage}/{pageSize}")
+    public Result getAdmins(@PathVariable int currentPage,@PathVariable int pageSize) {
+        return Result.result200(administratorService.getAdmins(currentPage, pageSize));
     }
 
     /**
@@ -89,21 +89,22 @@ public class AdministratorController {
 
     /**
      * change password
-     * @param userDTO
+     * @param login
      * @return Result contains if changed
      */
     @PostMapping(value = "/password")
-    public Result changePassword(@RequestBody UserDTO userDTO) {
-        return Result.result200(administratorService.changePassword(userDTO));
+    public Result changePassword(@RequestBody UserLogin login) {
+        return Result.result200(administratorService.changePassword(login));
     }
 
     /**
      * get not examined articles list
+     *
      * @return Result contains list of articles not examined articles
      */
-    @GetMapping(value = "/articleList")
-    public Result getArticleList() {
-        return Result.result200(administratorService.getArticleList());
+    @GetMapping(value = "/articleList/{currentPage}/{pageSize}")
+    public Result getArticleList(@PathVariable int currentPage, @PathVariable int pageSize) {
+        return Result.result200(administratorService.getArticleList(currentPage, pageSize));
     }
 
     /**
@@ -111,7 +112,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains article content
      */
-    @GetMapping(value = "/content")
+    @GetMapping(value = "/content/{id}")
     public Result getArticleContent(@PathVariable String id) {
         return Result.result200(administratorService.getArticleContent(id));
     }
@@ -121,18 +122,19 @@ public class AdministratorController {
      * @param id
      * @return Result contains if successful
      */
-    @PostMapping(value = "/examineArticle")
+    @PostMapping(value = "/examineArticle/{id}")
     public Result examineArticle(@PathVariable String id) {
         return Result.result200(administratorService.examineArticle(id));
     }
 
     /**
      * get videos not examined
+     *
      * @return Result contains list of videos not examined
      */
-    @GetMapping(value = "/video")
-    public Result getVideos() {
-        return Result.result200(administratorService.getVideos());
+    @GetMapping(value = "/video/{currentPage}/{pageSize}")
+    public Result getVideos(@PathVariable int currentPage, @PathVariable int pageSize) {
+        return Result.result200(administratorService.getVideos(currentPage, pageSize));
     }
 
     /**

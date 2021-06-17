@@ -1,15 +1,16 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.dto.UserDTO;
-import org.bearer.entity.vo.Admin;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.User;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.dto.PageDTO;
+import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.po.User;
+import org.bearer.entity.vo.*;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.UserMapper;
 import org.bearer.mapper.UserRoleMapper;
 import org.bearer.mapper.VideoMapper;
 import org.bearer.service.AdministratorService;
+import org.bearer.util.MD5Util;
+import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,22 +47,30 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * get users
      *
-     * @return list of User
+     * @return list of UserVO
      */
     @Override
-    public List<User> getUsers(int item, int page) {
+    public Page getUsers(int currentPage, int pageSize) {
+        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
+
+        int start = PageUtil.getStart(pageDTO);
+        int end = PageUtil.getEnd(pageDTO);
+
         // 获取user表中从第一个参数到第二个参数的User类
-        return userMapper.selectUserList(item*(page-1),(item*(page-1)+item));
+        List<UserVO> users = userMapper.selectUserList(start, end);
+        int total = userMapper.selectCountUser();
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), users);
     }
 
     /**
      * get users by account
      *
      * @param account
-     * @return list of User
+     * @return list of UserVO
      */
     @Override
-    public List<User> getUsersByAccount(String account) {
+    public UserVO getUsersByAccount(String account) {
         // 根据用户的account获取User对象
         return userMapper.selectUserByAccount(account);
     }
@@ -84,9 +93,17 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return list of admins
      */
     @Override
-    public List<Admin> getAdmins() {
+    public Page getAdmins(int currentPage, int pageSize) {
+        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
+
+        int start = PageUtil.getStart(pageDTO);
+        int end = PageUtil.getEnd(pageDTO);
+
         // 根据用户的role列出管理员账号
-        return userMapper.selectUserByUserRole();
+        List<UserVO> admins = userMapper.selectUserByUserRole(start, end);
+        int total = userMapper.selectCountAdmin();
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), admins);
     }
 
     /**
@@ -115,14 +132,25 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * change password
      *
-     * @param userDTO
+     * @param login
      * @return if changed
      */
     @Override
-    public Boolean changePassword(UserDTO userDTO) {
+    public Boolean changePassword(UserLogin login) {
+        User user = userMapper.selectByAccountAndPassword(login.getAccount());
+
+        String oldPassword;
+        if (user != null) {
+            oldPassword = MD5Util.parse(login.getOldPassword(), user.getSalt());
+        }else {
+            return false;
+        }
+
+        String password = MD5Util.parse(login.getPassword(), user.getSalt());
+
         // 根据用户的account和password修改密码
-        if (userMapper.selectByAccountAndPassword(userDTO.getAccount(), userDTO.getPassword()) != null) {
-            return userMapper.updatePasswordByAccount(userDTO.getAccount(), userDTO.getPassword());
+        if (oldPassword.equals(user.getPassword())) {
+            return userMapper.updatePasswordByAccount(login.getAccount(), password);
         }
         return false;
     }
@@ -133,9 +161,17 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return List of Articles
      */
     @Override
-    public List<Article> getArticleList() {
+    public Page getArticleList(int currentPage, int pageSize) {
+        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
+
+        int start = PageUtil.getStart(pageDTO);
+        int end = PageUtil.getEnd(pageDTO);
+
         // 列出未审核的文章列表 需要`id`,`title`,`category`,`material`,`pictureUrl`
-        return articleMapper.selectListByIsExamined();
+        List<Article> articles = articleMapper.selectListByIsExamined(start, end);
+        int total = articleMapper.selectCount();
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), articles);
     }
 
     /**
@@ -168,9 +204,17 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return list of videos
      */
     @Override
-    public List<Video> getVideos() {
+    public Page getVideos(int currentPage, int pageSize) {
+        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
+
+        int start = PageUtil.getStart(pageDTO);
+        int end = PageUtil.getEnd(pageDTO);
+
         // 列出未审核的视频列表 需要`id`,`title`,`videoUrl`,`category`,`material`,`pictureUrl`
-        return videoMapper.selectListByIsExamined();
+        List<Video> videos = videoMapper.selectListByIsExamined(start,end);
+        int total = videoMapper.selectCount();
+
+        return new Page(total, PageUtil.getPageCount(total, pageDTO.getPageSize()), videos);
     }
 
     /**

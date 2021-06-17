@@ -23,4 +23,6 @@ public class UserLogin implements Serializable {
     private String account;
 
     private String password;
+
+    private String oldPassword;
 }
