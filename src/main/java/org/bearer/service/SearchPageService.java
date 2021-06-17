@@ -19,14 +19,15 @@ public interface SearchPageService {
      * @param searchRecordsDTO
      * @return list of List<ArticleSearch>
      */
-    List<Article> getArticleSearchResult(SearchRecordsDTO searchRecordsDTO);
+    List<Article> getArticleSearchResult(String userId, String searchContent);
 
     /**
      * get video search result and save the searchRecords
-     * @param searchRecordsDTO
+     * @param userId
+     * @param searchContent
      * @return list of List<VideoSearch>
      */
-    List<Video> getVideoSearchResult(SearchRecordsDTO searchRecordsDTO);
+    List<Video> getVideoSearchResult(String userId, String searchContent);
 
     /**
      * get all main material

@@ -20,8 +20,8 @@ public class PersonalPageServiceImpl implements PersonalPageService {
 
     @Resource
     private ArticleMapper articleMapper;
-    @Resource
-    private BrowsingHistoryMapper browsingHistoryMapper;
+//    @Resource
+//    private BrowsingHistoryMapper browsingHistoryMapper;
 
     /**
      * get the self articles
@@ -31,7 +31,8 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public List<Article> getSelfArticle(String authorId) {
-        return articleMapper.selectArticleSearchByAuthorId(authorId);
+        return null;
+//        return articleMapper.selectArticleSearchByAuthorId(authorId);
     }
 
     /**
@@ -43,6 +44,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public List<BrowsingHistory> getBrowsingHistory(String userId) {
-        return browsingHistoryMapper.selectBrowsingHistoryByUserId(userId);
+        return null;
+//        return browsingHistoryMapper.selectBrowsingHistoryByUserId(userId);
     }
 }

@@ -36,34 +36,35 @@ public class SearchPageServiceImpl implements SearchPageService {
     /**
      * get article search result and save the searchRecords
      *
-     * @param searchRecordsDTO
+     * @param userId
+     * @param searchContent
      * @return list of List<ArticleSearch>
      */
     @Override
-    public List<Article> getArticleSearchResult(SearchRecordsDTO searchRecordsDTO) {
+    public List<Article> getArticleSearchResult(String userId, String searchContent) {
         SearchRecords searchRecords = new SearchRecords();
 
-        searchRecords.setSearchContent(searchRecordsDTO.getSearchContent());
-        searchRecords.setUserId(searchRecordsDTO.getUserId());
+        searchRecords.setSearchContent(searchContent);
+        searchRecords.setUserId(userId);
         searchRecords.setSearchTime(new Date(System.currentTimeMillis()));
 
         searchRecordsMapper.save(searchRecords);
-        System.out.println(articleMapper.selectArticleSearchByTitle(searchRecords.getSearchContent()));
         return articleMapper.selectArticleSearchByTitle(searchRecords.getSearchContent());
     }
 
     /**
      * get video search result and save the searchRecords
      *
-     * @param searchRecordsDTO
+     * @param userId
+     * @param searchContent
      * @return list of List<VideoSearch>
      */
     @Override
-    public List<Video> getVideoSearchResult(SearchRecordsDTO searchRecordsDTO) {
+    public List<Video> getVideoSearchResult(String userId, String searchContent) {
         SearchRecords searchRecords = new SearchRecords();
 
-        searchRecords.setSearchContent(searchRecordsDTO.getSearchContent());
-        searchRecords.setUserId(searchRecordsDTO.getUserId());
+        searchRecords.setSearchContent(searchContent);
+        searchRecords.setUserId(userId);
         searchRecords.setSearchTime(new Date(System.currentTimeMillis()));
 
         searchRecordsMapper.save(searchRecords);

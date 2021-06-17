@@ -38,36 +38,38 @@ public class SearchPageController {
     /**
      * get dish name
      * @author fanyuhongzhe
-     * @param materialId
+     * @param id
      * @return Result contains list of dish name
      */
-    @GetMapping("/dish/{materialId}")
-    public Result getDishName(@PathVariable String materialId) {
-        List<DishName> dishName = searchPageService.getDishName(materialId);
+    @GetMapping("/dish/{id}")
+    public Result getDishName(@PathVariable String id) {
+        List<DishName> dishName = searchPageService.getDishName(id);
         return Result.result200(dishName);
     }
 
     /**
      * fuzzy search by key word of main material
      * @author fanyuhongzhe
-     * @param searchRecordsDTO
+     * @param userId
+     * @param searchContent
      * @return Result contains the search result of the request
      */
-    @PostMapping("/article")
-    public Result getArticleResult(@RequestBody SearchRecordsDTO searchRecordsDTO) {
-        List<Article> articleSearchList = searchPageService.getArticleSearchResult(searchRecordsDTO);
+    @GetMapping("/article/{userId}/{searchContent}")
+    public Result getArticles(@PathVariable String userId, @PathVariable String searchContent) {
+        List<Article> articleSearchList = searchPageService.getArticleSearchResult(userId, searchContent);
         return Result.result200(articleSearchList);
     }
 
     /**
      * fuzzy search by key word of main material
      * @author fanyuhongzhe
-     * @param searchRecordsDTO
+     * @param userId
+     * @param searchContent
      * @return Result contains the search result of the request
      */
-    @PostMapping("/video")
-    public Result getVideoResult(@RequestBody SearchRecordsDTO searchRecordsDTO) {
-        List<Video> videoSearchList = searchPageService.getVideoSearchResult(searchRecordsDTO);
+    @GetMapping("/video/{userId}/{searchContent}")
+    public Result getVideos(@PathVariable String userId, @PathVariable String searchContent) {
+        List<Video> videoSearchList = searchPageService.getVideoSearchResult(userId, searchContent);
         return Result.result200(videoSearchList);
     }
 
