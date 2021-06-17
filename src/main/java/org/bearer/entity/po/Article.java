@@ -55,6 +55,12 @@ public class Article implements Serializable {
     private Integer recommend;
 
     /**
+     * 点赞数
+     */
+    @TableField(value = "praise")
+    private Integer praise;
+
+    /**
      * 作者id
      */
     @TableField(value = "author_id")

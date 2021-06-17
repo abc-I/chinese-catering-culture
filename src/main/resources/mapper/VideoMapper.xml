@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bearer.mapper.VideoMapper">
 
+    <update id="updatePraise">
+        update `cul_video`
+        set `praise`=`praise` + 1;
+    </update>
+
     <select id="selectList" resultType="org.bearer.entity.vo.Video">
         select `video`.`id`, `video`.`title`, `video`.`picture_url`, `user`.`username`
              , `cui`.`category`, `mat`.`material`
@@ -19,7 +24,7 @@
 
     <select id="selectOne" resultType="org.bearer.entity.vo.Video">
         select `video`.`id`, `video`.`title`, `video`.`video_url`, `video`.`recommend`, `user`.`username`
-             , `video`.`recommend`, `cui`.`category`, `mat`.`material`
+             , `video`.`recommend`,`video`.`praise`, `cui`.`category`, `mat`.`material`
         from `cul_video` AS `video`
             INNER JOIN `cul_user` AS `user`
                 ON `video`.`author_id` = `user`.`id`
@@ -42,5 +47,11 @@
             INNER JOIN `cul_material` AS `mat`
                 ON `mat`.`id` = `video`.`material_id`
         where `video`.`title` like "%"#{searchContent}"%";
+    </select>
+
+    <select id="selectPraise" resultType="java.lang.Integer">
+        select `praise`
+        from `cul_video`
+        where `id` = #{id};
     </select>
 </mapper>

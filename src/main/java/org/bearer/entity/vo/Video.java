@@ -32,7 +32,7 @@ public class Video implements Serializable {
     /**
      * 视频截图url
      */
-    private String picturUrl;
+    private String pictureUrl;
 
     /**
      * 菜系分类
@@ -48,6 +48,11 @@ public class Video implements Serializable {
      * 点击次数
      */
     private Integer recommend;
+
+    /**
+     * 点赞数
+     */
+    private Integer praise;
 
     /**
      * 作者名

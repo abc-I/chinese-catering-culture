@@ -1,6 +1,7 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Video;
 
 import java.util.List;
@@ -37,4 +38,8 @@ public interface VideoMapper {
      * @return List<Video>
      */
     List<Video> selectVideoSearchByTitle(String searchContent);
+
+    int selectPraise(String id);
+
+    int updatePraise(Ids ids);
 }

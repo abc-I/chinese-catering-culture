@@ -1,6 +1,12 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.Ids;
+import org.bearer.entity.vo.Video;
+import org.bearer.entity.po.VideoCollection;
+import org.bearer.entity.vo.Article;
+
+import java.util.List;
 
 /**
  * @author Li
@@ -9,4 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface VideoCollectionMapper {
+    List<Video> selectList(String userId);
+
+    int insertCollection(VideoCollection videoCollection);
+
+    int deleteCollection(Ids ids);
 }

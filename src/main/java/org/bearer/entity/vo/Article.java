@@ -50,6 +50,11 @@ public class Article implements Serializable {
     private Integer recommend;
 
     /**
+     * 点赞数
+     */
+    private Integer praise;
+
+    /**
      * 作者名
      */
     private String username;

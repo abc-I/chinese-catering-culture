@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bearer.mapper.VideoCollectionMapper">
 
+    <insert id="insertCollection">
+        insert into `cul_video_collection`
+            (`id`, `user_id`, `article_id`)
+        VALUES (#{id}, #{userid}, #{videoId});
+    </insert>
+
+    <delete id="deleteCollection">
+        delete
+        from `cul_video_collection`
+        where `user_id` = #{userId}
+          and `video_id` = #{id};
+    </delete>
+
+    <select id="selectList" resultType="org.bearer.entity.vo.Video">
+        select `video`.`id`, `video`.`title`,`video`.`picture_url`, `user`.`username`, `cui`.`category`, `mat`.`material`
+        from `cul_video` AS `video`
+                 INNER JOIN `cul_video_collection` AS `vc`
+                            ON `vc`.`video_id` = `video`.`id`
+                 INNER JOIN `cul_cuisine` AS `cui`
+                            ON `cui`.`id` = `video`.`cuisine_id`
+                 INNER JOIN `cul_material` AS `mat`
+                            ON `mat`.`id` = `video`.`material_id`
+                 INNER JOIN `cul_user` AS `user`
+                            ON `user`.`id` = `vc`.`user_id`
+        WHERE `vc`.`user_id` = #{userId};
+    </select>
 </mapper>

@@ -49,6 +49,18 @@ public class Video implements Serializable {
     private Boolean examined;
 
     /**
+     * 点击率
+     */
+    @TableField(value = "recommend")
+    private Integer recommend;
+
+    /**
+     * 点赞数
+     */
+    @TableField(value = "praise")
+    private Integer praise;
+
+    /**
      * 作者id
      */
     @TableField(value = "author_id")

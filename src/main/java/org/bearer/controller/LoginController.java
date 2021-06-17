@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping("/weChatLogin")
-    public String weChatLogin(@RequestBody UserLogin userLogin) {
+    public Result weChatLogin(@RequestBody UserLogin userLogin) {
         return loginService.weChatLogin(userLogin);
     }
 

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,9 +27,13 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig extends ShiroConfiguration {
     private final AuthorizingRealm myRealm;
+    private final JwtRealm jwtRealm;
+    private final JwtCredentialsMatcher jwtMatcher;
 
-    public ShiroConfig(AuthorizingRealm myRealm) {
+    public ShiroConfig(AuthorizingRealm myRealm, JwtRealm jwtRealm,JwtCredentialsMatcher jwtMatcher) {
         this.myRealm = myRealm;
+        this.jwtRealm = jwtRealm;
+        this.jwtMatcher = jwtMatcher;
     }
 
     @Bean
@@ -59,10 +64,14 @@ public class ShiroConfig extends ShiroConfiguration {
         urls.put("/swagger-ui/**", "anon");
         urls.put("/swagger-resources/**", "anon");
         urls.put("/v2/**", "anon");
+        urls.put("/home/**", "anon");
+        urls.put("/search/**", "anon");
+        urls.put("/praise/getArticlePraise/**", "anon");
+        urls.put("/praise/getVideoPraise/**", "anon");
 
         urls.put("/logout", "logout");
         urls.put("/**", "jwtFilter,authc");
-//        urls.put("/**", "anon");
+//        urls.put("/**","anon");
         factoryBean.setFilterChainDefinitionMap(urls);
         return factoryBean;
     }
@@ -70,7 +79,7 @@ public class ShiroConfig extends ShiroConfiguration {
     @Bean
     public DefaultWebSecurityManager mySecurityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(myRealm());
+        defaultWebSecurityManager.setRealms(Arrays.asList(myRealm(), jwtRealm()));
         return defaultWebSecurityManager;
     }
 
@@ -79,5 +88,10 @@ public class ShiroConfig extends ShiroConfiguration {
         matcher.setHashIterations(10);
         myRealm.setCredentialsMatcher(matcher);
         return myRealm;
+    }
+
+    public Realm jwtRealm() {
+        jwtRealm.setCredentialsMatcher(jwtMatcher);
+        return jwtRealm;
     }
 }
