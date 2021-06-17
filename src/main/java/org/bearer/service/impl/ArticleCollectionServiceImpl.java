@@ -39,14 +39,14 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
     /**
      * 保存收藏的文章
      *
-     * @param ids JSON{"articleId":"收藏文章id","userId":"用户id"}
+     * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
      * @return int
      */
     @Override
     public int insertCollection(Ids ids) {
         String id = UUID.randomUUID().toString().replace("-", "");
         ArticleCollection articleCollection =
-                new ArticleCollection(id, ids.getUserId(), ids.getArticleId(), new Date(), new Date());
+                new ArticleCollection(id, ids.getUserId(), ids.getId());
         return articleCollectionMapper.insertCollection(articleCollection);
     }
 
@@ -58,6 +58,6 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
      */
     @Override
     public int deleteCollection(Ids ids) {
-        return articleCollectionMapper.deleteCollection(ids.getArticleId(), ids.getUserId());
+        return articleCollectionMapper.deleteCollection(ids);
     }
 }

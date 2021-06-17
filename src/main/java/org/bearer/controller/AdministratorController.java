@@ -26,7 +26,7 @@ public class AdministratorController {
      */
     @DeleteMapping(value = "/articleDelete")
     public Result deleteArticle(@RequestBody Ids id) {
-        Boolean ifDelete = administratorService.deleteArticle(id.getArticleId());
+        Boolean ifDelete = administratorService.deleteArticle(id.getId());
         return Result.result200(ifDelete);
     }
 

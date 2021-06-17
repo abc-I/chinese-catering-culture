@@ -1,6 +1,7 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Article;
 
 import java.util.List;
@@ -41,4 +42,8 @@ public interface ArticleMapper {
     List<Article> selectArticleSearchByAuthorId(String authorId);
 
     Boolean deleteById(String id);
+
+    int selectPraise(String id);
+
+    int updatePraise(Ids ids);
 }

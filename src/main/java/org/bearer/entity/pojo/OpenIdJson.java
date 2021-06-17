@@ -1,4 +1,4 @@
-package org.bearer.entity.po;
+package org.bearer.entity.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +22,7 @@ public class OpenIdJson implements Serializable {
 
     private String openId;
     private String sessionKey;
+    private String unionid;
+    private String errcode;
+    private String errmsg;
 }

@@ -13,7 +13,7 @@
         delete
         from `cul_article_collection`
         where `user_id` = #{userId}
-          and `article_id` = #{articleId};
+          and `article_id` = #{id};
     </delete>
 
     <select id="selectList" resultType="org.bearer.entity.vo.Article">

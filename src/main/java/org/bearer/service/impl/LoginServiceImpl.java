@@ -6,7 +6,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.UserLogin;
-import org.bearer.entity.po.OpenIdJson;
+import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
 import org.bearer.mapper.UserMapper;
 import org.bearer.service.LoginService;
@@ -28,9 +28,6 @@ import java.util.HashMap;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    @Resource
-    private OpenIdJson openIdJson;
-
     @Resource(name = "template")
     private RedisTemplate<Serializable,Object> template;
 
@@ -38,25 +35,30 @@ public class LoginServiceImpl implements LoginService {
     private UserMapper userMapper;
 
     @Override
-    public String weChatLogin(UserLogin login) {
+    public Result weChatLogin(UserLogin login) {
         HashMap<String, String> params = new HashMap<>(4);
         params.put("appid=", login.getAppId());
         params.put("secret=", login.getSecret());
         params.put("js_code=", login.getCode());
         params.put("grant_type", "authorization_code");
 
+        OpenIdJson openIdJson;
         try {
             String result = HttpUtil.doGet("https://api.weixin.qq.com/sns/jscode2session?", params);
-//            return result;
-            openIdJson.setOpenId(result);
+            openIdJson = (OpenIdJson) JSONObject.parse(result);
+            if (openIdJson != null) {
+                String token = JwtUtil.createJwtToken(openIdJson.getOpenId());
+
+                User user = userMapper.selectOne(openIdJson.getOpenId());
+                template.opsForValue().set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24);
+
+                return Result.result200(token);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String token = JwtUtil.createJwtToken(openIdJson.getOpenId());
-
-
-
-        return token;
+        return Result.result403("拒绝访问！");
     }
 
     @Override

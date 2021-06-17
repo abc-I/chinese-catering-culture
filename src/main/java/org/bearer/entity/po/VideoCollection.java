@@ -2,7 +2,10 @@ package org.bearer.entity.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +20,12 @@ import java.util.Date;
 public class VideoCollection implements Serializable {
 
     private static final long serialVersionUID = -3909329527478639237L;
+
+    public VideoCollection(String id, String userId, String videoId) {
+        this.id = id;
+        this.userId = userId;
+        this.videoId = videoId;
+    }
 
     /**
      * 主键(UUID)

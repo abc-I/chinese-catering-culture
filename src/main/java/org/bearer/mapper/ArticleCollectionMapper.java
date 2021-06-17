@@ -1,6 +1,7 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.Ids;
 import org.bearer.entity.po.ArticleCollection;
 import org.bearer.entity.vo.Article;
 
@@ -32,9 +33,8 @@ public interface ArticleCollectionMapper {
     /**
      * 删除收藏文章
      *
-     * @param articleId 文章id
-     * @param userId 用户id
+     * @param ids 文章用户id
      * @return int
      */
-    int deleteCollection(String articleId, String userId);
+    int deleteCollection(Ids ids);
 }

@@ -16,11 +16,15 @@ import java.util.Date;
  */
 @Data
 @TableName("cul_article_collection")
-@AllArgsConstructor
-@NoArgsConstructor
 public class ArticleCollection implements Serializable {
 
     private static final long serialVersionUID = 8337986671362938232L;
+
+    public ArticleCollection(String id,String userId,String articleId) {
+        this.id = id;
+        this.userId = userId;
+        this.articleId = articleId;
+    }
 
     /**
      * 主键(UUID)

@@ -1,15 +1,17 @@
 package org.bearer.filter;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.bearer.entity.pojo.JwtToken;
-import org.bearer.util.JedisUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +65,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             throw new IllegalStateException("Token cannot be null!");
         }
         try {
-            return onLoginSuccess(token, null, request, response);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            return true;
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return onLoginFailure(token, e, request, response);
@@ -81,25 +85,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     }
 
     @Override
-    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
-                                     ServletRequest request, ServletResponse response) {
-
-        RedisTemplate<Serializable,Object> template = new JedisUtil().getRedisTemplate();
-
-        Boolean bool = template.hasKey(token);
-        if (bool != null && bool) {
-            template.expire(token, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         return ((HttpServletRequest) request).getHeader("JwtToken") == null;
     }
-
 
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
