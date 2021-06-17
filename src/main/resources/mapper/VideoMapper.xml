@@ -32,7 +32,7 @@
     </select>
 
     <select id="selectVideoSearchByTitle" resultType="org.bearer.entity.vo.Video">
-        select `video`.`id`, `video`.`title`, `video`.`video_img`, `user`.`username`
+        select `video`.`id`, `video`.`title`, `video`.`picture_url`, `user`.`username`
              , `cui`.`category`, `mat`.`material`
         from `cul_video` AS `video`
             INNER JOIN `cul_user` AS `user`
