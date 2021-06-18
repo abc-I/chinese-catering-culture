@@ -44,6 +44,4 @@ public class VideoCollectionServiceImpl implements VideoCollectionService {
     public int deleteCollection(Ids ids) {
         return videoCollectionMapper.deleteCollection(ids);
     }
-
-
 }

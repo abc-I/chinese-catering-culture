@@ -75,7 +75,7 @@ public interface AdministratorService {
      * @param id
      * @return the article
      */
-    String getArticleContent(String id);
+    Article getArticleContent(String id);
 
     /**
      * examine article by id

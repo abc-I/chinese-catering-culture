@@ -51,7 +51,7 @@ public interface ArticleMapper {
 
     int selectCount();
 
-    String selectArticleById(String id);
+    Article selectArticleById(String id);
 
     Boolean updateIsExaminedById(String id);
 }

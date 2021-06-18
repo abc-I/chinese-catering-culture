@@ -28,7 +28,7 @@
     <update id="updateIsLockedByAccount">
         update `cul_user`
         set `is_locked` = 1
-        where `account` = ${account};
+        where `account` = #{account};
     </update>
 
     <update id="updatePasswordByAccount">
@@ -44,7 +44,7 @@
 
     <select id="selectUserList" resultMap="userVO">
         select `account`, `is_locked`, `username`
-        from `cul_user` LIMIT ${start},${end};
+        from `cul_user` LIMIT #{start},#{end};
     </select>
 
     <select id="selectCountUser" resultType="java.lang.Integer">
@@ -54,7 +54,7 @@
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = ${account}
+        where `user`.`account` = #{account}
           AND `role`.`role` = 'user';
     </select>
 
@@ -65,7 +65,7 @@
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = ${account}
+        where `user`.`account` = #{account}
           AND `role`.`role` = 'user';
     </select>
 
@@ -76,7 +76,7 @@
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = ${account}
+        where `user`.`account` = #{account}
           AND `role`.`role` = 'admin';
     </select>
 
@@ -92,6 +92,6 @@
     <select id="selectByAccountAndPassword" resultType="org.bearer.entity.po.User">
         select *
         from `cul_user`
-        where `account` = ${account};
+        where `account` = #{account};
     </select>
 </mapper>

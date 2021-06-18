@@ -18,6 +18,14 @@ public class Dynamic implements Serializable {
 
     private static final long serialVersionUID = 1605848702825604368L;
 
+    public Dynamic(String id,String userId,String dynamic,String pictureUrl,String videoUrl) {
+        this.id = id;
+        this.userId = userId;
+        this.dynamic = dynamic;
+        this.pictureUrl = pictureUrl;
+        this.videoUrl = videoUrl;
+    }
+
     /**
      * 主键(UUID)
      */

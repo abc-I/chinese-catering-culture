@@ -1,6 +1,11 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.Ids;
+import org.bearer.entity.po.Dynamic;
+import org.bearer.entity.vo.DynamicVO;
+
+import java.util.List;
 
 /**
  * @author Li
@@ -9,4 +14,11 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DynamicMapper {
+    List<DynamicVO> selectDynamic(int start, int end);
+
+    int selectCount();
+
+    int deleteById(Ids ids);
+
+    int insertDynamic(Dynamic dynamic);
 }

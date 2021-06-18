@@ -7,7 +7,7 @@
         INNER JOIN `cul_user` AS `user`
             ON `user`.`id` = `ur`.`user_id`
         set `ur`.`role_id` = 'titjhdugig9y854jr9f7gtu59t9fjeht'
-        where `user`.`account` = ${account};
+        where `user`.`account` = #{account};
     </update>
 
     <update id="updateUserByAccount">
@@ -15,6 +15,6 @@
         INNER JOIN `cul_user` AS `user`
             ON `user`.`id` = `ur`.`user_id`
         set `ur`.`role_id` = 'lsjfhf8f8udg8g04fhf6384guff79302'
-        where `user`.`account` = ${account};
+        where `user`.`account` = #{account};
     </update>
 </mapper>

@@ -1,6 +1,5 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.dto.PageDTO;
 import org.bearer.entity.dto.UserLogin;
 import org.bearer.entity.po.User;
 import org.bearer.entity.vo.*;
@@ -51,10 +50,9 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Page getUsers(int currentPage, int pageSize) {
-        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
 
-        int start = PageUtil.getStart(pageDTO);
-        int end = PageUtil.getEnd(pageDTO);
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 获取user表中从第一个参数到第二个参数的User类
         List<UserVO> users = userMapper.selectUserList(start, end);
@@ -94,10 +92,9 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Page getAdmins(int currentPage, int pageSize) {
-        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
 
-        int start = PageUtil.getStart(pageDTO);
-        int end = PageUtil.getEnd(pageDTO);
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 根据用户的role列出管理员账号
         List<UserVO> admins = userMapper.selectUserByUserRole(start, end);
@@ -162,10 +159,9 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Page getArticleList(int currentPage, int pageSize) {
-        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
 
-        int start = PageUtil.getStart(pageDTO);
-        int end = PageUtil.getEnd(pageDTO);
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 列出未审核的文章列表 需要`id`,`title`,`category`,`material`,`pictureUrl`
         List<Article> articles = articleMapper.selectListByIsExamined(start, end);
@@ -181,7 +177,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return the article
      */
     @Override
-    public String getArticleContent(String id) {
+    public Article getArticleContent(String id) {
         // 根据文章id获取文章内容
         return articleMapper.selectArticleById(id);
     }
@@ -205,16 +201,15 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Page getVideos(int currentPage, int pageSize) {
-        PageDTO pageDTO = new PageDTO(pageSize, currentPage);
 
-        int start = PageUtil.getStart(pageDTO);
-        int end = PageUtil.getEnd(pageDTO);
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 列出未审核的视频列表 需要`id`,`title`,`videoUrl`,`category`,`material`,`pictureUrl`
         List<Video> videos = videoMapper.selectListByIsExamined(start,end);
         int total = videoMapper.selectCount();
 
-        return new Page(total, PageUtil.getPageCount(total, pageDTO.getPageSize()), videos);
+        return new Page(total, PageUtil.getPageCount(total, pageSize), videos);
     }
 
     /**
@@ -228,6 +223,4 @@ public class AdministratorServiceImpl implements AdministratorService {
         // 根据视频id通过审核
         return videoMapper.updateIsExaminedById(id);
     }
-
-
 }

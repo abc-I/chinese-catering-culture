@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bearer.mapper.DynamicMapper">
 
+    <insert id="insertDynamic">
+        insert into `cul_dynamic`
+            (`id`, `user_id`, `dynamic`, `picture_url`, `video_url`)
+        VALUES (#{id}, #{userId}, #{dynamic}, #{pictureUrl}, #{videoUrl});
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from `cul_dynamic`
+        where `id` = #{id};
+    </delete>
+
+
+    <select id="selectDynamic" resultType="org.bearer.entity.vo.DynamicVO">
+        select `dyn`.`id`, `user`.`username`, `dyn`.`dyn`.`dynamic`, `dyn`.`picture_url`, `dyn`.`video_url`
+        from `cul_dynamic` AS `dyn`
+            INNER JOIN `cul_user` AS `user`
+                ON `dyn`.`user_id` = `user`.`id` LIMIT #{start}, #{end };
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select COUNT(*)
+        from `cul_dynamic`;
+    </select>
 </mapper>

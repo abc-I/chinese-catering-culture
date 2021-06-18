@@ -70,7 +70,7 @@
                 ON `cui`.`id` = `video`.`cuisine_id`
             INNER JOIN `cul_material` AS `mat`
                 ON `mat`.`id` = `video`.`material_id`
-        where `is_examined` = 0 LIMIT ${start},${end};
+        where `is_examined` = 0 LIMIT #{start},#{end};
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">

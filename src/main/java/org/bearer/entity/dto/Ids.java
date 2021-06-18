@@ -15,7 +15,7 @@ public class Ids implements Serializable {
     private static final long serialVersionUID = -4394553501686660633L;
 
     /**
-     * 文章视频id
+     * id
      */
     private String id;
 

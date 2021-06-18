@@ -11,11 +11,11 @@
     <update id="updateIsExaminedById">
         update `cul_article`
         set `is_examined` = 1
-        where `id` = ${id};
+        where `id` = #{id};
     </update>
 
     <delete id="deleteById">
-        delete from `cul_article` AS `art` where `art`.`id` = ${id}
+        delete from `cul_article` AS `art` where `art`.`id` = #{id}
     </delete>
 
     <select id="selectList" resultType="org.bearer.entity.vo.Article">
@@ -70,7 +70,7 @@
                 ON `cui`.`id` = `art`.`cuisine_id`
             INNER JOIN `cul_material` AS `mat`
                 ON `mat`.`id` = `art`.`material_id`
-        where `art`.`author_id` = ${authorId};
+        where `art`.`author_id` = #{authorId};
     </select>
 
     <select id="selectPraise" resultType="java.lang.Integer">
@@ -89,7 +89,7 @@
                 ON `cui`.`id` = `art`.`cuisine_id`
             INNER JOIN `cul_material` AS `mat`
                 ON `mat`.`id` = `art`.`material_id`
-        where `art`.`is_examined` = 0 LIMIT ${start},${end};
+        where `art`.`is_examined` = 0 LIMIT #{start},#{end};
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
@@ -98,9 +98,16 @@
         where `is_examined` = 0;
     </select>
 
-    <select id="selectArticleById" resultType="java.lang.String">
-        select `article`
-        from `cul_article`
-        where `id` = ${id};
+    <select id="selectArticleById" resultType="org.bearer.entity.vo.Article">
+        select `art`.`id`, `art`.`title`, `art`.`picture_url`, `user`.`username`
+             , `cui`.`category`, `mat`.`material`;
+        from `cul_article` AS `art`
+            INNER JOIN `cul_user` AS `user`
+                ON `user`.`id` = `art`.`author_id`
+            INNER JOIN `cul_cuisine` AS `cui`
+                ON `cui`.`id` = `art`.`cuisine_id`
+            INNER JOIN `cul_material` AS `mat`
+                ON `mat`.`id` = `art`.`material_id`
+        where `art`.`id` = #{id};
     </select>
 </mapper>

@@ -142,7 +142,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains if successful
      */
-    @PostMapping(value = "/examineVideo")
+    @PostMapping(value = "/examineVideo/{id}")
     public Result examineVideo(@PathVariable String id) {
         return Result.result200(administratorService.examineVideo(id));
     }

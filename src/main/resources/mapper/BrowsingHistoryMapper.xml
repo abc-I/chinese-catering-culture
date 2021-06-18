@@ -16,6 +16,6 @@
                 ON `bh`.`article_id`=`art`.`id`
             INNER JOIN `cul_video` AS `video`
                 ON `bh`.`video_id`=`video`.`id`
-        where `bh`.`user_id` = ${userId};
+        where `bh`.`user_id` = #{userId};
     </select>
 </mapper>
