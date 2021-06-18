@@ -60,7 +60,7 @@ public class DynamicServiceImpl implements DynamicService {
     /**
      * 保存动态信息
      *
-     * @param dynamicDTO 动态信息
+     * @param dynamicDTO JSON{"userId":"用户id","dynamic":"动态信息","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return int
      */
     @Override

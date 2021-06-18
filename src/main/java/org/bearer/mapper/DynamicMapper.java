@@ -41,7 +41,7 @@ public interface DynamicMapper {
     /**
      * 保存动态
      *
-     * @param dynamic 动态信息
+     * @param dynamic JSON{"id":"动态id","userId":"用户id","dynamic":"动态内容","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return int
      */
     int insertDynamic(Dynamic dynamic);

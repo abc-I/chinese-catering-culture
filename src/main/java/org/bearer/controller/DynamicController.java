@@ -37,7 +37,7 @@ public class DynamicController {
     /**
      * 通过动态id删除动态
      *
-     * @param ids 只传动态id
+     * @param ids JSON{"id":"动态id"}
      * @return org.bearer.entity.Result
      */
     @DeleteMapping("/deleteDynamic")
@@ -49,7 +49,7 @@ public class DynamicController {
     /**
      * 保存动态
      *
-     * @param dynamicDTO 动态信息
+     * @param dynamicDTO JSON{"userId":"用户id","dynamic":"动态信息","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return org.bearer.entity.Result
      */
     @PostMapping("/insertDynamic")

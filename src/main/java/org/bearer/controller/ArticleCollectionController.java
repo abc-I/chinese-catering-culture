@@ -27,6 +27,8 @@ public class ArticleCollectionController {
      * 获取收藏的文章
      *
      * @param userId 用户id
+     * @param currentPage 当前页
+     * @param pageSize 每页几条数据
      * @return org.bearer.entity.Result
      */
     @GetMapping("/getCollection/{userId}/{currentPage}/{pageSize}")

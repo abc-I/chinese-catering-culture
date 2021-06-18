@@ -12,7 +12,7 @@ public class PageUtil {
     }
 
     public static int getEnd(int currentPage, int pageSize) {
-        return currentPage * pageSize - 1;
+        return currentPage * pageSize;
     }
 
     public static int getPageCount(int total,int pageSize) {
