@@ -1,8 +1,8 @@
 server:
   port: 8080
-#  ssl:
-#    key-store: classpath:www.lizhanfeng.xyz.jks
-#    key-store-password: 4ok86us6853608
+  ssl:
+    key-store: classpath:www.lizhanfeng.xyz.jks
+    key-store-password: 4ok86us6853608
 
 spring:
   datasource:
