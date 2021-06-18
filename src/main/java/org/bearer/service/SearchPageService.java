@@ -1,10 +1,7 @@
 package org.bearer.service;
 
 import org.bearer.entity.dto.SearchRecordsDTO;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.DishName;
-import org.bearer.entity.vo.Material;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.*;
 
 import java.util.List;
 
@@ -16,18 +13,19 @@ import java.util.List;
 public interface SearchPageService {
     /**
      * get article search result and save the searchRecords
-     * @param searchRecordsDTO
+     *
      * @return list of List<ArticleSearch>
      */
-    List<Article> getArticleSearchResult(String userId, String searchContent);
+    Page getArticleSearchResult(String userId, String searchContent, int currentPage, int pageSize);
 
     /**
      * get video search result and save the searchRecords
+     *
      * @param userId
      * @param searchContent
      * @return list of List<VideoSearch>
      */
-    List<Video> getVideoSearchResult(String userId, String searchContent);
+    Page getVideoSearchResult(String userId, String searchContent, int currentPage, int pageSize);
 
     /**
      * get all main material

@@ -35,23 +35,72 @@ public interface ArticleMapper {
      * 通过标题查询文章(模糊查询)
      *
      * @param searchContent 查询信息
+     * @param start 第一个index
+     * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectArticleSearchByTitle(String searchContent);
+    List<Article> selectArticleSearchByTitle(String searchContent, int start, int end);
 
+    /**
+     * 通过作者id查询文章
+     *
+     * @param authorId 作者id
+     * @return List<Article>
+     */
     List<Article> selectArticleSearchByAuthorId(String authorId);
 
+    /**
+     * 通过文章id删除文章
+     *
+     * @param id 文章id
+     * @return Boolean
+     */
     Boolean deleteById(String id);
 
-    int selectPraise(String id);
-
+    /**
+     * 通过文章id保存点赞
+     *
+     * @param ids 只取文章id
+     * @return int
+     */
     int updatePraise(Ids ids);
 
+    /**
+     * 查询所有未审核的文章
+     *
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return List<Article>
+     */
     List<Article> selectListByIsExamined(int start, int end);
 
-    int selectCount();
+    /**
+     * 统计未审核的文章数
+     * @return int
+     */
+    int selectCountNotExamined();
 
+    /**
+     * 通过文章id查询文章
+     *
+     * @param id 文章id
+     * @return org.bearer.entity.vo.Article
+     */
     Article selectArticleById(String id);
 
+    /**
+     * 通过文章id更新审核信息
+     *
+     * @param id 文章id
+     * @return Boolean
+     */
     Boolean updateIsExaminedById(String id);
+
+    /**
+     * 统计查询结果有几条
+     *
+     * @param searchContent 查询信息
+     * @return int
+     */
+    int selectCountByTitle(String searchContent);
 }

@@ -18,6 +18,12 @@ import java.util.UUID;
 @Service
 public class UploadServiceImpl implements UploadService {
 
+    /**
+     * 上传图片
+     *
+     * @param request 请求对象
+     * @return String
+     */
     @Override
     public String uploadPicture(HttpServletRequest request) {
         String path = "./src/main/resources/static/image/";
@@ -29,6 +35,12 @@ public class UploadServiceImpl implements UploadService {
         }
     }
 
+    /**
+     * 上传视频
+     *
+     * @param request 请求对象
+     * @return String
+     */
     @Override
     public String uploadVideo(HttpServletRequest request) {
         String path="./src/main/resources/static/video/";
@@ -41,6 +53,14 @@ public class UploadServiceImpl implements UploadService {
         }
     }
 
+    /**
+     * 解析请求对象
+     *
+     * @param request 请求对象
+     * @param path 保存路径
+     * @param fileName 保存文件名
+     * @return boolean
+     */
     private boolean upload(HttpServletRequest request, String path,String fileName) {
         File file = new File(path);
         if (!file.exists()) {

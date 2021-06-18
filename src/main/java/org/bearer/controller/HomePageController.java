@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,11 +28,8 @@ public class HomePageController {
     /**
      * 主页模块服务层
      */
-    private final HomePageService homePageService;
-
-    public HomePageController(HomePageService homePageService) {
-        this.homePageService = homePageService;
-    }
+    @Resource
+    private HomePageService homePageService;
 
     /**
      * 获取所有菜系分类

@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -26,15 +27,13 @@ import java.util.Map;
 @ConditionalOnClass({RedisConfig.class})
 @Configuration
 public class ShiroConfig extends ShiroConfiguration {
-    private final AuthorizingRealm myRealm;
-    private final JwtRealm jwtRealm;
-    private final JwtCredentialsMatcher jwtMatcher;
 
-    public ShiroConfig(AuthorizingRealm myRealm, JwtRealm jwtRealm,JwtCredentialsMatcher jwtMatcher) {
-        this.myRealm = myRealm;
-        this.jwtRealm = jwtRealm;
-        this.jwtMatcher = jwtMatcher;
-    }
+    @Resource
+    private AuthorizingRealm myRealm;
+    @Resource
+    private JwtRealm jwtRealm;
+    @Resource
+    private JwtCredentialsMatcher jwtMatcher;
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
@@ -60,18 +59,19 @@ public class ShiroConfig extends ShiroConfiguration {
         factoryBean.setFilters(filterMap);
 
         Map<String, String> urls = new LinkedHashMap<>();
-        urls.put("/login/**", "anon");
-        urls.put("/swagger-ui/**", "anon");
-        urls.put("/swagger-resources/**", "anon");
-        urls.put("/v2/**", "anon");
-        urls.put("/home/**", "anon");
-        urls.put("/search/**", "anon");
-        urls.put("/praise/getArticlePraise/**", "anon");
-        urls.put("/praise/getVideoPraise/**", "anon");
-
-        urls.put("/logout", "logout");
-        urls.put("/**", "jwtFilter,authc");
-//        urls.put("/**","anon");
+//        urls.put("/login/**", "anon");
+//        urls.put("/swagger-ui/**", "anon");
+//        urls.put("/swagger-resources/**", "anon");
+//        urls.put("/v2/**", "anon");
+//        urls.put("/home/**", "anon");
+//        urls.put("/search/**", "anon");
+//        urls.put("/praise/getArticlePraise/**", "anon");
+//        urls.put("/praise/getVideoPraise/**", "anon");
+//        urls.put("/dynamic/getDynamic/**", "anon");
+//
+//        urls.put("/logout", "logout");
+//        urls.put("/**", "jwtFilter,authc");
+        urls.put("/**","anon");
         factoryBean.setFilterChainDefinitionMap(urls);
         return factoryBean;
     }

@@ -1,13 +1,10 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.dto.SearchRecordsDTO;
 import org.bearer.entity.po.SearchRecords;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.DishName;
-import org.bearer.entity.vo.Material;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.*;
 import org.bearer.mapper.*;
 import org.bearer.service.SearchPageService;
+import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,7 +38,8 @@ public class SearchPageServiceImpl implements SearchPageService {
      * @return list of List<ArticleSearch>
      */
     @Override
-    public List<Article> getArticleSearchResult(String userId, String searchContent) {
+    public Page getArticleSearchResult(String userId, String searchContent,
+                                       int currentPage, int pageSize) {
         SearchRecords searchRecords = new SearchRecords();
 
         searchRecords.setSearchContent(searchContent);
@@ -49,7 +47,16 @@ public class SearchPageServiceImpl implements SearchPageService {
         searchRecords.setSearchTime(new Date(System.currentTimeMillis()));
 
         searchRecordsMapper.save(searchRecords);
-        return articleMapper.selectArticleSearchByTitle(searchRecords.getSearchContent());
+
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
+
+        List<Article> articles = articleMapper
+                .selectArticleSearchByTitle(searchContent, start, end);
+
+        int total = articleMapper.selectCountByTitle(searchContent);
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), articles);
     }
 
     /**
@@ -60,7 +67,9 @@ public class SearchPageServiceImpl implements SearchPageService {
      * @return list of List<VideoSearch>
      */
     @Override
-    public List<Video> getVideoSearchResult(String userId, String searchContent) {
+    public Page getVideoSearchResult(String userId, String searchContent,
+                                     int currentPage, int pageSize) {
+
         SearchRecords searchRecords = new SearchRecords();
 
         searchRecords.setSearchContent(searchContent);
@@ -68,7 +77,15 @@ public class SearchPageServiceImpl implements SearchPageService {
         searchRecords.setSearchTime(new Date(System.currentTimeMillis()));
 
         searchRecordsMapper.save(searchRecords);
-        return videoMapper.selectVideoSearchByTitle(searchRecords.getSearchContent());
+
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
+
+        List<Video> videos = videoMapper.selectVideoSearchByTitle(searchContent, start, end);
+
+        int total = videoMapper.selectCountByTitle(searchContent);
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), videos);
     }
 
     /**

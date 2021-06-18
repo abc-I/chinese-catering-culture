@@ -11,6 +11,7 @@ import org.bearer.mapper.VideoMapper;
 import org.bearer.service.HomePageService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,32 +23,28 @@ import java.util.List;
 public class HomePageServiceImpl implements HomePageService {
 
     /**
-     * 菜系分类Mapper
+     * 菜系分类 mapper
      */
-    private final CuisineMapper cuisineMapper;
+    @Resource
+    private CuisineMapper cuisineMapper;
 
     /**
-     * 轮播图Mapper
+     * 轮播图 mapper
      */
-    private final CarouselMapper carouselMapper;
+    @Resource
+    private CarouselMapper carouselMapper;
 
     /**
-     * 文章Mapper
+     * 文章 mapper
      */
-    private final ArticleMapper articleMapper;
+    @Resource
+    private ArticleMapper articleMapper;
 
     /**
-     * 视频Mapper
+     * 视频 mapper
      */
-    private final VideoMapper videoMapper;
-
-    public HomePageServiceImpl(CuisineMapper cuisineMapper, CarouselMapper carouselMapper,
-                               ArticleMapper articleMapper, VideoMapper videoMapper) {
-        this.cuisineMapper = cuisineMapper;
-        this.carouselMapper = carouselMapper;
-        this.articleMapper = articleMapper;
-        this.videoMapper = videoMapper;
-    }
+    @Resource
+    private VideoMapper videoMapper;
 
     /**
      * 获取所有菜系

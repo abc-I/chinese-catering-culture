@@ -24,3 +24,4 @@
 - 6.17 14:20 abc-I Add JwtRealm,JwtCredentialsMatcher,Praise;Update Video,Article,Login;Delete Praise,JedisUtil
 - 6.17 22:55 abc-I Add MD5Util,Page,PageDTO,PageUtil;Update UserMapper,UserRoleMapper,UserVO,VideoMapper;Delete UserDTO,Admin
 - 6.18 16:35 abc-I Add Dynamic's,Administrator's mapper,UploadController,UploadService
+- 6.18 21:25 abc-I Add notes,Page;Update annotation

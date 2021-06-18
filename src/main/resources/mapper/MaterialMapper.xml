@@ -3,6 +3,7 @@
 <mapper namespace="org.bearer.mapper.MaterialMapper">
 
     <select id="selectList" resultType="org.bearer.entity.vo.Material">
-        select `id`,`material` from `cul_material`;
+        select `id`, `material`
+        from `cul_material`;
     </select>
 </mapper>

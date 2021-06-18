@@ -13,6 +13,7 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,9 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @Configuration
 @EnableOpenApi
 public class SwaggerConfig {
-    private final TypeResolver typeResolver;
 
-    public SwaggerConfig(TypeResolver typeResolver) {
-        this.typeResolver = typeResolver;
-    }
+    @Resource
+    private TypeResolver typeResolver;
 
     @Bean
     public Docket petApi() {

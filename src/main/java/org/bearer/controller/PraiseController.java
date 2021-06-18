@@ -5,6 +5,8 @@ import org.bearer.entity.dto.Ids;
 import org.bearer.service.PraiseService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author Li
  * @version 1.0
@@ -14,30 +16,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/praise")
 public class PraiseController {
 
-    private final PraiseService praiseService;
+    @Resource
+    private PraiseService praiseService;
 
-    public PraiseController(PraiseService praiseService) {
-        this.praiseService = praiseService;
-    }
-
-    @GetMapping("/getArticlePraise/{id}")
-    public Result getArticlePraise(@PathVariable String id) {
-        int len = praiseService.getArticlePraise(id);
-        return Result.result200(len);
-    }
-
+    /**
+     * 保存文章点赞
+     *
+     * @param ids 只取id（文章id）
+     * @return org.bearer.entity.Result
+     */
     @PostMapping("/insertArticlePraise")
     public Result insertArticlePraise(Ids ids) {
         int len = praiseService.insertArticlePraise(ids);
         return Result.result200(len);
     }
 
-    @GetMapping("/getVideoPraise/{id}")
-    public Result getVideoPraise(@PathVariable String id) {
-        int len = praiseService.getVideoPraise(id);
-        return Result.result200(len);
-    }
-
+    /**
+     * 保存视频点赞
+     *
+     * @param ids 只取id（视频id）
+     * @return org.bearer.entity.Result
+     */
     @PostMapping("/insertVideoPraise")
     public Result insertVideoPraise(Ids ids) {
         int len = praiseService.insertVideoPraise(ids);

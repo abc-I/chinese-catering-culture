@@ -69,7 +69,7 @@
           AND `role`.`role` = 'user';
     </select>
 
-    <select id="selectUserByUserRole" resultMap="userVO">
+    <select id="selectAdminByUserRole" resultMap="userVO">
         select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
             INNER JOIN `cul_user_role` AS `ur`
@@ -87,11 +87,5 @@
         INNER JOIN `cul_role` AS `role`
             ON `ur`.`role_id` = `role`.`id`
         where `role`.`role` = 'admin';
-    </select>
-
-    <select id="selectByAccountAndPassword" resultType="org.bearer.entity.po.User">
-        select *
-        from `cul_user`
-        where `account` = #{account};
     </select>
 </mapper>

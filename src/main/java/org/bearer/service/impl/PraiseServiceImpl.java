@@ -4,8 +4,9 @@ import org.bearer.entity.dto.Ids;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.VideoMapper;
 import org.bearer.service.PraiseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author Li
@@ -15,29 +16,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class PraiseServiceImpl implements PraiseService {
 
-    private final ArticleMapper articleMapper;
-    private final VideoMapper videoMapper;
+    /**
+     * 文章 mapper
+     */
+    @Resource
+    private ArticleMapper articleMapper;
 
-    public PraiseServiceImpl(ArticleMapper articleMapper, VideoMapper videoMapper) {
-        this.articleMapper = articleMapper;
-        this.videoMapper = videoMapper;
-    }
+    /**
+     * 视频 mapper
+     */
+    @Resource
+    private VideoMapper videoMapper;
 
-    @Override
-    public int getArticlePraise(String id) {
-        return articleMapper.selectPraise(id);
-    }
-
+    /**
+     * 保存文章点赞
+     *
+     * @param ids 只取id（文章id）
+     * @return int
+     */
     @Override
     public int insertArticlePraise(Ids ids) {
         return articleMapper.updatePraise(ids);
     }
 
-    @Override
-    public int getVideoPraise(String id) {
-        return videoMapper.selectPraise(id);
-    }
-
+    /**
+     * 保存视频点赞
+     *
+     * @param ids 只取id（视频id）
+     * @return org.bearer.entity.Result
+     */
     @Override
     public int insertVideoPraise(Ids ids) {
         return videoMapper.updatePraise(ids);

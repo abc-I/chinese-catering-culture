@@ -35,17 +35,49 @@ public interface VideoMapper {
      * 通过视频标题查询
      *
      * @param searchContent 查询信息
+     * @param start 第一个index
+     * @param end 最后一个index
      * @return List<Video>
      */
-    List<Video> selectVideoSearchByTitle(String searchContent);
+    List<Video> selectVideoSearchByTitle(String searchContent, int start, int end);
 
-    int selectPraise(String id);
-
+    /**
+     * 通过视频id保存点赞数
+     *
+     * @param ids 只取id（视频id）
+     * @return int
+     */
     int updatePraise(Ids ids);
 
+    /**
+     * 查询未审核的视频
+     *
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return List<Video>
+     */
     List<Video> selectListByIsExamined(int start, int end);
 
-    int selectCount();
+    /**
+     * 统计为审核的视频
+     *
+     * @return int
+     */
+    int selectCountNotExamined();
 
+    /**
+     * 通过视频id审核
+     *
+     * @param id 视频id
+     * @return Boolean
+     */
     Boolean updateIsExaminedById(String id);
+
+    /**
+     * 统计查询出几条数据
+     *
+     * @param searchContent 查询内容
+     * @return int
+     */
+    int selectCountByTitle(String searchContent);
 }

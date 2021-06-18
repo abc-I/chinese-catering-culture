@@ -2,6 +2,8 @@ package org.bearer.service;
 
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Article;
+import org.bearer.entity.vo.Page;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface ArticleCollectionService {
      * @param userId 用户id
      * @return List<Article>
      */
-    List<Article> getCollection(String userId);
+    Page getCollection(String userId, int currentPage, int pageSize);
 
     /**
      * 保存收藏的文章

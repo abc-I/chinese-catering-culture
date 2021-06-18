@@ -10,9 +10,28 @@ import org.bearer.entity.vo.Page;
  * @date Created in 2021/6/18 15:41
  */
 public interface DynamicService {
+    /**
+     * 获取动态
+     *
+     * @param currentPage 当前页
+     * @param pageSize 每页几条数据
+     * @return org.bearer.entity.vo.Page
+     */
     Page getDynamic(int currentPage, int pageSize);
 
+    /**
+     * 同动态id删除动态
+     *
+     * @param ids JSON{"id":"动态id"}
+     * @return int
+     */
     int deleteDynamicById(Ids ids);
 
+    /**
+     * 保存动态信息
+     *
+     * @param dynamicDTO 动态信息
+     * @return int
+     */
     int insertDynamic(DynamicDTO dynamicDTO);
 }

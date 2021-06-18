@@ -12,6 +12,7 @@ import org.bearer.entity.pojo.JwtToken;
 import org.bearer.mapper.RoleMapper;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -21,11 +22,9 @@ import java.util.Set;
  */
 @Component
 public class JwtRealm extends AuthorizingRealm {
-    private final RoleMapper roleMapper;
 
-    public JwtRealm(RoleMapper roleMapper) {
-        this.roleMapper = roleMapper;
-    }
+    @Resource
+    private RoleMapper roleMapper;
 
     @Override
     public boolean supports(AuthenticationToken token) {

@@ -146,5 +146,4 @@ public class AdministratorController {
     public Result examineVideo(@PathVariable String id) {
         return Result.result200(administratorService.examineVideo(id));
     }
-
 }

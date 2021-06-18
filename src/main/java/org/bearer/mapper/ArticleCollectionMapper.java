@@ -18,9 +18,11 @@ public interface ArticleCollectionMapper {
      * 获取收藏文章
      *
      * @param userId 用户id
+     * @param start 第一个index
+     * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectList(String userId);
+    List<Article> selectList(String userId, int start, int end);
 
     /**
      * 保存收藏的文章
@@ -37,4 +39,12 @@ public interface ArticleCollectionMapper {
      * @return int
      */
     int deleteCollection(Ids ids);
+
+    /**
+     * 通过userId统计收藏的文章数
+     *
+     * @param userId 用户id
+     * @return 总条数
+     */
+    int selectCountById(String userId);
 }

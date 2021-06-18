@@ -8,11 +8,20 @@ import org.bearer.entity.dto.Ids;
  * @date Created in 2021/6/17 12:56
  */
 public interface PraiseService {
-    int getArticlePraise(String id);
 
+    /**
+     * 保存文章点赞
+     *
+     * @param ids 只取id（文章id）
+     * @return int
+     */
     int insertArticlePraise(Ids ids);
 
-    int getVideoPraise(String id);
-
+    /**
+     * 保存视频点赞
+     *
+     * @param ids 只取id（视频id）
+     * @return int
+     */
     int insertVideoPraise(Ids ids);
 }

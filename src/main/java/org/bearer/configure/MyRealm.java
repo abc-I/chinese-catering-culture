@@ -11,6 +11,7 @@ import org.bearer.mapper.RoleMapper;
 import org.bearer.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -21,13 +22,10 @@ import java.util.Set;
 @Component
 public class MyRealm extends AuthorizingRealm {
 
-    private final UserMapper userMapper;
-    private final RoleMapper roleMapper;
-
-    public MyRealm(UserMapper userMapper, RoleMapper roleMapper) {
-        this.userMapper = userMapper;
-        this.roleMapper = roleMapper;
-    }
+    @Resource
+    private UserMapper userMapper;
+    @Resource
+    private RoleMapper roleMapper;
 
     @Override
     public boolean supports(AuthenticationToken token) {

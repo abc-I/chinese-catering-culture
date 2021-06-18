@@ -97,7 +97,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 根据用户的role列出管理员账号
-        List<UserVO> admins = userMapper.selectUserByUserRole(start, end);
+        List<UserVO> admins = userMapper.selectAdminByUserRole(start, end);
         int total = userMapper.selectCountAdmin();
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), admins);
@@ -134,7 +134,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Boolean changePassword(UserLogin login) {
-        User user = userMapper.selectByAccountAndPassword(login.getAccount());
+        User user = userMapper.selectOne(login.getAccount());
 
         String oldPassword;
         if (user != null) {
@@ -165,7 +165,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         // 列出未审核的文章列表 需要`id`,`title`,`category`,`material`,`pictureUrl`
         List<Article> articles = articleMapper.selectListByIsExamined(start, end);
-        int total = articleMapper.selectCount();
+        int total = articleMapper.selectCountNotExamined();
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), articles);
     }
@@ -207,7 +207,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         // 列出未审核的视频列表 需要`id`,`title`,`videoUrl`,`category`,`material`,`pictureUrl`
         List<Video> videos = videoMapper.selectListByIsExamined(start,end);
-        int total = videoMapper.selectCount();
+        int total = videoMapper.selectCountNotExamined();
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), videos);
     }

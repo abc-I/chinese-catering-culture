@@ -9,7 +9,19 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserRoleMapper {
+    /**
+     * 修改账号权限为admin
+     *
+     * @param account 账号
+     * @return Boolean
+     */
     Boolean updateAdminByAccount(String account);
 
+    /**
+     * 修改账号权限为user
+     *
+     * @param account 账号
+     * @return Boolean
+     */
     Boolean updateUserByAccount(String account);
 }

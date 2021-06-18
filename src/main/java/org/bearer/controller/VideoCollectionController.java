@@ -2,10 +2,12 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.vo.Page;
 import org.bearer.entity.vo.Video;
 import org.bearer.service.VideoCollectionService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,11 +19,8 @@ import java.util.List;
 @RequestMapping("/video")
 public class VideoCollectionController {
 
-    private final VideoCollectionService videoCollectionService;
-
-    public VideoCollectionController(VideoCollectionService videoCollectionService) {
-        this.videoCollectionService = videoCollectionService;
-    }
+    @Resource
+    private VideoCollectionService videoCollectionService;
 
     /**
      * 获取收藏的文章
@@ -29,10 +28,12 @@ public class VideoCollectionController {
      * @param userId 用户id
      * @return org.bearer.entity.Result
      */
-    @GetMapping("/getCollection/{userId}")
-    public Result getCollection(@PathVariable String userId) {
-        List<Video> video = videoCollectionService.getCollection(userId);
-        return Result.result200(video);
+    @GetMapping("/getCollection/{userId}/{currentPage}/{pageSize}")
+    public Result getCollection(@PathVariable String userId,
+                                @PathVariable int currentPage, @PathVariable int pageSize) {
+
+        Page page = videoCollectionService.getCollection(userId, currentPage, pageSize);
+        return Result.result200(page);
     }
 
     /**

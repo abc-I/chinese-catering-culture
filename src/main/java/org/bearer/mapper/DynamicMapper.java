@@ -14,11 +14,35 @@ import java.util.List;
  */
 @Mapper
 public interface DynamicMapper {
+    /**
+     * 获取动态
+     *
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return List<DynamicVO>
+     */
     List<DynamicVO> selectDynamic(int start, int end);
 
+    /**
+     * 获取总条数
+     *
+     * @return int
+     */
     int selectCount();
 
+    /**
+     * 通过动态id删除动态
+     *
+     * @param ids 只取动态id
+     * @return int
+     */
     int deleteById(Ids ids);
 
+    /**
+     * 保存动态
+     *
+     * @param dynamic 动态信息
+     * @return int
+     */
     int insertDynamic(Dynamic dynamic);
 }

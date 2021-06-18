@@ -2,11 +2,11 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.service.UploadService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,24 +18,39 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/upload")
 public class UploadController {
 
-    private final UploadService uploadService;
+    @Resource
+    private UploadService uploadService;
 
-    public UploadController(UploadService uploadService) {
-        this.uploadService = uploadService;
-    }
-
+    /**
+     * 上传照片
+     *
+     * @param request 请求对象
+     * @return org.bearer.entity.Result
+     */
     @PostMapping("/uploadPicture")
     public Result uploadPicture(HttpServletRequest request) {
         String url = uploadService.uploadPicture(request);
         return result(url);
     }
 
+    /**
+     * 上传视频
+     *
+     * @param request 请求对象
+     * @return org.bearer.entity.Result
+     */
     @PostMapping("/uploadVideo")
     public Result uploadVideo(HttpServletRequest request) {
         String url = uploadService.uploadVideo(request);
         return result(url);
     }
 
+    /**
+     * 判读url
+     *
+     * @param url url
+     * @return org.bearer.entity.Result
+     */
     private Result result(String url) {
         if (url != null) {
             return Result.result200(url);

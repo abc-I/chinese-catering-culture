@@ -12,5 +12,11 @@ import java.util.List;
  */
 @Mapper
 public interface BrowsingHistoryMapper {
+    /**
+     * 通过用户id查询搜索记录
+     *
+     * @param userId 用户id
+     * @return List<BrowsingHistory>
+     */
     List<BrowsingHistory> selectBrowsingHistoryByUserId(String userId);
 }

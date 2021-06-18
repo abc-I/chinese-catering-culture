@@ -10,7 +10,7 @@ import org.bearer.service.DynamicService;
 import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +22,19 @@ import java.util.UUID;
 @Service
 public class DynamicServiceImpl implements DynamicService {
 
-    private final DynamicMapper dynamicMapper;
+    /**
+     * 动态mapper
+     */
+    @Resource
+    private DynamicMapper dynamicMapper;
 
-    public DynamicServiceImpl(DynamicMapper dynamicMapper) {
-        this.dynamicMapper = dynamicMapper;
-    }
-
+    /**
+     * 获取动态
+     *
+     * @param currentPage 当前页
+     * @param pageSize 每页几条数据
+     * @return org.bearer.entity.vo.Page
+     */
     @Override
     public Page getDynamic(int currentPage, int pageSize) {
 
@@ -39,11 +46,23 @@ public class DynamicServiceImpl implements DynamicService {
         return new Page(total, PageUtil.getPageCount(total, pageSize), dynamics);
     }
 
+    /**
+     * 同动态id删除动态
+     *
+     * @param ids JSON{"id":"动态id"}
+     * @return int
+     */
     @Override
     public int deleteDynamicById(Ids ids) {
         return dynamicMapper.deleteById(ids);
     }
 
+    /**
+     * 保存动态信息
+     *
+     * @param dynamicDTO 动态信息
+     * @return int
+     */
     @Override
     public int insertDynamic(DynamicDTO dynamicDTO) {
         Dynamic dynamic =

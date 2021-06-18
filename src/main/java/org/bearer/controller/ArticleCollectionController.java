@@ -2,11 +2,11 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
-import org.bearer.entity.vo.Article;
+import org.bearer.entity.vo.Page;
 import org.bearer.service.ArticleCollectionService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * @author Li
@@ -20,11 +20,8 @@ public class ArticleCollectionController {
     /**
      * 文章收藏服务层
      */
-    private final ArticleCollectionService articleCollectionService;
-
-    public ArticleCollectionController(ArticleCollectionService articleCollectionService) {
-        this.articleCollectionService = articleCollectionService;
-    }
+    @Resource
+    private ArticleCollectionService articleCollectionService;
 
     /**
      * 获取收藏的文章
@@ -32,10 +29,11 @@ public class ArticleCollectionController {
      * @param userId 用户id
      * @return org.bearer.entity.Result
      */
-    @GetMapping("/getCollection/{userId}")
-    public Result getCollection(@PathVariable String userId) {
-        List<Article> article = articleCollectionService.getCollection(userId);
-        return Result.result200(article);
+    @GetMapping("/getCollection/{userId}/{currentPage}/{pageSize}")
+    public Result getCollection(@PathVariable String userId,
+                                @PathVariable int currentPage, @PathVariable int pageSize) {
+        Page page = articleCollectionService.getCollection(userId, currentPage, pageSize);
+        return Result.result200(page);
     }
 
     /**

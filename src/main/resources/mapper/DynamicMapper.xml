@@ -14,7 +14,6 @@
         where `id` = #{id};
     </delete>
 
-
     <select id="selectDynamic" resultType="org.bearer.entity.vo.DynamicVO">
         select `dyn`.`id`, `user`.`username`, `dyn`.`dyn`.`dynamic`, `dyn`.`picture_url`, `dyn`.`video_url`
         from `cul_dynamic` AS `dyn`

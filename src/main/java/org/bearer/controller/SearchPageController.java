@@ -2,10 +2,7 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.SearchRecordsDTO;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.DishName;
-import org.bearer.entity.vo.Material;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.*;
 import org.bearer.service.SearchPageService;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,28 +46,36 @@ public class SearchPageController {
 
     /**
      * fuzzy search by key word of main material
-     * @author fanyuhongzhe
+     *
      * @param userId
      * @param searchContent
      * @return Result contains the search result of the request
+     * @author fanyuhongzhe
      */
-    @GetMapping("/article/{userId}/{searchContent}")
-    public Result getArticles(@PathVariable String userId, @PathVariable String searchContent) {
-        List<Article> articleSearchList = searchPageService.getArticleSearchResult(userId, searchContent);
-        return Result.result200(articleSearchList);
+    @GetMapping("/article/{userId}/{searchContent}/{currentPage}/{pageSize}")
+    public Result getArticles(@PathVariable String userId, @PathVariable String searchContent,
+                              @PathVariable int currentPage, @PathVariable int pageSize) {
+
+        Page page = searchPageService.getArticleSearchResult(userId, searchContent,
+                currentPage, pageSize);
+
+        return Result.result200(page);
     }
 
     /**
      * fuzzy search by key word of main material
-     * @author fanyuhongzhe
+     *
      * @param userId
      * @param searchContent
      * @return Result contains the search result of the request
+     * @author fanyuhongzhe
      */
-    @GetMapping("/video/{userId}/{searchContent}")
-    public Result getVideos(@PathVariable String userId, @PathVariable String searchContent) {
-        List<Video> videoSearchList = searchPageService.getVideoSearchResult(userId, searchContent);
-        return Result.result200(videoSearchList);
+    @GetMapping("/video/{userId}/{searchContent}/{currentPage}/{pageSize}")
+    public Result getVideos(@PathVariable String userId, @PathVariable String searchContent,
+                            @PathVariable int currentPage, @PathVariable int pageSize) {
+
+        Page page = searchPageService.getVideoSearchResult(userId, searchContent, currentPage, pageSize);
+        return Result.result200(page);
     }
 
     /**

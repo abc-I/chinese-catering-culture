@@ -16,7 +16,12 @@
     </delete>
 
     <select id="selectList" resultType="org.bearer.entity.vo.Video">
-        select `video`.`id`, `video`.`title`,`video`.`picture_url`, `user`.`username`, `cui`.`category`, `mat`.`material`
+        select `video`.`id`,
+               `video`.`title`,
+               `video`.`picture_url`,
+               `user`.`username`,
+               `cui`.`category`,
+               `mat`.`material`
         from `cul_video` AS `video`
                  INNER JOIN `cul_video_collection` AS `vc`
                             ON `vc`.`video_id` = `video`.`id`
@@ -26,6 +31,12 @@
                             ON `mat`.`id` = `video`.`material_id`
                  INNER JOIN `cul_user` AS `user`
                             ON `user`.`id` = `vc`.`user_id`
-        WHERE `vc`.`user_id` = #{userId};
+        WHERE `vc`.`user_id` = #{userId} LIMIT #{start}, #{end};
+    </select>
+
+    <select id="selectCountById" resultType="java.lang.Integer">
+        select count(*)
+        from `cul_video_collection`
+        where `user_id` = #{userId};
     </select>
 </mapper>

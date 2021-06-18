@@ -6,6 +6,7 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -16,11 +17,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class JwtCredentialsMatcher implements CredentialsMatcher {
-    private final RedisTemplate<Serializable, Object> template;
 
-    public JwtCredentialsMatcher(RedisTemplate<Serializable, Object> template) {
-        this.template = template;
-    }
+    @Resource
+    private RedisTemplate<Serializable, Object> template;
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {

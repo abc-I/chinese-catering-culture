@@ -28,12 +28,24 @@ import java.util.HashMap;
 @Service
 public class LoginServiceImpl implements LoginService {
 
+    /**
+     * redis
+     */
     @Resource(name = "template")
     private RedisTemplate<Serializable,Object> template;
 
+    /**
+     * 用户 mapper
+     */
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * 微信登录
+     *
+     * @param login 取appId，secret，js_code
+     * @return org.bearer.entity.Result
+     */
     @Override
     public Result weChatLogin(UserLogin login) {
         HashMap<String, String> params = new HashMap<>(4);
@@ -61,6 +73,12 @@ public class LoginServiceImpl implements LoginService {
         return Result.result403("拒绝访问！");
     }
 
+    /**
+     * 管理员登录
+     *
+     * @param userLogin 取account，password
+     * @return org.bearer.entity.Result
+     */
     @Override
     public Result adminLogin(UserLogin userLogin) {
         String account = userLogin.getAccount();

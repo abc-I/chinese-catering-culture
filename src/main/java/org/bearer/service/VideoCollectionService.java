@@ -1,10 +1,7 @@
 package org.bearer.service;
 
 import org.bearer.entity.dto.Ids;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.Video;
-
-import java.util.List;
+import org.bearer.entity.vo.Page;
 
 /**
  * @author Li
@@ -12,9 +9,29 @@ import java.util.List;
  * @date Created in 2021/6/17 12:20
  */
 public interface VideoCollectionService {
-    List<Video> getCollection(String userId);
+    /**
+     * 通过用户id获取收藏视频
+     *
+     * @param userId 用户id
+     * @param currentPage 当前页数
+     * @param pageSize 每页几条
+     * @return org.bearer.entity.vo.Page
+     */
+    Page getCollection(String userId, int currentPage, int pageSize);
 
+    /**
+     * 保存收藏信息
+     *
+     * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
+     * @return int
+     */
     int insertCollection(Ids ids);
 
+    /**
+     * 通过视频id和用户id删除收藏
+     *
+     * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
+     * @return int
+     */
     int deleteCollection(Ids ids);
 }
