@@ -1,6 +1,7 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChangePassword;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.User;
 import org.bearer.entity.vo.*;
 import org.bearer.mapper.ArticleMapper;
@@ -39,8 +40,8 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return ifDelete
      */
     @Override
-    public Boolean deleteArticle(String id) {
-        return articleMapper.deleteById(id);
+    public Boolean deleteArticle(PostId id) {
+        return articleMapper.deleteById(id.getId());
     }
 
     /**
@@ -76,13 +77,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * lock users account
      *
-     * @param account
+     * @param id
      * @return if locked
      */
     @Override
-    public Boolean lockUser(String account) {
+    public Boolean lockUser(PostId id) {
         // 根据用户的account设置is_locked字段为1
-        return userMapper.updateIsLockedByAccount(account);
+        return userMapper.updateIsLockedByAccount(id.getId());
     }
 
     /**
@@ -109,45 +110,45 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return if added
      */
     @Override
-    public Boolean addAdmin(String account) {
+    public Boolean addAdmin(PostId id) {
         // 根据用户的account设置管理员
-        return userRoleMapper.updateAdminByAccount(account);
+        return userRoleMapper.updateAdminByAccount(id.getId());
     }
 
     /**
      * delete admin by account
      *
-     * @param account
+     * @param id
      * @return if deleted
      */
     @Override
-    public Boolean deleteAdmin(String account) {
+    public Boolean deleteAdmin(PostId id) {
         // 根据用户的account删除管理员
-        return userRoleMapper.updateUserByAccount(account);
+        return userRoleMapper.updateUserByAccount(id.getId());
     }
 
     /**
      * change password
      *
-     * @param login
+     * @param changePassword
      * @return if changed
      */
     @Override
-    public Boolean changePassword(UserLogin login) {
-        User user = userMapper.selectOne(login.getAccount());
+    public Boolean changePassword(ChangePassword changePassword) {
+        User user = userMapper.selectOne(changePassword.getAccount());
 
         String oldPassword;
         if (user != null) {
-            oldPassword = MD5Util.parse(login.getOldPassword(), user.getSalt());
+            oldPassword = MD5Util.parse(changePassword.getOldPassword(), user.getSalt());
         }else {
             return false;
         }
 
-        String password = MD5Util.parse(login.getPassword(), user.getSalt());
+        String password = MD5Util.parse(changePassword.getPassword(), user.getSalt());
 
         // 根据用户的account和password修改密码
         if (oldPassword.equals(user.getPassword())) {
-            return userMapper.updatePasswordByAccount(login.getAccount(), password);
+            return userMapper.updatePasswordByAccount(changePassword.getAccount(), password);
         }
         return false;
     }
@@ -171,27 +172,15 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     /**
-     * get article content by id
-     *
-     * @param id
-     * @return the article
-     */
-    @Override
-    public Article getArticleContent(String id) {
-        // 根据文章id获取文章内容
-        return articleMapper.selectArticleById(id);
-    }
-
-    /**
      * examine article by id
      *
      * @param id
      * @return if successful
      */
     @Override
-    public Boolean examineArticle(String id) {
+    public Boolean examineArticle(PostId id) {
         // 根据文章id通过审核
-        return articleMapper.updateIsExaminedById(id);
+        return articleMapper.updateIsExaminedById(id.getId());
     }
 
     /**
@@ -219,8 +208,8 @@ public class AdministratorServiceImpl implements AdministratorService {
      * @return if successful
      */
     @Override
-    public Boolean examineVideo(String id) {
+    public Boolean examineVideo(PostId id) {
         // 根据视频id通过审核
-        return videoMapper.updateIsExaminedById(id);
+        return videoMapper.updateIsExaminedById(id.getId());
     }
 }

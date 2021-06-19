@@ -21,9 +21,16 @@
         <collection property="roles" ofType="string" resultMap="roles"/>
     </resultMap>
 
-    <resultMap id="roles" type="list">
-        <result column="role"/>
+    <resultMap id="roles" type="org.bearer.entity.vo.Role">
+        <result property="role" column="role"/>
     </resultMap>
+
+    <insert id="insertWeChat">
+        insert into `cul_user` AS `user`
+            (`id`,`username`,`account`,`password`,`salt`,`is_locked`)
+        values
+            (#{id}, #{username}, #{account}, #{password}, #{salt}, #{locked});
+    </insert>
 
     <update id="updateIsLockedByAccount">
         update `cul_user`
@@ -33,7 +40,8 @@
 
     <update id="updatePasswordByAccount">
         update `cul_user`
-        set `password`
+        set `password`=#{password}
+        where `account` = #{account};
     </update>
 
     <select id="selectOne" resultMap="userMap">
@@ -43,19 +51,13 @@
     </select>
 
     <select id="selectUserList" resultMap="userVO">
-        select `account`, `is_locked`, `username`
-        from `cul_user` LIMIT #{start},#{end};
-    </select>
-
-    <select id="selectCountUser" resultType="java.lang.Integer">
         select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
-            INNER JOIN `cul_user_role` AS `ur`
-                ON `ur`.`user_id` = `user`.`id`
-            INNER JOIN `cul_role` AS `role`
-                ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = #{account}
-          AND `role`.`role` = 'user';
+                 INNER JOIN `cul_user_role` AS `ur`
+                            ON `ur`.`user_id` = `user`.`id`
+                 INNER JOIN `cul_role` AS `role`
+                            ON `ur`.`role_id` = `role`.`id`
+        where `role`.`role` = 'user';
     </select>
 
     <select id="selectUserByAccount" resultMap="userVO">
@@ -76,16 +78,26 @@
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = #{account}
-          AND `role`.`role` = 'admin';
+        where `role`.`role` = 'admin';
     </select>
 
     <select id="selectCountAdmin" resultType="java.lang.Integer">
-        select count(*) from `cul_user` AS `user`
-        INNER JOIN `cul_user_role` AS `ur`
-            ON `ur`.`user_id` = `user`.`id`
-        INNER JOIN `cul_role` AS `role`
-            ON `ur`.`role_id` = `role`.`id`
+        select count(*)
+        from `cul_user` AS `user`
+                 INNER JOIN `cul_user_role` AS `ur`
+                            ON `ur`.`user_id` = `user`.`id`
+                 INNER JOIN `cul_role` AS `role`
+                            ON `ur`.`role_id` = `role`.`id`
         where `role`.`role` = 'admin';
+    </select>
+
+    <select id="selectCountUser" resultType="java.lang.Integer">
+        select count(*)
+        from `cul_user` AS `user`
+                 INNER JOIN `cul_user_role` AS `ur`
+                            ON `ur`.`user_id` = `user`.`id`
+                 INNER JOIN `cul_role` AS `role`
+                            ON `ur`.`role_id` = `role`.`id`
+        where `role`.`role` = 'user';
     </select>
 </mapper>

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Li
@@ -42,4 +43,9 @@ public class DynamicVO implements Serializable {
      * 视频url
      */
     private String videoUrl;
+
+    /**
+     * 发动态的时间
+     */
+    private Date createTime;
 }

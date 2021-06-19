@@ -81,14 +81,6 @@ public interface ArticleMapper {
     int selectCountNotExamined();
 
     /**
-     * 通过文章id查询文章
-     *
-     * @param id 文章id
-     * @return org.bearer.entity.vo.Article
-     */
-    Article selectArticleById(String id);
-
-    /**
      * 通过文章id更新审核信息
      *
      * @param id 文章id

@@ -77,4 +77,12 @@ public interface UserMapper {
      * @return Boolean
      */
     Boolean updatePasswordByAccount(String account, String password);
+
+    /**
+     * 保存微信端用户信息
+     *
+     * @param user JSON{"id":"用户id","username":"用户名","account":"账号","password":"密码","locked":"是否封号"}
+     * @return int
+     */
+    int insertWeChat(User user);
 }

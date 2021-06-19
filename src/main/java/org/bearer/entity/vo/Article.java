@@ -3,6 +3,7 @@ package org.bearer.entity.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Li
@@ -58,4 +59,9 @@ public class Article implements Serializable {
      * 作者名
      */
     private String username;
+
+    /**
+     * 文章创建时间
+     */
+    private Date createTime;
 }

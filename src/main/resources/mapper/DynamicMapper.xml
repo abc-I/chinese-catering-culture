@@ -15,10 +15,15 @@
     </delete>
 
     <select id="selectDynamic" resultType="org.bearer.entity.vo.DynamicVO">
-        select `dyn`.`id`, `user`.`username`, `dyn`.`dynamic`, `dyn`.`picture_url`, `dyn`.`video_url`
+        select `dyn`.`id`,
+               `user`.`username`,
+               `dyn`.`dynamic`,
+               `dyn`.`picture_url`,
+               `dyn`.`video_url`,
+               `dyn`.`create_time`
         from `cul_dynamic` AS `dyn`
-            INNER JOIN `cul_user` AS `user`
-                ON `dyn`.`user_id` = `user`.`id` LIMIT #{start}, #{end };
+                 INNER JOIN `cul_user` AS `user`
+                            ON `dyn`.`user_id` = `user`.`id` LIMIT #{start}, #{end };
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">

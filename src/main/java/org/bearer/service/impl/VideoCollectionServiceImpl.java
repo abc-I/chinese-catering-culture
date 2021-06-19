@@ -48,26 +48,23 @@ public class VideoCollectionServiceImpl implements VideoCollectionService {
     }
 
     /**
-     * 保存收藏视频
+     * 操作收藏视频
      *
      * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
      * @return int
      */
     @Override
-    public int insertCollection(Ids ids) {
+    public int collection(Ids ids) {
         String id = UUID.randomUUID().toString().replace("-", "");
         VideoCollection videoCollection =
                 new VideoCollection(id, ids.getUserId(), ids.getId());
-        return videoCollectionMapper.insertCollection(videoCollection);
-    }
 
-    /**
-     * 通过用户id和视频id删除收藏
-     * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
-     * @return int
-     */
-    @Override
-    public int deleteCollection(Ids ids) {
-        return videoCollectionMapper.deleteCollection(ids);
+        String collectionId = videoCollectionMapper.selectIdByUserId(ids);
+
+        if (collectionId != null) {
+            return videoCollectionMapper.deleteCollection(ids);
+        } else {
+            return videoCollectionMapper.insertCollection(videoCollection);
+        }
     }
 }

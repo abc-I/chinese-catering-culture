@@ -85,7 +85,7 @@ public class ShiroConfig extends ShiroConfiguration {
 
     public Realm myRealm() {
         HashedCredentialsMatcher matcher = new MyHashedCredentialsMatcher("MD5");
-        matcher.setHashIterations(10);
+        matcher.setHashIterations(1);
         myRealm.setCredentialsMatcher(matcher);
         return myRealm;
     }

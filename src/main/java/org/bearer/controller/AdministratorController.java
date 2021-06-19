@@ -1,8 +1,8 @@
 package org.bearer.controller;
 
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.Ids;
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChangePassword;
+import org.bearer.entity.dto.PostId;
 import org.bearer.service.AdministratorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +26,8 @@ public class AdministratorController {
      * @return Result contains ifDelete
      */
     @DeleteMapping(value = "/articleDelete")
-    public Result deleteArticle(@RequestBody Ids id) {
-        return Result.result200(administratorService.deleteArticle(id.getId()));
+    public Result deleteArticle(@RequestBody PostId id) {
+        return Result.result200(administratorService.deleteArticle(id));
     }
 
     /**
@@ -52,19 +52,19 @@ public class AdministratorController {
 
     /**
      * lock user's account
-     * @param account
+     * @param id
      * @return Result contains if locked successfully
      */
     @PostMapping(value = "/lock")
-    public Result lockUser(@RequestBody String account) {
-        return Result.result200(administratorService.lockUser(account));
+    public Result lockUser(@RequestBody PostId id) {
+        return Result.result200(administratorService.lockUser(id));
     }
 
     /**
      * get admins
      * @return Result contains list of admins
      */
-    @GetMapping(value = "/getAdmin/{currentPage}/{pageSize}")
+    @GetMapping(value = "/getAdmins/{currentPage}/{pageSize}")
     public Result getAdmins(@PathVariable int currentPage,@PathVariable int pageSize) {
         return Result.result200(administratorService.getAdmins(currentPage, pageSize));
     }
@@ -74,8 +74,8 @@ public class AdministratorController {
      * @return Result contains if added
      */
     @PostMapping(value = "/addAdmin")
-    public Result addAdmin(@RequestBody String account) {
-        return Result.result200(administratorService.addAdmin(account));
+    public Result addAdmin(@RequestBody PostId id) {
+        return Result.result200(administratorService.addAdmin(id));
     }
 
     /**
@@ -83,18 +83,18 @@ public class AdministratorController {
      * @return Result contains if deleted
      */
     @DeleteMapping(value = "/deleteAdmin")
-    public Result deleteAdmin(@RequestBody String account) {
-        return Result.result200(administratorService.deleteAdmin(account));
+    public Result deleteAdmin(@RequestBody PostId id) {
+        return Result.result200(administratorService.deleteAdmin(id));
     }
 
     /**
      * change password
-     * @param login
+     * @param changePassword
      * @return Result contains if changed
      */
     @PostMapping(value = "/password")
-    public Result changePassword(@RequestBody UserLogin login) {
-        return Result.result200(administratorService.changePassword(login));
+    public Result changePassword(@RequestBody ChangePassword changePassword) {
+        return Result.result200(administratorService.changePassword(changePassword));
     }
 
     /**
@@ -108,22 +108,12 @@ public class AdministratorController {
     }
 
     /**
-     * get article content by id
-     * @param id
-     * @return Result contains article content
-     */
-    @GetMapping(value = "/content/{id}")
-    public Result getArticleContent(@PathVariable String id) {
-        return Result.result200(administratorService.getArticleContent(id));
-    }
-
-    /**
      * examine article by id
      * @param id
      * @return Result contains if successful
      */
     @PostMapping(value = "/examineArticle")
-    public Result examineArticle(@RequestBody String id) {
+    public Result examineArticle(@RequestBody PostId id) {
         return Result.result200(administratorService.examineArticle(id));
     }
 
@@ -143,7 +133,7 @@ public class AdministratorController {
      * @return Result contains if successful
      */
     @PostMapping(value = "/examineVideo")
-    public Result examineVideo(@RequestBody String id) {
+    public Result examineVideo(@RequestBody PostId id) {
         return Result.result200(administratorService.examineVideo(id));
     }
 }

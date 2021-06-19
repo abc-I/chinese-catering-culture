@@ -37,26 +37,14 @@ public class VideoCollectionController {
     }
 
     /**
-     * 保存收藏的文章
+     * 操作收藏的文章
      *
      * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
      * @return org.bearer.entity.Result
      */
-    @PostMapping("/insertCollection")
-    public Result insertCollection(@RequestBody Ids ids) {
-        int len = videoCollectionService.insertCollection(ids);
-        return Result.result200(len);
-    }
-
-    /**
-     * 删除收藏文章
-     *
-     * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
-     * @return org.bearer.entity.Result
-     */
-    @DeleteMapping("/deleteCollection")
-    public Result deleteCollection(@RequestBody Ids ids) {
-        int len = videoCollectionService.deleteCollection(ids);
+    @PostMapping("/collection")
+    public Result videoCollection(@RequestBody Ids ids) {
+        int len = videoCollectionService.collection(ids);
         return Result.result200(len);
     }
 }

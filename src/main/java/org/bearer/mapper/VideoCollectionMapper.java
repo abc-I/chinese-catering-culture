@@ -48,4 +48,12 @@ public interface VideoCollectionMapper {
      * @return int
      */
     int deleteCollection(Ids ids);
+
+    /**
+     * 通过userId和文章id，获取收藏id
+     *
+     * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
+     * @return String
+     */
+    String selectIdByUserId(Ids ids);
 }

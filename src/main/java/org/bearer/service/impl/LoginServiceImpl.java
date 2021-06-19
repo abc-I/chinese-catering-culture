@@ -5,7 +5,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChatLogin;
+import org.bearer.entity.dto.Login;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
 import org.bearer.mapper.UserMapper;
@@ -47,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
      * @return org.bearer.entity.Result
      */
     @Override
-    public Result weChatLogin(UserLogin login) {
+    public Result weChatLogin(ChatLogin login) {
         HashMap<String, String> params = new HashMap<>(4);
         params.put("appid=", login.getAppId());
         params.put("secret=", login.getSecret());
@@ -62,6 +63,18 @@ public class LoginServiceImpl implements LoginService {
                 String token = JwtUtil.createJwtToken(openIdJson.getOpenId());
 
                 User user = userMapper.selectOne(openIdJson.getOpenId());
+
+                if (user == null) {
+                    user = new User();
+
+                    user.setId(openIdJson.getOpenId());
+                    user.setAccount(login.getAccount());
+                    user.setUsername(login.getUsername());
+                    user.setLocked(false);
+                    user.setPassword(null);
+
+                    int len = userMapper.insertWeChat(user);
+                }
                 template.opsForValue().set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24);
 
                 return Result.result200(token);
@@ -80,7 +93,7 @@ public class LoginServiceImpl implements LoginService {
      * @return org.bearer.entity.Result
      */
     @Override
-    public Result adminLogin(UserLogin userLogin) {
+    public Result adminLogin(Login userLogin) {
         String account = userLogin.getAccount();
         String password = userLogin.getPassword();
 
@@ -102,6 +115,7 @@ public class LoginServiceImpl implements LoginService {
         String jwtToken = JwtUtil.createJwtToken(account);
 
         User user = userMapper.selectOne(account);
+
         template.opsForValue().set(jwtToken, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24);
 
         return Result.result200(jwtToken);

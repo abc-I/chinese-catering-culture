@@ -3,6 +3,7 @@ package org.bearer.controller;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.DynamicDTO;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.Page;
 import org.bearer.service.DynamicService;
 import org.springframework.web.bind.annotation.*;
@@ -37,12 +38,12 @@ public class DynamicController {
     /**
      * 通过动态id删除动态
      *
-     * @param ids JSON{"id":"动态id"}
+     * @param id JSON{"id":"动态id"}
      * @return org.bearer.entity.Result
      */
     @DeleteMapping("/deleteDynamic")
-    public Result deleteDynamicById(@RequestBody Ids ids) {
-        int len = dynamicService.deleteDynamicById(ids);
+    public Result deleteDynamicById(@RequestBody PostId id) {
+        int len = dynamicService.deleteDynamicById(id);
         return Result.result200(len);
     }
 

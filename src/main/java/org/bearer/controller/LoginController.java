@@ -1,7 +1,8 @@
 package org.bearer.controller;
 
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChatLogin;
+import org.bearer.entity.dto.Login;
 import org.bearer.service.LoginService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class LoginController {
      * @return org.bearer.entity.Result
      */
     @PostMapping("/weChatLogin")
-    public Result weChatLogin(@RequestBody UserLogin userLogin) {
+    public Result weChatLogin(@RequestBody ChatLogin userLogin) {
         return loginService.weChatLogin(userLogin);
     }
 
@@ -37,7 +38,7 @@ public class LoginController {
      * @return org.bearer.entity.Result
      */
     @PostMapping("/adminLogin")
-    public Result adminLogin(@RequestBody UserLogin userLogin) {
+    public Result adminLogin(@RequestBody Login userLogin) {
         return loginService.adminLogin(userLogin);
     }
 }

@@ -1,7 +1,8 @@
 package org.bearer.service;
 
 
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChangePassword;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.*;
 
 /**
@@ -16,7 +17,7 @@ public interface AdministratorService {
      * @param id
      * @return ifDelete
      */
-    Boolean deleteArticle(String id);
+    Boolean deleteArticle(PostId id);
 
     /**
      * get users
@@ -33,10 +34,10 @@ public interface AdministratorService {
 
     /**
      * lock users account
-     * @param account
+     * @param id
      * @return if locked
      */
-    Boolean lockUser(String account);
+    Boolean lockUser(PostId id);
 
     /**
      * get admins
@@ -48,21 +49,21 @@ public interface AdministratorService {
      * add admins
      * @return if added
      */
-    Boolean addAdmin(String account);
+    Boolean addAdmin(PostId id);
 
     /**
      * delete admin by account
-     * @param account
+     * @param id
      * @return if deleted
      */
-    Boolean deleteAdmin(String account);
+    Boolean deleteAdmin(PostId id);
 
     /**
      * change password
-     * @param login
+     * @param changePassword
      * @return if changed
      */
-    Boolean changePassword(UserLogin login);
+    Boolean changePassword(ChangePassword changePassword);
 
     /**
      * get article list
@@ -71,18 +72,11 @@ public interface AdministratorService {
     Page getArticleList(int currentPage, int pageSize);
 
     /**
-     * get article content by id
-     * @param id
-     * @return the article
-     */
-    Article getArticleContent(String id);
-
-    /**
      * examine article by id
      * @param id
      * @return if successful
      */
-    Boolean examineArticle(String id);
+    Boolean examineArticle(PostId id);
 
     /**
      * get videos
@@ -95,5 +89,5 @@ public interface AdministratorService {
      * @param id
      * @return if successful
      */
-    Boolean examineVideo(String id);
+    Boolean examineVideo(PostId id);
 }

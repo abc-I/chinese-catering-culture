@@ -2,6 +2,7 @@ package org.bearer.service.impl;
 
 import org.bearer.entity.dto.DynamicDTO;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.Dynamic;
 import org.bearer.entity.vo.DynamicVO;
 import org.bearer.entity.vo.Page;
@@ -49,12 +50,12 @@ public class DynamicServiceImpl implements DynamicService {
     /**
      * 同动态id删除动态
      *
-     * @param ids JSON{"id":"动态id"}
+     * @param id JSON{"id":"动态id"}
      * @return int
      */
     @Override
-    public int deleteDynamicById(Ids ids) {
-        return dynamicMapper.deleteById(ids);
+    public int deleteDynamicById(PostId id) {
+        return dynamicMapper.deleteById(id);
     }
 
     /**
@@ -65,8 +66,10 @@ public class DynamicServiceImpl implements DynamicService {
      */
     @Override
     public int insertDynamic(DynamicDTO dynamicDTO) {
+        String id = UUID.randomUUID().toString().replace("-", "");
+
         Dynamic dynamic =
-                new Dynamic(UUID.randomUUID().toString(), dynamicDTO.getUserId(),
+                new Dynamic(id, dynamicDTO.getUserId(),
                         dynamicDTO.getDynamic(), dynamicDTO.getPictureUrl(), dynamicDTO.getVideoUrl());
 
         return dynamicMapper.insertDynamic(dynamic);

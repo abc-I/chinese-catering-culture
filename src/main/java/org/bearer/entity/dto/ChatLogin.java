@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @date Created in 2021/6/16 15:47
  */
 @Data
-public class UserLogin implements Serializable {
+public class ChatLogin implements Serializable {
 
     private static final long serialVersionUID = 5662898438223384908L;
 
@@ -40,7 +40,7 @@ public class UserLogin implements Serializable {
     private String password;
 
     /**
-     * 旧密码
+     * 用户名
      */
-    private String oldPassword;
+    private String username;
 }

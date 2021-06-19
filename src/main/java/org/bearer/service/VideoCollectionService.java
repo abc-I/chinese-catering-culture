@@ -20,18 +20,10 @@ public interface VideoCollectionService {
     Page getCollection(String userId, int currentPage, int pageSize);
 
     /**
-     * 保存收藏信息
+     * 操作收藏信息
      *
      * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
      * @return int
      */
-    int insertCollection(Ids ids);
-
-    /**
-     * 通过视频id和用户id删除收藏
-     *
-     * @param ids JSON{"id":"收藏视频id","userId":"用户id"}
-     * @return int
-     */
-    int deleteCollection(Ids ids);
+    int collection(Ids ids);
 }

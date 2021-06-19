@@ -1,7 +1,8 @@
 package org.bearer.service;
 
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.UserLogin;
+import org.bearer.entity.dto.ChatLogin;
+import org.bearer.entity.dto.Login;
 
 /**
  * @author Li
@@ -15,7 +16,7 @@ public interface LoginService {
      * @param userLogin 取appId，secret，js_code
      * @return org.bearer.entity.Result
      */
-    Result weChatLogin(UserLogin userLogin);
+    Result weChatLogin(ChatLogin userLogin);
 
     /**
      * 管理员登录
@@ -23,5 +24,5 @@ public interface LoginService {
      * @param userLogin 取account，password
      * @return org.bearer.entity.Result
      */
-    Result adminLogin(UserLogin userLogin);
+    Result adminLogin(Login userLogin);
 }

@@ -48,27 +48,23 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
     }
 
     /**
-     * 保存收藏的文章
+     * 操作收藏的文章
      *
      * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
      * @return int
      */
     @Override
-    public int insertCollection(Ids ids) {
+    public int collection(Ids ids) {
         String id = UUID.randomUUID().toString().replace("-", "");
         ArticleCollection articleCollection =
                 new ArticleCollection(id, ids.getUserId(), ids.getId());
-        return articleCollectionMapper.insertCollection(articleCollection);
-    }
 
-    /**
-     * 通过文章id和用户id删除收藏文章
-     *
-     * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
-     * @return int
-     */
-    @Override
-    public int deleteCollection(Ids ids) {
-        return articleCollectionMapper.deleteCollection(ids);
+        String collectionId = articleCollectionMapper.selectIdByUserId(ids);
+
+        if (collectionId != null) {
+            return articleCollectionMapper.deleteCollection(ids);
+        } else {
+            return articleCollectionMapper.insertCollection(articleCollection);
+        }
     }
 }

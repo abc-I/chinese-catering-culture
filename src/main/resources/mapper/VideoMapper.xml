@@ -103,7 +103,7 @@
     <select id="selectCountNotExamined" resultType="java.lang.Integer">
         select count(*)
         from `cul_video`
-        where `is_examined` = 1;
+        where `is_examined` = 0;
     </select>
 
     <select id="selectCountByTitle" resultType="java.lang.Integer">

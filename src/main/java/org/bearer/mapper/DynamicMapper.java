@@ -2,6 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.Dynamic;
 import org.bearer.entity.vo.DynamicVO;
 
@@ -33,10 +34,10 @@ public interface DynamicMapper {
     /**
      * 通过动态id删除动态
      *
-     * @param ids 只取动态id
+     * @param id 动态id
      * @return int
      */
-    int deleteById(Ids ids);
+    int deleteById(PostId id);
 
     /**
      * 保存动态

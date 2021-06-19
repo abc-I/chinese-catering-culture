@@ -47,4 +47,12 @@ public interface ArticleCollectionMapper {
      * @return 总条数
      */
     int selectCountById(String userId);
+
+    /**
+     * 通过userId和文章id，获取收藏id
+     *
+     * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
+     * @return String
+     */
+    String selectIdByUserId(Ids ids);
 }

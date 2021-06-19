@@ -2,6 +2,7 @@ package org.bearer.service;
 
 import org.bearer.entity.dto.DynamicDTO;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.Page;
 
 /**
@@ -25,7 +26,7 @@ public interface DynamicService {
      * @param ids JSON{"id":"动态id"}
      * @return int
      */
-    int deleteDynamicById(Ids ids);
+    int deleteDynamicById(PostId id);
 
     /**
      * 保存动态信息

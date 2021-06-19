@@ -23,18 +23,10 @@ public interface ArticleCollectionService {
     Page getCollection(String userId, int currentPage, int pageSize);
 
     /**
-     * 保存收藏的文章
+     * 操作收藏的文章
      *
      * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
      * @return int
      */
-    int insertCollection(Ids ids);
-
-    /**
-     * 删除收藏文章
-     *
-     * @param ids JSON{"id":"收藏文章id","userId":"用户id"}
-     * @return int
-     */
-    int deleteCollection(Ids ids);
+    int collection(Ids ids);
 }

@@ -39,4 +39,11 @@
         from `cul_video_collection`
         where `user_id` = #{userId};
     </select>
+
+    <select id="selectIdByUserId" resultType="java.lang.String">
+        select `id`
+        from `cul_video_collection`
+        where `user_id` = #{userId}
+          AND `video_id` = #{id};
+    </select>
 </mapper>
