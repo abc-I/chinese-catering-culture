@@ -103,4 +103,11 @@ public interface ArticleMapper {
      * @return int
      */
     int selectCountByTitle(String searchContent);
+
+    /**
+     * 添加文章点击次数
+     *
+     * @param id 文章id
+     */
+    void updateRecommend(String id);
 }

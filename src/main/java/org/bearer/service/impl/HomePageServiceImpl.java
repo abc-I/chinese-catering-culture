@@ -100,7 +100,9 @@ public class HomePageServiceImpl implements HomePageService {
      */
     @Override
     public Article getArticle(String id) {
-        return articleMapper.selectOne(id);
+        Article article = articleMapper.selectOne(id);
+        articleMapper.updateRecommend(id);
+        return article;
     }
 
     /**
@@ -111,6 +113,8 @@ public class HomePageServiceImpl implements HomePageService {
      */
     @Override
     public Video getVideo(String id) {
-        return videoMapper.selectOne(id);
+        Video video = videoMapper.selectOne(id);
+        videoMapper.updateRecommend(id);
+        return video;
     }
 }
