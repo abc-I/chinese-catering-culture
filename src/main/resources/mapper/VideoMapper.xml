@@ -12,6 +12,12 @@
         set `is_examined` = 1;
     </update>
 
+    <update id="updateRecommend">
+        update `cul_video`
+        set `recommend` = `recommend` + 1
+        where `id` = #{id};
+    </update>
+
     <select id="selectList" resultType="org.bearer.entity.vo.Video">
         select `video`.`id`
              , `video`.`title`

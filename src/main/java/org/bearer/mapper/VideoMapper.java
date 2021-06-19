@@ -80,4 +80,11 @@ public interface VideoMapper {
      * @return int
      */
     int selectCountByTitle(String searchContent);
+
+    /**
+     * 添加视频点击次数
+     *
+     * @param id 视频id
+     */
+    void updateRecommend(String id);
 }
