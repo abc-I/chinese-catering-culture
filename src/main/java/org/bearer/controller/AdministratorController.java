@@ -56,7 +56,7 @@ public class AdministratorController {
      * @return Result contains if locked successfully
      */
     @PostMapping(value = "/lock")
-    public Result lockUser(@RequestParam String account) {
+    public Result lockUser(@RequestBody String account) {
         return Result.result200(administratorService.lockUser(account));
     }
 
@@ -74,7 +74,7 @@ public class AdministratorController {
      * @return Result contains if added
      */
     @PostMapping(value = "/addAdmin")
-    public Result addAdmin(@RequestParam String account) {
+    public Result addAdmin(@RequestBody String account) {
         return Result.result200(administratorService.addAdmin(account));
     }
 
@@ -83,7 +83,7 @@ public class AdministratorController {
      * @return Result contains if deleted
      */
     @DeleteMapping(value = "/deleteAdmin")
-    public Result deleteAdmin(@RequestParam String account) {
+    public Result deleteAdmin(@RequestBody String account) {
         return Result.result200(administratorService.deleteAdmin(account));
     }
 
@@ -122,8 +122,8 @@ public class AdministratorController {
      * @param id
      * @return Result contains if successful
      */
-    @PostMapping(value = "/examineArticle/{id}")
-    public Result examineArticle(@PathVariable String id) {
+    @PostMapping(value = "/examineArticle")
+    public Result examineArticle(@RequestBody String id) {
         return Result.result200(administratorService.examineArticle(id));
     }
 
@@ -142,8 +142,8 @@ public class AdministratorController {
      * @param id
      * @return Result contains if successful
      */
-    @PostMapping(value = "/examineVideo/{id}")
-    public Result examineVideo(@PathVariable String id) {
+    @PostMapping(value = "/examineVideo")
+    public Result examineVideo(@RequestBody String id) {
         return Result.result200(administratorService.examineVideo(id));
     }
 }
