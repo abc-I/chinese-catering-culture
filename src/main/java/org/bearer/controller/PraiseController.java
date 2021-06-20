@@ -2,7 +2,9 @@ package org.bearer.controller;
 
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.service.PraiseService;
+import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,24 +24,24 @@ public class PraiseController {
     /**
      * 保存文章点赞
      *
-     * @param ids 只取id（文章id）
+     * @param id JSON{"id":"文章id"}
      * @return org.bearer.entity.Result
      */
     @PostMapping("/insertArticlePraise")
-    public Result insertArticlePraise(Ids ids) {
-        int len = praiseService.insertArticlePraise(ids);
+    public Result insertArticlePraise(@RequestBody PostId id) {
+        int len = praiseService.insertArticlePraise(id);
         return Result.result200(len);
     }
 
     /**
      * 保存视频点赞
      *
-     * @param ids 只取id（视频id）
+     * @param id JSON{"id":"视频id"}
      * @return org.bearer.entity.Result
      */
     @PostMapping("/insertVideoPraise")
-    public Result insertVideoPraise(Ids ids) {
-        int len = praiseService.insertVideoPraise(ids);
+    public Result insertVideoPraise(@RequestBody PostId id) {
+        int len = praiseService.insertVideoPraise(id);
         return Result.result200(len);
     }
 }

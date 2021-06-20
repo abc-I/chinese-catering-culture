@@ -1,6 +1,7 @@
 package org.bearer.service.impl;
 
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.VideoMapper;
 import org.bearer.service.PraiseService;
@@ -31,22 +32,22 @@ public class PraiseServiceImpl implements PraiseService {
     /**
      * 保存文章点赞
      *
-     * @param ids 只取id（文章id）
+     * @param id JSON{"id":"文章"}
      * @return int
      */
     @Override
-    public int insertArticlePraise(Ids ids) {
-        return articleMapper.updatePraise(ids);
+    public int insertArticlePraise(PostId id) {
+        return articleMapper.updatePraise(id);
     }
 
     /**
      * 保存视频点赞
      *
-     * @param ids 只取id（视频id）
+     * @param id JSON{"id":"视频id"}
      * @return org.bearer.entity.Result
      */
     @Override
-    public int insertVideoPraise(Ids ids) {
-        return videoMapper.updatePraise(ids);
+    public int insertVideoPraise(PostId id) {
+        return videoMapper.updatePraise(id);
     }
 }

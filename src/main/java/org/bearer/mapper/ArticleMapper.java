@@ -2,6 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.Article;
 
 import java.util.List;
@@ -60,10 +61,10 @@ public interface ArticleMapper {
     /**
      * 通过文章id保存点赞
      *
-     * @param ids 只取文章id
+     * @param id JSON{"id":"文章id"}
      * @return int
      */
-    int updatePraise(Ids ids);
+    int updatePraise(PostId id);
 
     /**
      * 查询所有未审核的文章

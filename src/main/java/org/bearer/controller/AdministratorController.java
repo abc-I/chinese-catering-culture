@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChangePassword;
 import org.bearer.entity.dto.PostId;
@@ -64,6 +65,7 @@ public class AdministratorController {
      * get admins
      * @return Result contains list of admins
      */
+    @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/getAdmins/{currentPage}/{pageSize}")
     public Result getAdmins(@PathVariable int currentPage,@PathVariable int pageSize) {
         return Result.result200(administratorService.getAdmins(currentPage, pageSize));

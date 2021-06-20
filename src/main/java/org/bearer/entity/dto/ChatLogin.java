@@ -32,5 +32,5 @@ public class ChatLogin implements Serializable {
     /**
      * 用户名
      */
-    private String username;
+    private UserProfile userProfile;
 }

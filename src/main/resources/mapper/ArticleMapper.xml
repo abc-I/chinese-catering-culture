@@ -5,7 +5,7 @@
     <update id="updatePraise">
         update `cul_article`
         set `praise`=`praise` + 1
-        where `id` = #{id}
+        where `id` = #{id};
     </update>
 
     <update id="updateIsExaminedById">
@@ -22,8 +22,8 @@
 
     <delete id="deleteById">
         delete
-        from `cul_article` AS `art`
-        where `art`.`id` = #{id};
+        from `cul_article`
+        where `id` = #{id};
     </delete>
 
     <select id="selectList" resultType="org.bearer.entity.vo.Article">

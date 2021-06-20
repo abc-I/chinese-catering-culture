@@ -83,7 +83,11 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean lockUser(PostId id) {
         // 根据用户的account设置is_locked字段为1
-        return userMapper.updateIsLockedByAccount(id.getId());
+        if (userMapper.selectLocked()) {
+            return userMapper.updateNotLockedByAccount(id);
+        } else {
+           return userMapper.updateIsLockedByAccount(id.getId());
+        }
     }
 
     /**

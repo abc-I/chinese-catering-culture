@@ -2,6 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.Video;
 
 import java.util.List;
@@ -44,10 +45,10 @@ public interface VideoMapper {
     /**
      * 通过视频id保存点赞数
      *
-     * @param ids 只取id（视频id）
+     * @param id JSON{"id":"视频id"}
      * @return int
      */
-    int updatePraise(Ids ids);
+    int updatePraise(PostId id);
 
     /**
      * 查询未审核的视频
