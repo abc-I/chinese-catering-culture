@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.service.UploadService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date Created in 2021/6/18 15:02
  */
 @RestController
+@RequiresRoles(value = {"user", "admin"})
 @RequestMapping("/upload")
 public class UploadController {
 

@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.vo.Article;
 import org.bearer.entity.vo.BrowsingHistory;
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 6/15/21 10:39 PM
  */
 @RestController
+@RequiresRoles(value = {"user"})
 @RequestMapping(value = "/personal")
 public class PersonalPageController {
 
@@ -23,6 +25,7 @@ public class PersonalPageController {
 
     /**
      * get the list of self articles
+     *
      * @param userId
      * @return Result contain List<Article>
      */

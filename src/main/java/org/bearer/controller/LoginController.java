@@ -7,6 +7,7 @@ import org.bearer.service.LoginService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Li
@@ -40,5 +41,16 @@ public class LoginController {
     @PostMapping("/adminLogin")
     public Result adminLogin(@RequestBody Login userLogin) {
         return loginService.adminLogin(userLogin);
+    }
+
+    /**
+     * 等出
+     *
+     * @param request 请求对象
+     * @return org.bearer.entity.Result
+     */
+    @DeleteMapping("/logout")
+    public Result logout(HttpServletRequest request) {
+        return loginService.logout(request);
     }
 }

@@ -8,14 +8,15 @@ import org.bearer.entity.Result;
 import org.bearer.entity.dto.*;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
-import org.bearer.mapper.RoleMapper;
 import org.bearer.mapper.UserMapper;
 import org.bearer.mapper.UserRoleMapper;
 import org.bearer.service.LoginService;
 import org.bearer.util.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
@@ -26,6 +27,7 @@ import java.util.UUID;
  * @date Created in 2021/6/15 9:44
  */
 @Service
+@Transactional(rollbackFor = {Exception.class})
 public class LoginServiceImpl implements LoginService {
 
     /**
@@ -115,7 +117,7 @@ public class LoginServiceImpl implements LoginService {
             throw new UnknownAccountException("账号错误！");
         } catch (LockedAccountException locked) {
             throw new LockedAccountException("账号被锁定！");
-        }catch (IncorrectCredentialsException inc){
+        } catch (IncorrectCredentialsException inc) {
             throw new IncorrectCredentialsException("密码错误！");
         } catch (AuthenticationException e) {
             throw new AuthenticationException("登录失败！");
@@ -131,6 +133,17 @@ public class LoginServiceImpl implements LoginService {
             return Result.result200(jwtToken);
         } else {
             return Result.result401("登录失败！");
+        }
+    }
+
+    @Override
+    public Result logout(HttpServletRequest request) {
+        String key = request.getHeader("JwtToken");
+
+        if (JedisUtil.delete(key)) {
+            return Result.result200("success!");
+        } else {
+            return Result.result500("fail!");
         }
     }
 }

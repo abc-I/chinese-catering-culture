@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.dto.PostId;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  * @date Created in 2021/6/17 12:40
  */
 @RestController
+@RequiresRoles(value = {"user"})
 @RequestMapping("/praise")
 public class PraiseController {
 

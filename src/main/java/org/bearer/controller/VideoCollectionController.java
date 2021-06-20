@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Page;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date Created in 2021/6/17 12:16
  */
 @RestController
+@RequiresRoles(value = {"user"})
 @RequestMapping("/video")
 public class VideoCollectionController {
 

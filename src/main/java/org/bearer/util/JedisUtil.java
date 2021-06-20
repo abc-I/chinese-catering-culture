@@ -51,6 +51,16 @@ public class JedisUtil {
         }
     }
 
+    public static boolean delete(String key) {
+        Jedis jedis = getJedis();
+        if (jedis != null) {
+            return jedis.del(key) > 0;
+        } else {
+            return false;
+
+        }
+    }
+
     public static boolean refresh(String key,long time) {
         Jedis jedis = getJedis();
         if (jedis != null && jedis.exists(key)) {

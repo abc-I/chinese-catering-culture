@@ -4,6 +4,8 @@ import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChatLogin;
 import org.bearer.entity.dto.Login;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Li
  * @version 1.0
@@ -25,4 +27,12 @@ public interface LoginService {
      * @return org.bearer.entity.Result
      */
     Result adminLogin(Login userLogin);
+
+    /**
+     * 等出
+     *
+     * @param request 请求对象
+     * @return org.bearer.entity.Result
+     */
+    Result logout(HttpServletRequest request);
 }

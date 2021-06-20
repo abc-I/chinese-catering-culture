@@ -32,3 +32,4 @@
 - 6.20 15:35 abc-I Add UserInfo,UserProfile;Update Praise,ArticleMapper,VideoMapper
 - 6.20 16:14 FanHoozy Update Administrator
 - 6.20 18:20 abc-I Add deleteVideo,authority control;Update weChatLogin,lockedUser
+- 6.20 19:16 abc-I Add transactional,authority control,logout

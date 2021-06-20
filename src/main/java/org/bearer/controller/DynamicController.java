@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.DynamicDTO;
 import org.bearer.entity.dto.Ids;
@@ -41,6 +42,7 @@ public class DynamicController {
      * @param id JSON{"id":"动态id"}
      * @return org.bearer.entity.Result
      */
+    @RequiresRoles(value = {"user"})
     @DeleteMapping("/deleteDynamic")
     public Result deleteDynamicById(@RequestBody PostId id) {
         int len = dynamicService.deleteDynamicById(id);
@@ -53,6 +55,7 @@ public class DynamicController {
      * @param dynamicDTO JSON{"userId":"用户id","dynamic":"动态信息","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return org.bearer.entity.Result
      */
+    @RequiresRoles(value = {"user"})
     @PostMapping("/insertDynamic")
     public Result insertDynamic(@RequestBody DynamicDTO dynamicDTO) {
         int len = dynamicService.insertDynamic(dynamicDTO);
