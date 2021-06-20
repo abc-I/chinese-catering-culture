@@ -88,4 +88,12 @@ public interface VideoMapper {
      * @param id 视频id
      */
     void updateRecommend(String id);
+
+    /**
+     * 通过id删除视频
+     *
+     * @param id 视频id
+     * @return Boolean
+     */
+    Boolean deleteById(String id);
 }

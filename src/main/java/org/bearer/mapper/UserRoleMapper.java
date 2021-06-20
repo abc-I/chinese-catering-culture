@@ -24,4 +24,12 @@ public interface UserRoleMapper {
      * @return Boolean
      */
     Boolean updateUserByAccount(String account);
+
+    /**
+     * 用户绑定权限
+     *
+     * @param id 用户id
+     * @return int
+     */
+    int insertRole(String id);
 }

@@ -1,5 +1,6 @@
 package org.bearer.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Page;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @date Created in 2021/6/11 13:25
  */
 @RestController
+@RequiresRoles(value = {"user"})
 @RequestMapping("/article")
 public class ArticleCollectionController {
 
@@ -26,9 +28,9 @@ public class ArticleCollectionController {
     /**
      * 获取收藏的文章
      *
-     * @param userId 用户id
+     * @param userId      用户id
      * @param currentPage 当前页
-     * @param pageSize 每页几条数据
+     * @param pageSize    每页几条数据
      * @return org.bearer.entity.Result
      */
     @GetMapping("/getCollection/{userId}/{currentPage}/{pageSize}")

@@ -5,15 +5,14 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.ChatLogin;
-import org.bearer.entity.dto.Login;
+import org.bearer.entity.dto.*;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
+import org.bearer.mapper.RoleMapper;
 import org.bearer.mapper.UserMapper;
+import org.bearer.mapper.UserRoleMapper;
 import org.bearer.service.LoginService;
-import org.bearer.util.HttpUtil;
-import org.bearer.util.JedisUtil;
-import org.bearer.util.JwtUtil;
+import org.bearer.util.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +33,8 @@ public class LoginServiceImpl implements LoginService {
      */
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserRoleMapper userRoleMapper;
 
     /**
      * 微信登录
@@ -60,18 +61,26 @@ public class LoginServiceImpl implements LoginService {
             }
 
             if (openIdJson != null) {
-                String token = JwtUtil.createJwtToken(openIdJson.getOpenId());
+                String openId = openIdJson.getOpenId();
 
-                User user = userMapper.selectOne(openIdJson.getOpenId());
+                String token = JwtUtil.createJwtToken(openId);
+
+                User user = userMapper.selectOne(openId);
 
                 if (user == null) {
                     user = new User();
+                    UserProfile userProfile = login.getUserProfile();
+                    UserInfo userInfo = userProfile.getUserInfo();
 
-                    user.setId(UUID.randomUUID().toString());
-                    user.setAccount(openIdJson.getOpenId());
+                    String id = UUID.randomUUID().toString();
+                    user.setId(id);
+                    user.setAccount(openId);
+                    user.setUsername(userInfo.getNickName());
                     user.setLocked(false);
 
                     userMapper.insertWeChat(user);
+
+                    userRoleMapper.insertRole(id);
                 }
 
                 boolean bool = JedisUtil.set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24L);

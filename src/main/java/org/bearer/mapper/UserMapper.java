@@ -1,6 +1,7 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.User;
 import org.bearer.entity.vo.UserVO;
 
@@ -81,8 +82,24 @@ public interface UserMapper {
     /**
      * 保存微信端用户信息
      *
-     * @param user JSON{"id":"用户id","username":"用户名","account":"账号","password":"密码","locked":"是否封号"}
+     * @param user JSON{"id":"用户id","username":"用户名","account":"账号","locked":"是否封号"}
      * @return int
      */
     int insertWeChat(User user);
+
+    /**
+     * 通过账号锁定用户
+     *
+     * @param account 账号
+     * @return Boolean
+     */
+    Boolean selectLockedByAccount(String account);
+
+    /**
+     * 通过账号解锁账号
+     *
+     * @param account 账号
+     * @return Boolean
+     */
+    Boolean updateNotLockedByAccount(String account);
 }

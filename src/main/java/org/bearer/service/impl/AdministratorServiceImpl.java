@@ -83,8 +83,8 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean lockUser(PostId id) {
         // 根据用户的account设置is_locked字段为1
-        if (userMapper.selectLocked()) {
-            return userMapper.updateNotLockedByAccount(id);
+        if (userMapper.selectLockedByAccount(id.getId())) {
+            return userMapper.updateNotLockedByAccount(id.getId());
         } else {
            return userMapper.updateIsLockedByAccount(id.getId());
         }
@@ -225,7 +225,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Boolean rejectArticle(PostId id) {
-        return articleMapper.updateNotExaminedById(id.getId());
+        return articleMapper.deleteById(id.getId());
     }
 
     /**
@@ -236,6 +236,6 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Boolean rejectVideo(PostId id) {
-        return videoMapper.updateNotExaminedById(id.getId());
+        return videoMapper.deleteById(id.getId());
     }
 }

@@ -20,6 +20,12 @@
         where `id` = #{id};
     </update>
 
+    <delete id="deleteById">
+        delete
+        from `cul_video`
+        where `id` = #{id};
+    </delete>
+
     <select id="selectList" resultType="org.bearer.entity.vo.Video">
         select `video`.`id`
              , `video`.`title`

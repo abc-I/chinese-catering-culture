@@ -27,9 +27,8 @@
 
     <insert id="insertWeChat">
         insert into `cul_user`
-            (`id`,`account`,`is_locked`)
-        values
-            (#{id}, #{account}, #{locked});
+            (`id`, `username`, `account`, `is_locked`)
+        values (#{id}, #{username}, #{account}, #{locked});
     </insert>
 
     <update id="updateIsLockedByAccount">
@@ -41,6 +40,12 @@
     <update id="updatePasswordByAccount">
         update `cul_user`
         set `password`=#{password}
+        where `account` = #{account};
+    </update>
+
+    <update id="updateNotLockedByAccount">
+        update `cul_user`
+        set `is_locked` = 0
         where `account` = #{account};
     </update>
 
@@ -99,5 +104,11 @@
                  INNER JOIN `cul_role` AS `role`
                             ON `ur`.`role_id` = `role`.`id`
         where `role`.`role` = 'user';
+    </select>
+
+    <select id="selectLockedByAccount" resultType="java.lang.Boolean">
+        select `is_locked`
+        from `cul_user`
+        where `account` = #{account};
     </select>
 </mapper>

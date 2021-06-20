@@ -26,6 +26,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains ifDelete
      */
+    @RequiresRoles(value = {"admin"})
     @DeleteMapping(value = "/articleDelete")
     public Result deleteArticle(@RequestBody PostId id) {
         return Result.result200(administratorService.deleteArticle(id));
@@ -35,6 +36,7 @@ public class AdministratorController {
      * get all users
      * @return Result contains list of users
      */
+    @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/getUsers/{currentPage}/{pageSize}")
     public Result getUsers(@PathVariable int currentPage, @PathVariable int pageSize) {
         return Result.result200(administratorService.getUsers(currentPage, pageSize));
@@ -46,6 +48,7 @@ public class AdministratorController {
      * @param account
      * @return Result contains specified user
      */
+    @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/getUsers/{account}")
     public Result getUsersByAccount(@PathVariable String account) {
         return Result.result200(administratorService.getUsersByAccount(account));
@@ -56,6 +59,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains if locked successfully
      */
+    @RequiresRoles(value = {"admin","administrator"})
     @PostMapping(value = "/lock")
     public Result lockUser(@RequestBody PostId id) {
         return Result.result200(administratorService.lockUser(id));
@@ -65,7 +69,7 @@ public class AdministratorController {
      * get admins
      * @return Result contains list of admins
      */
-    @RequiresRoles(value = {"admin"})
+    @RequiresRoles(value = {"administrator"})
     @GetMapping(value = "/getAdmins/{currentPage}/{pageSize}")
     public Result getAdmins(@PathVariable int currentPage,@PathVariable int pageSize) {
         return Result.result200(administratorService.getAdmins(currentPage, pageSize));
@@ -75,6 +79,7 @@ public class AdministratorController {
      * add admin by account
      * @return Result contains if added
      */
+    @RequiresRoles(value = {"administrator"})
     @PostMapping(value = "/addAdmin")
     public Result addAdmin(@RequestBody PostId id) {
         return Result.result200(administratorService.addAdmin(id));
@@ -84,6 +89,7 @@ public class AdministratorController {
      * delete admin by account
      * @return Result contains if deleted
      */
+    @RequiresRoles(value = {"administrator"})
     @DeleteMapping(value = "/deleteAdmin")
     public Result deleteAdmin(@RequestBody PostId id) {
         return Result.result200(administratorService.deleteAdmin(id));
@@ -94,6 +100,7 @@ public class AdministratorController {
      * @param changePassword
      * @return Result contains if changed
      */
+    @RequiresRoles(value = {"admin","administrator"})
     @PostMapping(value = "/password")
     public Result changePassword(@RequestBody ChangePassword changePassword) {
         return Result.result200(administratorService.changePassword(changePassword));
@@ -104,6 +111,7 @@ public class AdministratorController {
      *
      * @return Result contains list of articles not examined articles
      */
+    @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/articleList/{currentPage}/{pageSize}")
     public Result getArticleList(@PathVariable int currentPage, @PathVariable int pageSize) {
         return Result.result200(administratorService.getArticleList(currentPage, pageSize));
@@ -114,6 +122,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains if successful
      */
+    @RequiresRoles(value = {"admin"})
     @PostMapping(value = "/examineArticle")
     public Result examineArticle(@RequestBody PostId id) {
         return Result.result200(administratorService.examineArticle(id));
@@ -124,6 +133,7 @@ public class AdministratorController {
      *
      * @return Result contains list of videos not examined
      */
+    @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/video/{currentPage}/{pageSize}")
     public Result getVideos(@PathVariable int currentPage, @PathVariable int pageSize) {
         return Result.result200(administratorService.getVideos(currentPage, pageSize));
@@ -131,9 +141,11 @@ public class AdministratorController {
 
     /**
      * examine video by id
+     *
      * @param id
      * @return Result contains if successful
      */
+    @RequiresRoles(value = {"admin"})
     @PostMapping(value = "/examineVideo")
     public Result examineVideo(@RequestBody PostId id) {
         return Result.result200(administratorService.examineVideo(id));

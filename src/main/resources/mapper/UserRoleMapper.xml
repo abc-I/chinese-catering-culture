@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bearer.mapper.UserRoleMapper">
 
+    <insert id="insertRole">
+        insert into `cul_user_role`
+            (`user_id`, `role_id`)
+        values (#{id}, 'lsjfhf8f8udg8g04fhf6384guff79302');
+    </insert>
+
     <update id="updateAdminByAccount">
         update `cul_user_role` AS `ur`
         INNER JOIN `cul_user` AS `user`
