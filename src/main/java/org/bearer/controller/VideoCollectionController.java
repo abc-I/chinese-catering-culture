@@ -4,12 +4,10 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Page;
-import org.bearer.entity.vo.Video;
 import org.bearer.service.VideoCollectionService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author Li
