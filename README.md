@@ -26,6 +26,8 @@
 - 6.18 16:35 abc-I Add Dynamic's,Administrator's mapper,UploadController,UploadService
 - 6.18 21:25 abc-I Add notes,Page;Update annotation
 - 6.19 12:55 abc-I Add update recommend
+- 6.19 13:54 FanHoozy Update Administrator
 - 6.19 21:27 abc-I Add Login.java,PostId,Role.java,ChangePassword;Update AdministratorController,ArticleCollection,Dynamic,VideoCollection
 - 6.20 12:25 abc-I Update LoginService,JedisConfig
-- 6.21 15:35 abc-I Add UserInfo,UserProfile;Update Praise,ArticleMapper,VideoMapper
+- 6.20 15:35 abc-I Add UserInfo,UserProfile;Update Praise,ArticleMapper,VideoMapper
+- 6.20 16:14 FanHoozy Update Administrator
