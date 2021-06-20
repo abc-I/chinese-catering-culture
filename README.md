@@ -27,3 +27,4 @@
 - 6.18 21:25 abc-I Add notes,Page;Update annotation
 - 6.19 12:55 abc-I Add update recommend
 - 6.19 21:27 abc-I Add Login.java,PostId,Role.java,ChangePassword;Update AdministratorController,ArticleCollection,Dynamic,VideoCollection
+- 6.20 12:25 abc-I Update LoginService,JedisConfig

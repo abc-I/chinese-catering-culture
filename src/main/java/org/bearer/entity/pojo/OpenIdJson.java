@@ -1,5 +1,6 @@
 package org.bearer.entity.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,18 @@ public class OpenIdJson implements Serializable {
 
     private static final long serialVersionUID = 2415988306266110348L;
 
+    @JsonProperty("openid")
     private String openId;
+
+    @JsonProperty("session_key")
     private String sessionKey;
-    private String unionid;
-    private String errcode;
-    private String errmsg;
+
+    @JsonProperty("unionid")
+    private String unionId;
+
+    @JsonProperty("errcode")
+    private Integer errCode;
+
+    @JsonProperty("errmsg")
+    private String errMsg;
 }

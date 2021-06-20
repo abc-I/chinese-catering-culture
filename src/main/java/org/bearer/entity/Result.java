@@ -84,4 +84,14 @@ public class Result implements Serializable {
     public static Result result415(Object o) {
         return new Result(415, "Unsupported media type!", o);
     }
+
+    /**
+     * 未通过身份验证！
+     *
+     * @param o 返回数据
+     * @return 返回结果
+     */
+    public static Result result401(Object o) {
+        return new Result(401, "UNAUTHORIZED", o);
+    }
 }

@@ -1,24 +1,20 @@
 package org.bearer.filter;
 
-import org.apache.shiro.SecurityUtils;
+import lombok.SneakyThrows;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.bearer.entity.pojo.JwtToken;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.bearer.util.JedisUtil;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.io.Serializable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Li
@@ -58,6 +54,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         return allowed || super.isPermissive(mappedValue);
     }
 
+    @SneakyThrows
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) {
         JwtToken token = createToken(request, response);
@@ -65,9 +62,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             throw new IllegalStateException("Token cannot be null!");
         }
         try {
-            Subject subject = SecurityUtils.getSubject();
-            subject.login(token);
-            return true;
+            return onLoginSuccess(token, null, request, response);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return onLoginFailure(token, e, request, response);
@@ -98,6 +93,12 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         PrintWriter writer = httpResponse.getWriter();
         writer.write("{\"errCode\": 401, \"msg\": \"UNAUTHORIZED\"}");
         return false;
+    }
+
+    @Override
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
+        String jwtToken = (String) token.getCredentials();
+        return JedisUtil.refresh(jwtToken, 1000 * 60 * 60 * 24L);
     }
 
     @Override

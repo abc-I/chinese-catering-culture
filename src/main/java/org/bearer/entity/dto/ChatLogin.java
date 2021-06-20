@@ -30,16 +30,6 @@ public class ChatLogin implements Serializable {
     private String code;
 
     /**
-     * 管理员登录的账号
-     */
-    private String account;
-
-    /**
-     * 管理员登录的密码
-     */
-    private String password;
-
-    /**
      * 用户名
      */
     private String username;

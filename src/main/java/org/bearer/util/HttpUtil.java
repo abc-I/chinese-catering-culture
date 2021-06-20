@@ -26,7 +26,8 @@ public class HttpUtil {
                     sb.append(key).append(param.get(key)).append("&");
                 }
             }
-            sb.deleteCharAt(sb.indexOf("&") - 1);
+            int index = sb.lastIndexOf("&");
+            sb.deleteCharAt(index);
         }
 
         URL url = new URL(sb.toString());

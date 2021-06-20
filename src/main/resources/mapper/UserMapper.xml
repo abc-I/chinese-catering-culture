@@ -26,10 +26,10 @@
     </resultMap>
 
     <insert id="insertWeChat">
-        insert into `cul_user` AS `user`
-            (`id`,`username`,`account`,`password`,`salt`,`is_locked`)
+        insert into `cul_user`
+            (`id`,`account`,`is_locked`)
         values
-            (#{id}, #{username}, #{account}, #{password}, #{salt}, #{locked});
+            (#{id}, #{account}, #{locked});
     </insert>
 
     <update id="updateIsLockedByAccount">

@@ -12,14 +12,14 @@ import org.bearer.entity.po.User;
 import org.bearer.mapper.UserMapper;
 import org.bearer.service.LoginService;
 import org.bearer.util.HttpUtil;
+import org.bearer.util.JedisUtil;
 import org.bearer.util.JwtUtil;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * @author Li
@@ -28,12 +28,6 @@ import java.util.HashMap;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
-
-    /**
-     * redis
-     */
-    @Resource(name = "template")
-    private RedisTemplate<Serializable,Object> template;
 
     /**
      * 用户 mapper
@@ -53,12 +47,18 @@ public class LoginServiceImpl implements LoginService {
         params.put("appid=", login.getAppId());
         params.put("secret=", login.getSecret());
         params.put("js_code=", login.getCode());
-        params.put("grant_type", "authorization_code");
+        params.put("grant_type=", "authorization_code");
 
         OpenIdJson openIdJson;
         try {
             String result = HttpUtil.doGet("https://api.weixin.qq.com/sns/jscode2session?", params);
-            openIdJson = (OpenIdJson) JSONObject.parse(result);
+            try {
+                openIdJson = JSONObject.parseObject(result, OpenIdJson.class);
+            } catch (ClassCastException e) {
+                e.printStackTrace();
+                return Result.result401("未通过身份验证");
+            }
+
             if (openIdJson != null) {
                 String token = JwtUtil.createJwtToken(openIdJson.getOpenId());
 
@@ -67,23 +67,23 @@ public class LoginServiceImpl implements LoginService {
                 if (user == null) {
                     user = new User();
 
-                    user.setId(openIdJson.getOpenId());
-                    user.setAccount(login.getAccount());
-                    user.setUsername(login.getUsername());
+                    user.setId(UUID.randomUUID().toString());
+                    user.setAccount(openIdJson.getOpenId());
                     user.setLocked(false);
-                    user.setPassword(null);
 
-                    int len = userMapper.insertWeChat(user);
+                    userMapper.insertWeChat(user);
                 }
-                template.opsForValue().set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24);
 
-                return Result.result200(token);
+                boolean bool = JedisUtil.set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24L);
+                if (bool) {
+                    return Result.result200(token);
+                }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Result.result403("拒绝访问！");
+        return Result.result401("登录失败！");
     }
 
     /**
@@ -116,8 +116,12 @@ public class LoginServiceImpl implements LoginService {
 
         User user = userMapper.selectOne(account);
 
-        template.opsForValue().set(jwtToken, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24);
+        boolean bool = JedisUtil.set(jwtToken, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24L);
 
-        return Result.result200(jwtToken);
+        if (bool) {
+            return Result.result200(jwtToken);
+        } else {
+            return Result.result401("登录失败！");
+        }
     }
 }
