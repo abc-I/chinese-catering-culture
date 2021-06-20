@@ -90,4 +90,18 @@ public interface AdministratorService {
      * @return if successful
      */
     Boolean examineVideo(PostId id);
+
+    /**
+     * reject article by id
+     * @param id
+     * @return if successful
+     */
+    Boolean rejectArticle(PostId id);
+
+    /**
+     * reject video by id
+     * @param id
+     * @return if successful
+     */
+    Boolean rejectVideo(PostId id);
 }

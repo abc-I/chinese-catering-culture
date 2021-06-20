@@ -138,4 +138,25 @@ public class AdministratorController {
     public Result examineVideo(@RequestBody PostId id) {
         return Result.result200(administratorService.examineVideo(id));
     }
+
+    /**
+     * reject article by id
+     * @param id
+     * @return Result contains if reject successful
+     */
+    @PostMapping(value = "/rejectArticle")
+    public Result rejectArticle(@RequestBody PostId id) {
+        return Result.result200(administratorService.rejectArticle(id));
+    }
+
+    /**
+     * reject video by id
+     * @param id
+     * @return Result contains iif reject successful
+     */
+    @PostMapping(value = "rejectVideo")
+    public Result rejectVideo(@RequestBody PostId id) {
+        return Result.result200(administratorService.rejectVideo(id));
+    }
+
 }

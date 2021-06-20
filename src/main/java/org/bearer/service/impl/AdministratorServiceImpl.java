@@ -216,4 +216,26 @@ public class AdministratorServiceImpl implements AdministratorService {
         // 根据视频id通过审核
         return videoMapper.updateIsExaminedById(id.getId());
     }
+
+    /**
+     * reject article by id
+     *
+     * @param id
+     * @return if successful
+     */
+    @Override
+    public Boolean rejectArticle(PostId id) {
+        return articleMapper.updateNotExaminedById(id.getId());
+    }
+
+    /**
+     * reject video by id
+     *
+     * @param id
+     * @return if successful
+     */
+    @Override
+    public Boolean rejectVideo(PostId id) {
+        return videoMapper.updateNotExaminedById(id.getId());
+    }
 }
