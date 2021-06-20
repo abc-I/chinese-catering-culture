@@ -154,7 +154,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains iif reject successful
      */
-    @PostMapping(value = "rejectVideo")
+    @PostMapping(value = "/rejectVideo")
     public Result rejectVideo(@RequestBody PostId id) {
         return Result.result200(administratorService.rejectVideo(id));
     }
