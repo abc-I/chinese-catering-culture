@@ -1,8 +1,6 @@
 package org.bearer.entity.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author fanyuhongzhe

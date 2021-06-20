@@ -2,10 +2,8 @@ package org.bearer.controller;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.Ids;
 import org.bearer.entity.dto.PostId;
 import org.bearer.service.PraiseService;
-import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

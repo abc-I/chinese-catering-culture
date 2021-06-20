@@ -1,7 +1,6 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.bearer.entity.dto.Ids;
 import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.Dynamic;
 import org.bearer.entity.vo.DynamicVO;

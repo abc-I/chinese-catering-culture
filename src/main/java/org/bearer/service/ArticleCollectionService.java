@@ -1,11 +1,7 @@
 package org.bearer.service;
 
 import org.bearer.entity.dto.Ids;
-import org.bearer.entity.vo.Article;
 import org.bearer.entity.vo.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 /**
  * @author Li

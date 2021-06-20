@@ -1,7 +1,6 @@
 package org.bearer.controller;
 
 import org.bearer.entity.Result;
-import org.bearer.entity.dto.SearchRecordsDTO;
 import org.bearer.entity.vo.*;
 import org.bearer.service.SearchPageService;
 import org.springframework.web.bind.annotation.*;

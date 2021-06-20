@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.vo.Video;
 import org.bearer.entity.po.VideoCollection;
-import org.bearer.entity.vo.Article;
 
 import java.util.List;
 
