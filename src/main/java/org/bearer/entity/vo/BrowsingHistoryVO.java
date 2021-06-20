@@ -1,6 +1,8 @@
 package org.bearer.entity.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author fanyuhongzhe
@@ -8,7 +10,7 @@ import lombok.Data;
  * @date 6/15/21 11:04 PM
  */
 @Data
-public class BrowsingHistory {
+public class BrowsingHistoryVO {
 
     /**
      * 文章或视频的Id

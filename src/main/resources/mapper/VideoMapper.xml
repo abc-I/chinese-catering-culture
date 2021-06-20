@@ -81,13 +81,8 @@
                  INNER JOIN `cul_material` AS `mat`
                             ON `mat`.`id` = `video`.`material_id`
         where `video`.`title` like "%"#{searchContent}"%"
+            AND `video`.`is_examined` = 1
             LIMIT #{start}, #{end};
-    </select>
-
-    <select id="selectPraise" resultType="java.lang.Integer">
-        select `praise`
-        from `cul_video`
-        where `id` = #{id};
     </select>
 
     <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.Video">
@@ -119,5 +114,31 @@
         from `cul_video`
         where `is_examined` = 1
           AND `title` like "%"#{searchContent}"%";
+    </select>
+
+    <select id="selectByCuisine" resultType="org.bearer.entity.vo.Video">
+        select `video`.`id`
+             , `video`.`title`
+             , `video`.`picture_url`
+             , `user`.`username`
+             , `cui`.`category`
+             , `mat`.`material`
+        from `cul_video` AS `video`
+                 INNER JOIN `cul_user` AS `user`
+                            ON `user`.`id` = `video`.`author_id`
+                 INNER JOIN `cul_cuisine` AS `cui`
+                            ON `cui`.`id` = `video`.`cuisine_id`
+                 INNER JOIN `cul_material` AS `mat`
+                            ON `mat`.`id` = `video`.`material_id`
+        where `video`.`cuisine_id` = #{id}
+          AND `video`.`is_examined` = 1
+            LIMIT #{start}, #{end};
+    </select>
+
+    <select id="selectCountByCuisine" resultType="java.lang.Integer">
+        select count(*)
+        from `cul_video`
+        where `cuisine_id` = #{id}
+          AND `is_examined` = 1;
     </select>
 </mapper>

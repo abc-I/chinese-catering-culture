@@ -96,4 +96,22 @@ public interface VideoMapper {
      * @return Boolean
      */
     Boolean deleteById(String id);
+
+    /**
+     * 通过菜系分类获取视频
+     *
+     * @param id 菜系分类
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return List<Video>
+     */
+    List<Video> selectByCuisine(String id, int start, int end);
+
+    /**
+     * 通过菜系id统计
+     *
+     * @param id 菜系id
+     * @return int
+     */
+    int selectCountByCuisine(String id);
 }

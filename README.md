@@ -33,3 +33,4 @@
 - 6.20 16:14 FanHoozy Update Administrator
 - 6.20 18:20 abc-I Add deleteVideo,authority control;Update weChatLogin,lockedUser
 - 6.20 19:16 abc-I Add transactional,authority control,logout
+- 6.20 22:10 abc-I Add history paging,save history,get article and video by cuisine

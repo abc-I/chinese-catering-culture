@@ -1,9 +1,6 @@
 package org.bearer.service;
 
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.BrowsingHistory;
-
-import java.util.List;
+import org.bearer.entity.vo.Page;
 
 /**
  * @author fanyuhongzhe
@@ -13,15 +10,17 @@ import java.util.List;
 public interface PersonalPageService {
     /**
      * get the self articles
+     *
      * @param authorId
      * @return list of self articles
      */
-    List<Article> getSelfArticle(String authorId);
+    Page getSelfArticle(String authorId, int currentPage, int pageSize);
 
     /**
      * get user's browsing history
+     *
      * @param userId
-     * @return list of the BrowsingHistory
+     * @return list of the BrowsingHistoryVO
      */
-    List<BrowsingHistory> getBrowsingHistory(String userId);
+    Page getBrowsingHistory(String userId, int currentPage, int pageSize);
 }

@@ -1,18 +1,16 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.Carousel;
-import org.bearer.entity.vo.Cuisine;
-import org.bearer.entity.vo.Video;
-import org.bearer.mapper.ArticleMapper;
-import org.bearer.mapper.CarouselMapper;
-import org.bearer.mapper.CuisineMapper;
-import org.bearer.mapper.VideoMapper;
+import org.bearer.entity.po.BrowsingHistory;
+import org.bearer.entity.vo.*;
+import org.bearer.mapper.*;
 import org.bearer.service.HomePageService;
+import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Li
@@ -20,6 +18,7 @@ import java.util.List;
  * @date Created in 2021/6/9 19:50
  */
 @Service
+@Transactional(timeout = 5, rollbackFor = {Exception.class})
 public class HomePageServiceImpl implements HomePageService {
 
     /**
@@ -47,6 +46,12 @@ public class HomePageServiceImpl implements HomePageService {
     private VideoMapper videoMapper;
 
     /**
+     * 历史记录 mapper
+     */
+    @Resource
+    private BrowsingHistoryMapper browsingHistoryMapper;
+
+    /**
      * 获取所有菜系
      *
      * @return List<Cuisine>
@@ -60,7 +65,7 @@ public class HomePageServiceImpl implements HomePageService {
      * 获取一定区间内的图片作为轮播图
      *
      * @param start 区间开始
-     * @param end 区间结尾
+     * @param end   区间结尾
      * @return List<Carousel>
      */
     @Override
@@ -72,7 +77,7 @@ public class HomePageServiceImpl implements HomePageService {
      * 获取一定区间内的推荐文章
      *
      * @param start 区间开始
-     * @param end 区间结尾
+     * @param end   区间结尾
      * @return List<Article>
      */
     @Override
@@ -84,7 +89,7 @@ public class HomePageServiceImpl implements HomePageService {
      * 获取一定区间内的推荐视频
      *
      * @param start 区间开始
-     * @param end 区间结尾
+     * @param end   区间结尾
      * @return List<Video>
      */
     @Override
@@ -95,12 +100,20 @@ public class HomePageServiceImpl implements HomePageService {
     /**
      * 通过文章id获取文章
      *
-     * @param id 文章id
+     * @param id     文章id
+     * @param userId 用户id
      * @return org.bearer.entity.vo.Article
      */
     @Override
-    public Article getArticle(String id) {
+    public Article getArticle(String id, String userId) {
         Article article = articleMapper.selectOne(id);
+
+        BrowsingHistory browsingHistory = new BrowsingHistory();
+        browsingHistory.setId(UUID.randomUUID().toString());
+        browsingHistory.setArticleId(id);
+        browsingHistory.setUserId(userId);
+
+        browsingHistoryMapper.insertArticleHistory(browsingHistory);
         articleMapper.updateRecommend(id);
         return article;
     }
@@ -108,13 +121,59 @@ public class HomePageServiceImpl implements HomePageService {
     /**
      * 通过视频id获取视频
      *
-     * @param id 视频id
+     * @param id     视频id
+     * @param userId 用户id
      * @return org.bearer.vo.Video
      */
     @Override
-    public Video getVideo(String id) {
+    public Video getVideo(String id, String userId) {
         Video video = videoMapper.selectOne(id);
+
+        BrowsingHistory browsingHistory = new BrowsingHistory();
+        browsingHistory.setId(UUID.randomUUID().toString());
+        browsingHistory.setVideoId(id);
+        browsingHistory.setUserId(userId);
+
+        browsingHistoryMapper.insertVideoHistory(browsingHistory);
         videoMapper.updateRecommend(id);
         return video;
+    }
+
+    /**
+     * 通过菜系id获取文章
+     *
+     * @param id 菜系分类文章
+     * @return org.bearer.entity.vo.Page
+     */
+    @Override
+    public Page getArticleByCuisine(String id, int currentPage, int pageSize) {
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
+
+        List<Article> articles = articleMapper.selectByCuisine(id, start, end);
+
+        int total = articleMapper.selectCountByCuisine(id);
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), articles);
+    }
+
+    /**
+     * 通过菜系分类获取视频
+     *
+     * @param id          菜系分类id
+     * @param currentPage 当前页
+     * @param pageSize    每页几条数据
+     * @return org.bearer.entity.vo.Page
+     */
+    @Override
+    public Page getVideoByCuisine(String id, int currentPage, int pageSize) {
+        int start = PageUtil.getStart(currentPage, pageSize);
+        int end = PageUtil.getEnd(currentPage, pageSize);
+
+        List<Video> videos = videoMapper.selectByCuisine(id, start, end);
+
+        int total = videoMapper.selectCountByCuisine(id);
+
+        return new Page(total, PageUtil.getPageCount(total, pageSize), videos);
     }
 }

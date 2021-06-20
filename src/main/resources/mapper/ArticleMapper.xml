@@ -27,18 +27,22 @@
     </delete>
 
     <select id="selectList" resultType="org.bearer.entity.vo.Article">
-        select `art`.`id`, `art`.`title`, `art`.`picture_url`, `user`.`username`
-             , `cui`.`category`, `mat`.`material`
+        select `art`.`id`
+             , `art`.`title`
+             , `art`.`picture_url`
+             , `user`.`username`
+             , `cui`.`category`
+             , `mat`.`material`
         from `cul_article` AS `art`
-            INNER JOIN `cul_user` AS `user`
-                ON `art`.`author_id` = `user`.`id`
-            INNER JOIN `cul_cuisine` AS `cui`
-                ON `cui`.`id` = `art`.`cuisine_id`
-            INNER JOIN `cul_material` AS `mat`
-                ON `mat`.`id` = `art`.`material_id`
+                 INNER JOIN `cul_user` AS `user`
+                            ON `art`.`author_id` = `user`.`id`
+                 INNER JOIN `cul_cuisine` AS `cui`
+                            ON `cui`.`id` = `art`.`cuisine_id`
+                 INNER JOIN `cul_material` AS `mat`
+                            ON `mat`.`id` = `art`.`material_id`
         WHERE `art`.`is_examined` = 1
         ORDER BY `art`.`recommend`
-                LIMIT #{start}, #{end};
+            LIMIT #{start}, #{end};
     </select>
 
     <select id="selectOne" resultType="org.bearer.entity.vo.Article">
@@ -77,7 +81,7 @@
                             ON `cui`.`id` = `art`.`cuisine_id`
                  INNER JOIN `cul_material` AS `mat`
                             ON `mat`.`id` = `art`.`material_id`
-        where `art`.`title` like "%"#{searchContent}"%" LIMIT #{start}, #{end};
+        where `art`.`title` like "%"#{searchContent}"%" AND `art`.`is_examined` = 1 LIMIT #{start}, #{end};
     </select>
 
     <select id="selectArticleSearchByAuthorId" resultType="org.bearer.entity.vo.Article">
@@ -94,7 +98,8 @@
                             ON `cui`.`id` = `art`.`cuisine_id`
                  INNER JOIN `cul_material` AS `mat`
                             ON `mat`.`id` = `art`.`material_id`
-        where `art`.`author_id` = #{authorId};
+        where `art`.`author_id` = #{authorId}
+          AND `art`.`is_examined` = 1 LIMIT #{start}, #{end};
     </select>
 
     <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.Article">
@@ -120,11 +125,17 @@
         where `is_examined` = 0;
     </select>
 
-    <select id="selectArticleById" resultType="org.bearer.entity.vo.Article">
+    <select id="selectCountByTitle" resultType="java.lang.Integer">
+        select COUNT(*)
+        from `cul_article`
+        where `title` like "%"#{searchContent}"%"
+            AND `is_examined` = 1;
+    </select>
+
+    <select id="selectByCuisine" resultType="org.bearer.entity.vo.Article">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`
-             , `art`.`praise`
              , `user`.`username`
              , `cui`.`category`
              , `mat`.`material`
@@ -135,13 +146,23 @@
                             ON `cui`.`id` = `art`.`cuisine_id`
                  INNER JOIN `cul_material` AS `mat`
                             ON `mat`.`id` = `art`.`material_id`
-        where `art`.`id` = #{id};
+        where `art`.`cuisine_id` = #{id}
+          AND `art`.`is_examined` = 1 LIMIT #{start}
+            , #{end};
+
     </select>
 
-    <select id="selectCountByTitle" resultType="java.lang.Integer">
-        select COUNT(*)
+    <select id="selectCountByCuisine" resultType="java.lang.Integer">
+        select count(*)
         from `cul_article`
-        where `title` like "%"#{searchContent}"%"
-            AND `is_examined` = 1;
+        where `cuisine_id` = #{id}
+          AND `is_examined` = 1;
+    </select>
+
+    <select id="selectCountByAuthorId" resultType="java.lang.Integer">
+        select count(*)
+        from `cul_article`
+        where `author_id` = #{authorId}
+          AND `is_examind` = 1;
     </select>
 </mapper>

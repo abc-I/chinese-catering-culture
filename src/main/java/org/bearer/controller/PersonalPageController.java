@@ -2,13 +2,11 @@ package org.bearer.controller;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.BrowsingHistory;
+import org.bearer.entity.vo.Page;
 import org.bearer.service.PersonalPageService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author fanyuhongzhe
@@ -29,15 +27,17 @@ public class PersonalPageController {
      * @param userId
      * @return Result contain List<Article>
      */
-    @GetMapping(value = "/selfArticle/{userId}")
-    public Result getSelfArticle(@PathVariable String userId) {
-        List<Article> articles = personalService.getSelfArticle(userId);
-        return Result.result200(articles);
+    @GetMapping(value = "/selfArticle/{userId}/{currentPage}/{pageSize}")
+    public Result getSelfArticle(@PathVariable String userId,
+                                 @PathVariable int currentPage, @PathVariable int pageSize) {
+        Page page = personalService.getSelfArticle(userId, currentPage, pageSize);
+        return Result.result200(page);
     }
 
-    @GetMapping(value = "/browsingHistory/{userId}")
-    public Result getBrowsingHistory(@PathVariable String userId) {
-        List<BrowsingHistory> browsingHistories = personalService.getBrowsingHistory(userId);
-        return Result.result200(browsingHistories);
+    @GetMapping(value = "/browsingHistory/{userId}/{currentPage}/{pageSize}")
+    public Result getBrowsingHistory(@PathVariable String userId,
+                                     @PathVariable int currentPage, @PathVariable int pageSize) {
+        Page page = personalService.getBrowsingHistory(userId, currentPage, pageSize);
+        return Result.result200(page);
     }
 }

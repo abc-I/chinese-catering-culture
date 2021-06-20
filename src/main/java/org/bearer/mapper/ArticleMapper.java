@@ -46,9 +46,11 @@ public interface ArticleMapper {
      * 通过作者id查询文章
      *
      * @param authorId 作者id
+     * @param start 第一个index
+     * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectArticleSearchByAuthorId(String authorId);
+    List<Article> selectArticleSearchByAuthorId(String authorId, int start, int end);
 
     /**
      * 通过文章id删除文章
@@ -103,4 +105,30 @@ public interface ArticleMapper {
      * @param id 文章id
      */
     void updateRecommend(String id);
+
+    /**
+     * 通过菜系id获取文章
+     *
+     * @param id 菜系id
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return List<Article>
+     */
+    List<Article> selectByCuisine(String id, int start, int end);
+
+    /**
+     * 通过菜系分类统计
+     *
+     * @param id 菜系分类
+     * @return int
+     */
+    int selectCountByCuisine(String id);
+
+    /**
+     * 通过作者id统计文章
+     *
+     * @param authorId 作者id
+     * @return int
+     */
+    int selectCountByAuthorId(String authorId);
 }

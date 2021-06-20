@@ -1,6 +1,5 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.dto.Ids;
 import org.bearer.entity.dto.PostId;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.VideoMapper;

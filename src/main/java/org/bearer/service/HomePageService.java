@@ -1,9 +1,6 @@
 package org.bearer.service;
 
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.Carousel;
-import org.bearer.entity.vo.Cuisine;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.*;
 
 import java.util.List;
 
@@ -52,15 +49,37 @@ public interface HomePageService {
      * 通过文章id获取文章
      *
      * @param id 文章id
+     * @param userId 用户id
      * @return org.bearer.entity.vo.Article
      */
-    Article getArticle(String id);
+    Article getArticle(String id, String userId);
 
     /**
      * 通过视频id获取视频
      *
      * @param id 视频id
+     * @param userId 用户id
      * @return org.bearer.vo.Video
      */
-    Video getVideo(String id);
+    Video getVideo(String id,String userId);
+
+    /**
+     * 通过菜系分类获取文章
+     *
+     * @param id 菜系分类id
+     * @param currentPage 当前页
+     * @param pageSize 每页几条数据
+     * @return org.bearer.entity.vo.Page
+     */
+    Page getArticleByCuisine(String id, int currentPage, int pageSize);
+
+    /**
+     * 通过菜系分类获取视频
+     *
+     * @param id 菜系分类id
+     * @param currentPage 当前页
+     * @param pageSize 每页几条数据
+     * @return org.bearer.entity.vo.Page
+     */
+    Page getVideoByCuisine(String id, int currentPage, int pageSize);
 }

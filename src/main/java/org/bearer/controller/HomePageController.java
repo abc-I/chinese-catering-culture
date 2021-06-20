@@ -1,10 +1,7 @@
 package org.bearer.controller;
 
 import org.bearer.entity.Result;
-import org.bearer.entity.vo.Article;
-import org.bearer.entity.vo.Carousel;
-import org.bearer.entity.vo.Cuisine;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.*;
 import org.bearer.service.HomePageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,11 +82,12 @@ public class HomePageController {
      * 获取单个文章
      *
      * @param id 文章id
+     * @param userId 用户id
      * @return org.bearer.entity.Result
      */
-    @GetMapping("/article/{id}")
-    public Result getArticle(@PathVariable String id) {
-        Article article = homePageService.getArticle(id);
+    @GetMapping("/article/{id}/{userId}")
+    public Result getArticle(@PathVariable String id, @PathVariable String userId) {
+        Article article = homePageService.getArticle(id, userId);
         return Result.result200(article);
     }
 
@@ -97,11 +95,42 @@ public class HomePageController {
      * 获取单个视频
      *
      * @param id 视频id
+     * @param userId 用户id
      * @return org.bearer.entity.Result
      */
-    @GetMapping("/video/{id}")
-    public Result getVideo(@PathVariable String id) {
-        Video video = homePageService.getVideo(id);
+    @GetMapping("/video/{id}/{userId}")
+    public Result getVideo(@PathVariable String id, @PathVariable String userId) {
+        Video video = homePageService.getVideo(id, userId);
         return Result.result200(video);
+    }
+
+    /**
+     * 通过菜系分类获取文章
+     *
+     * @param id 菜系分类id
+     * @param currentPage 当前页
+     * @param pageSize 每页记录条数
+     * @return org.bearer.entity.Result
+     */
+    @GetMapping("/articleByCuisine/{id}/{currentPage}/{pageSize}")
+    public Result getArticleByCuisine(@PathVariable String id,
+                                      @PathVariable int currentPage, @PathVariable int pageSize) {
+        Page page = homePageService.getArticleByCuisine(id, currentPage, pageSize);
+        return Result.result200(page);
+    }
+
+    /**
+     * 通过菜系分类获取视频
+     *
+     * @param id 菜系分类id
+     * @param currentPage 当前页
+     * @param pageSize 每页记录条数
+     * @return org.bearer.entity.Result
+     */
+    @GetMapping("/videoByCuisine/{id}/{currentPage}/{pageSize}")
+    public Result getVideoByCuisine(@PathVariable String id,
+                                      @PathVariable int currentPage, @PathVariable int pageSize) {
+        Page page = homePageService.getVideoByCuisine(id, currentPage, pageSize);
+        return Result.result200(page);
     }
 }

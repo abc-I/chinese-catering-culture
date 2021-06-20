@@ -1,7 +1,6 @@
 package org.bearer.service.impl;
 
 import org.bearer.entity.dto.DynamicDTO;
-import org.bearer.entity.dto.Ids;
 import org.bearer.entity.dto.PostId;
 import org.bearer.entity.po.Dynamic;
 import org.bearer.entity.vo.DynamicVO;
