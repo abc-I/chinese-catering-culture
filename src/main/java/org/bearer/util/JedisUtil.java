@@ -70,4 +70,13 @@ public class JedisUtil {
             return false;
         }
     }
+
+    public static boolean exists(String key) {
+        Jedis jedis = getJedis();
+        if (jedis != null) {
+            return jedis.exists(key);
+        } else {
+            return false;
+        }
+    }
 }

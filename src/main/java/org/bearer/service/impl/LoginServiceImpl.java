@@ -85,7 +85,8 @@ public class LoginServiceImpl implements LoginService {
                     userRoleMapper.insertRole(id);
                 }
 
-                boolean bool = JedisUtil.set(token, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24L);
+                boolean bool = JedisUtil.set(openId, token, 1000 * 60 * 60 * 24L);
+
                 if (bool) {
                     return Result.result200(token);
                 }
@@ -125,9 +126,7 @@ public class LoginServiceImpl implements LoginService {
 
         String jwtToken = JwtUtil.createJwtToken(account);
 
-        User user = userMapper.selectOne(account);
-
-        boolean bool = JedisUtil.set(jwtToken, JSONObject.toJSONString(user), 1000 * 60 * 60 * 24L);
+        boolean bool = JedisUtil.set(account, jwtToken, 1000 * 60 * 60 * 24L);
 
         if (bool) {
             return Result.result200(jwtToken);
