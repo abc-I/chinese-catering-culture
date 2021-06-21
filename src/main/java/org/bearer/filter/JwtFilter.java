@@ -61,12 +61,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         if (token == null) {
             throw new IllegalStateException("Token cannot be null!");
         }
+        Subject subject = SecurityUtils.getSubject();
         try {
-            Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             return onLoginSuccess(token, subject, request, response);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
+        }catch (AuthenticationException e) {
             return onLoginFailure(token, e, request, response);
         }
     }

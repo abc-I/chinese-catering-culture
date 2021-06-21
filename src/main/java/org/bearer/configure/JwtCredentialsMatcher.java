@@ -13,8 +13,11 @@ import org.bearer.util.JedisUtil;
 public class JwtCredentialsMatcher implements CredentialsMatcher {
     @Override
     public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {
+        String clientToken = (String) authenticationToken.getCredentials();
+        String redisToken = (String) authenticationInfo.getCredentials();
         String id = (String) authenticationToken.getPrincipal();
-        if (JedisUtil.exists(id)) {
+
+        if (clientToken.equals(redisToken)) {
             return JedisUtil.refresh(id, 1000 * 60 * 60 * 24);
         } else {
             return false;

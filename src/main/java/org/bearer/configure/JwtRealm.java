@@ -10,6 +10,7 @@ import org.bearer.entity.po.User;
 import org.bearer.entity.pojo.JwtToken;
 import org.bearer.mapper.RoleMapper;
 import org.bearer.mapper.UserMapper;
+import org.bearer.util.JedisUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -68,6 +69,6 @@ public class JwtRealm extends AuthorizingRealm {
             throw new LockedAccountException("账户被锁定！");
         }
 
-        return new SimpleAuthenticationInfo(user, null, "jwtRealm");
+        return new SimpleAuthenticationInfo(user, JedisUtil.get(id), "jwtRealm");
     }
 }
