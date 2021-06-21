@@ -46,17 +46,6 @@ public class JwtUtil {
                 .signWith(PUBLIC_KEY).compact();
     }
 
-    public static boolean parserToken(String token) {
-        Claims claims = getClaims(token);
-
-        try {
-            return claims.getIssuedAt().before(new Date(System.currentTimeMillis())) &&
-                    claims.getNotBefore().before(new Date(System.currentTimeMillis())) && "Li".equals(claims.getIssuer());
-        } catch (NullPointerException e) {
-            return false;
-        }
-    }
-
     public static Claims getClaims(String token) {
         return (Claims) Jwts.parserBuilder().setSigningKey(PUBLIC_KEY).build().parse(token).getBody();
     }

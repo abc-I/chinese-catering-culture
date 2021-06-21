@@ -143,7 +143,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Result logout(HttpServletRequest request) {
-        String key = request.getHeader("JwtToken");
+        String token = request.getHeader("JwtToken");
+
+        String key = JwtUtil.getClaims(token).getAudience();
 
         if (JedisUtil.delete(key)) {
             return Result.result200("success!");

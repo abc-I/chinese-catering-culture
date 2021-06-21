@@ -1,5 +1,7 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChatLogin;
 import org.bearer.entity.dto.Login;
@@ -50,6 +52,10 @@ public class LoginController {
      * @return org.bearer.entity.Result
      */
     @DeleteMapping("/logout")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                    required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+    })
     public Result logout(HttpServletRequest request) {
         return loginService.logout(request);
     }

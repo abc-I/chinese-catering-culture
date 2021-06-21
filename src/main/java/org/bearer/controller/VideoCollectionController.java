@@ -36,7 +36,7 @@ public class VideoCollectionController {
      * @return org.bearer.entity.Result
      */
     @GetMapping("/getCollection/{userId}/{currentPage}/{pageSize}")
-    public Result getCollection(@PathVariable String userId,
+    public Result getVideoCollection(@PathVariable String userId,
                                 @PathVariable int currentPage, @PathVariable int pageSize) {
 
         Page page = videoCollectionService.getCollection(userId, currentPage, pageSize);
