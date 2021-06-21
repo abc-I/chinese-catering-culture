@@ -1,5 +1,7 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChangePassword;
@@ -16,6 +18,10 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping(value = "/administrator")
+@ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+})
 public class AdministratorController {
 
     @Resource

@@ -15,15 +15,6 @@ import java.util.List;
 public interface VideoMapper {
 
     /**
-     * 通过点击率排序，获取一定区间内的视频
-     *
-     * @param start 区间开始
-     * @param end 区间结尾
-     * @return List<Video>
-     */
-    List<Video> selectList(int start, int end);
-
-    /**
      * 通过视频id获取视频
      *
      * @param id 视频id

@@ -66,19 +66,6 @@ public class HomePageController {
     }
 
     /**
-     * 获取区间内的视频
-     *
-     * @param start 区间开始
-     * @param end   区间结尾
-     * @return org.bearer.entity.Result
-     */
-    @GetMapping("/videoRecommend/{start}/{end}")
-    public Result getVideoRecommend(@PathVariable int start, @PathVariable int end) {
-        List<Video> videos = homePageService.getVideoRecommend(start, end);
-        return Result.result200(videos);
-    }
-
-    /**
      * 获取单个文章
      *
      * @param id 文章id

@@ -86,18 +86,6 @@ public class HomePageServiceImpl implements HomePageService {
     }
 
     /**
-     * 获取一定区间内的推荐视频
-     *
-     * @param start 区间开始
-     * @param end   区间结尾
-     * @return List<Video>
-     */
-    @Override
-    public List<Video> getVideoRecommend(int start, int end) {
-        return videoMapper.selectList(start, end);
-    }
-
-    /**
      * 通过文章id获取文章
      *
      * @param id     文章id

@@ -1,5 +1,7 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.DynamicDTO;
@@ -42,6 +44,10 @@ public class DynamicController {
      * @return org.bearer.entity.Result
      */
     @RequiresRoles(value = {"user"})
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                    required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+    })
     @DeleteMapping("/deleteDynamic")
     public Result deleteDynamicById(@RequestBody PostId id) {
         int len = dynamicService.deleteDynamicById(id);
@@ -55,6 +61,10 @@ public class DynamicController {
      * @return org.bearer.entity.Result
      */
     @RequiresRoles(value = {"user"})
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                    required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+    })
     @PostMapping("/insertDynamic")
     public Result insertDynamic(@RequestBody DynamicDTO dynamicDTO) {
         int len = dynamicService.insertDynamic(dynamicDTO);
