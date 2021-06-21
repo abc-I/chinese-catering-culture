@@ -43,7 +43,7 @@ public class DynamicController {
      * @param id JSON{"id":"动态id"}
      * @return org.bearer.entity.Result
      */
-    @RequiresRoles(value = {"user"})
+    @RequiresRoles(value = {"user","admin"})
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
                     required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
@@ -60,7 +60,7 @@ public class DynamicController {
      * @param dynamicDTO JSON{"userId":"用户id","dynamic":"动态信息","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return org.bearer.entity.Result
      */
-    @RequiresRoles(value = {"user"})
+    @RequiresRoles(value = {"user","admin"})
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
                     required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)

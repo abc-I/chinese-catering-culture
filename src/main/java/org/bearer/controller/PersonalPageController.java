@@ -1,5 +1,7 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.vo.Page;
@@ -14,8 +16,12 @@ import javax.annotation.Resource;
  * @date 6/15/21 10:39 PM
  */
 @RestController
-@RequiresRoles(value = {"user"})
+@RequiresRoles(value = {"user","admin"})
 @RequestMapping(value = "/personal")
+@ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+})
 public class PersonalPageController {
 
     @Resource

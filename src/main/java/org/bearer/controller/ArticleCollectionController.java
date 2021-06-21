@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @date Created in 2021/6/11 13:25
  */
 @RestController
-@RequiresRoles(value = {"user"})
+@RequiresRoles(value = {"user","admin"})
 @RequestMapping("/article")
 @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "JwtToken", value = "JwtToken",

@@ -1,5 +1,7 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.service.UploadService;
@@ -18,6 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequiresRoles(value = {"user", "admin"})
 @RequestMapping("/upload")
+@ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+})
 public class UploadController {
 
     @Resource
