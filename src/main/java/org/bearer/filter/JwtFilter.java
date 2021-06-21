@@ -1,14 +1,12 @@
 package org.bearer.filter;
 
-import io.jsonwebtoken.Claims;
 import lombok.SneakyThrows;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.bearer.entity.pojo.JwtToken;
-import org.bearer.util.JedisUtil;
-import org.bearer.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -64,7 +62,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             throw new IllegalStateException("Token cannot be null!");
         }
         try {
-            return onLoginSuccess(token, null, request, response);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            return onLoginSuccess(token, subject, request, response);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return onLoginFailure(token, e, request, response);
@@ -99,19 +99,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
-        String jwtToken = (String) token.getCredentials();
-        Claims claims = JwtUtil.getClaims(jwtToken);
-
-        String id = claims.getAudience();
-
-        boolean bool = JedisUtil.exists(id);
-        if (bool) {
-            String redisToken = (String) JedisUtil.get(id);
-            if (redisToken.equals(jwtToken)) {
-                return JedisUtil.refresh(id, 1000 * 60 * 60 * 24);
-            }
-        }
-        return false;
+        return true;
     }
 
     @Override

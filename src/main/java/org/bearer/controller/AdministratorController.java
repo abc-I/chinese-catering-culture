@@ -2,6 +2,7 @@ package org.bearer.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChangePassword;
@@ -62,10 +63,11 @@ public class AdministratorController {
 
     /**
      * lock user's account
+     *
      * @param id
      * @return Result contains if locked successfully
      */
-    @RequiresRoles(value = {"admin","administrator"})
+    @RequiresRoles(value = {"admin", "administrator"}, logical = Logical.OR)
     @PostMapping(value = "/lock")
     public Result lockUser(@RequestBody PostId id) {
         return Result.result200(administratorService.lockUser(id));
@@ -103,10 +105,11 @@ public class AdministratorController {
 
     /**
      * change password
+     *
      * @param changePassword
      * @return Result contains if changed
      */
-    @RequiresRoles(value = {"admin","administrator"})
+    @RequiresRoles(value = {"admin", "administrator"}, logical = Logical.OR)
     @PostMapping(value = "/password")
     public Result changePassword(@RequestBody ChangePassword changePassword) {
         return Result.result200(administratorService.changePassword(changePassword));

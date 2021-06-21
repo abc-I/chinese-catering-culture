@@ -117,4 +117,10 @@
         from `cul_user`
         where `account` = #{account};
     </select>
+
+    <select id="selectById" resultMap="userMap">
+        select *
+        from `cul_user`
+        where `id` = #{id};
+    </select>
 </mapper>

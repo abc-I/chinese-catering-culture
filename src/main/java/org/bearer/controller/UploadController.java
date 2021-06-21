@@ -2,6 +2,7 @@ package org.bearer.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.service.UploadService;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date Created in 2021/6/18 15:02
  */
 @RestController
-@RequiresRoles(value = {"user", "admin"})
+@RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
 @RequestMapping("/upload")
 @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "JwtToken", value = "JwtToken",

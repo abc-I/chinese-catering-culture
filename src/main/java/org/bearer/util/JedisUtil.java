@@ -27,14 +27,6 @@ public class JedisUtil {
         }
     }
 
-    public static JedisPool getJedisPool() {
-        return jedisPool;
-    }
-
-    public static void close() {
-        jedisPool.close();
-    }
-
     public static Object get(String key) {
         return jedisPool.getResource().get(key);
     }
@@ -45,6 +37,7 @@ public class JedisUtil {
         if (jedis != null) {
             jedis.set(key, value);
             jedis.expire(key, time);
+            jedis.close();
             return true;
         } else {
             return false;
@@ -53,18 +46,18 @@ public class JedisUtil {
 
     public static boolean delete(String key) {
         Jedis jedis = getJedis();
-        if (jedis != null) {
-            return jedis.del(key) > 0;
-        } else {
-            return false;
-
+        if (jedis != null && jedis.del(key) > 0) {
+            jedis.close();
+            return true;
         }
+        return false;
     }
 
     public static boolean refresh(String key,long time) {
         Jedis jedis = getJedis();
         if (jedis != null && jedis.exists(key)) {
             jedis.expire(key, time);
+            jedis.close();
             return true;
         } else {
             return false;
@@ -73,8 +66,9 @@ public class JedisUtil {
 
     public static boolean exists(String key) {
         Jedis jedis = getJedis();
-        if (jedis != null) {
-            return jedis.exists(key);
+        if (jedis != null && jedis.exists(key)) {
+            jedis.close();
+            return true;
         } else {
             return false;
         }

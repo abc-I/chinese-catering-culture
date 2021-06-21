@@ -2,6 +2,7 @@ package org.bearer.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.DynamicDTO;
@@ -43,7 +44,7 @@ public class DynamicController {
      * @param id JSON{"id":"动态id"}
      * @return org.bearer.entity.Result
      */
-    @RequiresRoles(value = {"user","admin"})
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
                     required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
@@ -60,7 +61,7 @@ public class DynamicController {
      * @param dynamicDTO JSON{"userId":"用户id","dynamic":"动态信息","pictureUrl":"图片url","videoUrl":"视频url"}
      * @return org.bearer.entity.Result
      */
-    @RequiresRoles(value = {"user","admin"})
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
                     required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)

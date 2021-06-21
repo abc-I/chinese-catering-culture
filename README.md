@@ -35,3 +35,4 @@
 - 6.20 19:16 abc-I Add transactional,authority control,logout
 - 6.20 22:10 abc-I Add history paging,save history,get article and video by cuisine
 - 6.21 12:30 abc-I Add swagger annotation
+- 6.21 16:35 abc-I Update Authority verification

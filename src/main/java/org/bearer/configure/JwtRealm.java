@@ -1,17 +1,17 @@
 package org.bearer.configure;
 
+import lombok.SneakyThrows;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.bearer.entity.po.User;
+import org.bearer.entity.pojo.JwtToken;
 import org.bearer.mapper.RoleMapper;
 import org.bearer.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -20,16 +20,18 @@ import java.util.Set;
  * @date Created in 2021/4/7 13:24
  */
 @Component
-public class MyRealm extends AuthorizingRealm {
+public class JwtRealm extends AuthorizingRealm {
+    private final RoleMapper rolesMapper;
+    private final UserMapper userMapper;
 
-    @Resource
-    private UserMapper userMapper;
-    @Resource
-    private RoleMapper roleMapper;
+    public JwtRealm(RoleMapper rolesMapper, UserMapper userMapper) {
+        this.rolesMapper = rolesMapper;
+        this.userMapper = userMapper;
+    }
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof UsernamePasswordToken;
+        return token instanceof JwtToken;
     }
 
     @Override
@@ -39,31 +41,33 @@ public class MyRealm extends AuthorizingRealm {
 
         User user = (User) principalCollection.getPrimaryPrincipal();
 
-        Set<String> roles = roleMapper.selectRolesByUserId(user.getId());
+        Set<String> roles = rolesMapper.selectRolesByUserId(user.getId());
 
         info.setRoles(roles);
 
         return info;
     }
 
+    @SneakyThrows
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
+        String id = (String) authenticationToken.getPrincipal();
 
-        String account = (String) authenticationToken.getPrincipal();
+        if (id == null) {
+            throw new AccountException("JWT Token参数异常！");
+        }
 
-        User user = userMapper.selectOne(account);
+        User user = userMapper.selectById(id);
 
         if (user == null) {
             throw new UnknownAccountException("用户不存在！");
         }
 
         if (user.getLocked()) {
-            throw new LockedAccountException("账号已被锁定！");
+            throw new LockedAccountException("账户被锁定！");
         }
 
-        ByteSource byteSource = ByteSource.Util.bytes(user.getSalt());
-
-        return new SimpleAuthenticationInfo(user, user.getPassword(), byteSource, "myRealm");
+        return new SimpleAuthenticationInfo(user, null, "jwtRealm");
     }
 }

@@ -109,4 +109,12 @@ public interface UserMapper {
      * @return String
      */
     String selectIdByAccount(String account);
+
+    /**
+     * 通过id获取user
+     *
+     * @param id 主键
+     * @return org.bearer.entity.po.User
+     */
+    User selectById(String id);
 }

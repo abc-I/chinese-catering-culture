@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,6 +30,8 @@ public class ShiroConfig extends ShiroConfiguration {
 
     @Resource
     private AuthorizingRealm myRealm;
+    @Resource
+    private AuthorizingRealm jwtRealm;
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
@@ -72,7 +75,7 @@ public class ShiroConfig extends ShiroConfiguration {
     @Bean
     public DefaultWebSecurityManager mySecurityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(myRealm());
+        defaultWebSecurityManager.setRealms(Arrays.asList(myRealm(), jwtRealm()));
         return defaultWebSecurityManager;
     }
 
@@ -81,5 +84,11 @@ public class ShiroConfig extends ShiroConfiguration {
         matcher.setHashIterations(1);
         myRealm.setCredentialsMatcher(matcher);
         return myRealm;
+    }
+
+    public Realm jwtRealm() {
+        JwtCredentialsMatcher matcher = new JwtCredentialsMatcher();
+        jwtRealm.setCredentialsMatcher(matcher);
+        return jwtRealm;
     }
 }

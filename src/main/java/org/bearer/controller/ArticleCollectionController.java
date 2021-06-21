@@ -2,6 +2,7 @@ package org.bearer.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.Ids;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
  * @date Created in 2021/6/11 13:25
  */
 @RestController
-@RequiresRoles(value = {"user","admin"})
+@RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
 @RequestMapping("/article")
 @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
