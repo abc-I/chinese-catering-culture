@@ -6,6 +6,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.*;
+import org.bearer.entity.pojo.JwtToken;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
 import org.bearer.mapper.UserMapper;
@@ -65,16 +66,15 @@ public class LoginServiceImpl implements LoginService {
             if (openIdJson != null) {
                 String openId = openIdJson.getOpenId();
 
-                String token = JwtUtil.createJwtToken(openId);
-
                 User user = userMapper.selectOne(openId);
 
+                String id;
                 if (user == null) {
                     user = new User();
                     UserProfile userProfile = login.getUserProfile();
                     UserInfo userInfo = userProfile.getUserInfo();
 
-                    String id = UUID.randomUUID().toString();
+                    id = UUID.randomUUID().toString();
                     user.setId(id);
                     user.setAccount(openId);
                     user.setUsername(userInfo.getNickName());
@@ -83,12 +83,16 @@ public class LoginServiceImpl implements LoginService {
                     userMapper.insertWeChat(user);
 
                     userRoleMapper.insertRole(id);
+                } else {
+                    id = user.getId();
                 }
 
-                boolean bool = JedisUtil.set(openId, token, 1000 * 60 * 60 * 24L);
+                String token = JwtUtil.createJwtToken(id);
+
+                boolean bool = JedisUtil.set(id, token, 1000 * 60 * 60 * 24L);
 
                 if (bool) {
-                    return Result.result200(token);
+                    return Result.result200(new JwtToken(token));
                 }
             }
 
@@ -124,12 +128,14 @@ public class LoginServiceImpl implements LoginService {
             throw new AuthenticationException("登录失败！");
         }
 
-        String jwtToken = JwtUtil.createJwtToken(account);
+        String id = userMapper.selectIdByAccount(account);
 
-        boolean bool = JedisUtil.set(account, jwtToken, 1000 * 60 * 60 * 24L);
+        String jwtToken = JwtUtil.createJwtToken(id);
+
+        boolean bool = JedisUtil.set(id, jwtToken, 1000 * 60 * 60 * 24L);
 
         if (bool) {
-            return Result.result200(jwtToken);
+            return Result.result200(new JwtToken(jwtToken));
         } else {
             return Result.result401("登录失败！");
         }

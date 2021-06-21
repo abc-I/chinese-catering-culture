@@ -101,6 +101,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
         String jwtToken = (String) token.getCredentials();
         Claims claims = JwtUtil.getClaims(jwtToken);
+
         String id = claims.getAudience();
 
         boolean bool = JedisUtil.exists(id);

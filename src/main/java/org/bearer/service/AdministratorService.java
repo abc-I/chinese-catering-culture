@@ -27,10 +27,10 @@ public interface AdministratorService {
 
     /**
      * get users by account
-     * @param account
+     * @param id
      * @return
      */
-    UserVO getUsersByAccount(String account);
+    UserVO getUsersById(String id);
 
     /**
      * lock users account

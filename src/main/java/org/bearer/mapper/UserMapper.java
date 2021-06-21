@@ -40,10 +40,10 @@ public interface UserMapper {
     /**
      * 通过账号查询user用户信息
      *
-     * @param account 用户账号
+     * @param id 用户id
      * @return org.bearer.entity.vo.UserVO
      */
-    UserVO selectUserByAccount(String account);
+    UserVO selectUserById(String id);
 
     /**
      * 通过用户账号封号
@@ -101,4 +101,12 @@ public interface UserMapper {
      * @return Boolean
      */
     Boolean updateNotLockedByAccount(String account);
+
+    /**
+     * 通过账号查找id
+     *
+     * @param account 账号
+     * @return String
+     */
+    String selectIdByAccount(String account);
 }

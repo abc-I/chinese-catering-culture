@@ -26,10 +26,10 @@ public class JwtUtil {
             "9d5532ed-6ad7-4754-9815-209f424eddbe".getBytes(StandardCharsets.UTF_8),
             SignatureAlgorithm.HS256.getJcaName());
 
-    public static String createJwtToken(String openId) {
+    public static String createJwtToken(String id) {
         DefaultClaims claims = new DefaultClaims();
         claims.setId(UUID.randomUUID().toString());
-        claims.setAudience(openId);
+        claims.setAudience(id);
         claims.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 24 * 1000)));
         claims.setIssuer("Li");
         claims.setIssuedAt(new Date(System.currentTimeMillis()));

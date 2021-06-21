@@ -65,13 +65,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * get users by account
      *
-     * @param account
+     * @param id
      * @return list of UserVO
      */
     @Override
-    public UserVO getUsersByAccount(String account) {
+    public UserVO getUsersById(String id) {
         // 根据用户的account获取User对象
-        return userMapper.selectUserByAccount(account);
+        return userMapper.selectUserById(id);
     }
 
     /**

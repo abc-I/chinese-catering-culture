@@ -65,14 +65,14 @@
         where `role`.`role` = 'user';
     </select>
 
-    <select id="selectUserByAccount" resultMap="userVO">
+    <select id="selectUserById" resultMap="userVO">
         select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
             INNER JOIN `cul_user_role` AS `ur`
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`account` = #{account}
+        where `user`.`id` = #{id}
           AND `role`.`role` = 'user';
     </select>
 
@@ -108,6 +108,12 @@
 
     <select id="selectLockedByAccount" resultType="java.lang.Boolean">
         select `is_locked`
+        from `cul_user`
+        where `account` = #{account};
+    </select>
+
+    <select id="selectIdByAccount" resultType="java.lang.String">
+        select `id`
         from `cul_user`
         where `account` = #{account};
     </select>
