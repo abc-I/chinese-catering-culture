@@ -10,6 +10,7 @@ import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -57,8 +58,10 @@ public class PersonalPageServiceImpl implements PersonalPageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<BrowsingHistoryVO> browsingHistories =
-                browsingHistoryMapper.selectBrowsingHistoryByUserId(userId, start, end);
+        HashSet<BrowsingHistoryVO> browsingHistories =
+                browsingHistoryMapper.selectArticleHistoryByUserId(userId, start, end);
+
+        browsingHistories.addAll(browsingHistoryMapper.selectVideoHistoryByUserId(userId, start, end));
 
         int total = browsingHistoryMapper.selectCountByUserId(userId);
 

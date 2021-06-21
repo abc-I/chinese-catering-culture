@@ -17,13 +17,11 @@
             (#{id}, #{videoId}, #{userId});
     </insert>
 
-    <select id="selectBrowsingHistoryByUserId" resultType="org.bearer.entity.vo.BrowsingHistoryVO">
+
+    <select id="selectArticleHistoryByUserId" resultType="org.bearer.entity.vo.BrowsingHistoryVO">
         select `art`.`id`
-             , `video`.`id`
              , `art`.`picture_url`
-             , `video`.`picture_url`
              , `art`.`title`
-             , `video`.`title`
              , `user`.`username`
              , `mat`.`material`
              , `cui`.`category`
@@ -36,7 +34,24 @@
                             ON `mat`.`id` = `art`.`material_id`
                  INNER JOIN `cul_browsing_history` AS `bh`
                             ON `bh`.`article_id` = `art`.`id`
-                 INNER JOIN `cul_video` AS `video`
+        where `bh`.`user_id` = #{userId} LIMIT #{start}, #{end};
+    </select>
+
+    <select id="selectVideoHistoryByUserId" resultType="org.bearer.entity.vo.BrowsingHistoryVO">
+        select `video`.`id`
+             , `video`.`picture_url`
+             , `video`.`title`
+             , `user`.`username`
+             , `mat`.`material`
+             , `cui`.`category`
+        from `cul_video` AS `video`
+                 INNER JOIN `cul_user` AS `user`
+                            ON `user`.`id` = `video`.`author_id`
+                 INNER JOIN `cul_cuisine` AS `cui`
+                            ON `cui`.`id` = `video`.`cuisine_id`
+                 INNER JOIN `cul_material` AS `mat`
+                            ON `mat`.`id` = `video`.`material_id`
+                 INNER JOIN `cul_browsing_history` AS `bh`
                             ON `bh`.`video_id` = `video`.`id`
         where `bh`.`user_id` = #{userId} LIMIT #{start}, #{end};
     </select>

@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.po.BrowsingHistory;
 import org.bearer.entity.vo.BrowsingHistoryVO;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -14,14 +16,24 @@ import java.util.List;
 @Mapper
 public interface BrowsingHistoryMapper {
     /**
-     * 通过用户id查询搜索记录
+     * 通过用户id查询历史记录
      *
      * @param userId 用户id
      * @param start 第一个index
      * @param end 最后一个index
-     * @return List<BrowsingHistoryVO>
+     * @return HashSet<BrowsingHistory>
      */
-    List<BrowsingHistoryVO> selectBrowsingHistoryByUserId(String userId, int start, int end);
+    HashSet<BrowsingHistoryVO> selectArticleHistoryByUserId(String userId, int start, int end);
+
+    /**
+     * 通过用户id查询历史记录
+     *
+     * @param userId 用户id
+     * @param start 第一个index
+     * @param end 最后一个index
+     * @return HashSet<BrowsingHistory>
+     */
+    HashSet<BrowsingHistoryVO> selectVideoHistoryByUserId(String userId, int start, int end);
 
     /**
      * 通过用户id统计历史记录
