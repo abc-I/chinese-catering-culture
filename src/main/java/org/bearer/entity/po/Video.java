@@ -3,9 +3,11 @@ package org.bearer.entity.po;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.bearer.entity.dto.VideoDTO;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author Li
@@ -91,4 +93,14 @@ public class Video implements Serializable {
     @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modifyTime;
+
+    public Video(VideoDTO videoDTO) {
+        this.id = String.valueOf(UUID.randomUUID());
+        this.title = videoDTO.getTitle();
+        this.videoUrl = videoDTO.getVideoUrl();
+        this.pictureUrl = videoDTO.getPictureUrl();
+        this.authorId = videoDTO.getAuthorId();
+        this.cuisineId = videoDTO.getCuisineId();
+        this.materialId = videoDTO.getMaterialId();
+    }
 }

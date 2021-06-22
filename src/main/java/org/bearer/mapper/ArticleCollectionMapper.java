@@ -3,7 +3,7 @@ package org.bearer.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.po.ArticleCollection;
-import org.bearer.entity.vo.Article;
+import org.bearer.entity.vo.ArticleVO;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface ArticleCollectionMapper {
      * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectList(String userId, int start, int end);
+    List<ArticleVO> selectList(String userId, int start, int end);
 
     /**
      * 保存收藏的文章

@@ -8,15 +8,15 @@ import java.util.Date;
 /**
  * @author Li
  * @version 1.0
- * @date Created in 2021/6/10 19:39
+ * @date Created in 2021/6/10 19:09
  */
 @Data
-public class Video implements Serializable {
+public class ArticleVO implements Serializable {
 
-    private static final long serialVersionUID = -5543296506528588844L;
+    private static final long serialVersionUID = -8686544735374852463L;
 
     /**
-     * 视频id
+     * 文章id
      */
     private String id;
 
@@ -26,14 +26,9 @@ public class Video implements Serializable {
     private String title;
 
     /**
-     * 视频url
+     * 文章
      */
-    private String videoUrl;
-
-    /**
-     * 视频截图url
-     */
-    private String pictureUrl;
+    private String article;
 
     /**
      * 菜系分类
@@ -44,6 +39,11 @@ public class Video implements Serializable {
      * 主材分类
      */
     private String material;
+
+    /**
+     * 图片url
+     */
+    private String pictureUrl;
 
     /**
      * 点击次数
@@ -61,7 +61,7 @@ public class Video implements Serializable {
     private String username;
 
     /**
-     * 创建时间
+     * 文章创建时间
      */
     private Date createTime;
 }

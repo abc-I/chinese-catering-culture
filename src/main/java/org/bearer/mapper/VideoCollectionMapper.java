@@ -2,7 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.Ids;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.VideoVO;
 import org.bearer.entity.po.VideoCollection;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public interface VideoCollectionMapper {
      * @param end 最后一个index
      * @return List<Video>
      */
-    List<Video> selectList(String userId, int start, int end);
+    List<VideoVO> selectList(String userId, int start, int end);
 
     /**
      * 保存收藏视频

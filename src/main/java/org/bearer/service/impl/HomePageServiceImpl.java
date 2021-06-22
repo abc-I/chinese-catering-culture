@@ -81,7 +81,7 @@ public class HomePageServiceImpl implements HomePageService {
      * @return List<Article>
      */
     @Override
-    public List<Article> getArticleRecommend(int start, int end) {
+    public List<ArticleVO> getArticleRecommend(int start, int end) {
         return articleMapper.selectList(start, end);
     }
 
@@ -93,8 +93,8 @@ public class HomePageServiceImpl implements HomePageService {
      * @return org.bearer.entity.vo.Article
      */
     @Override
-    public Article getArticle(String id, String userId) {
-        Article article = articleMapper.selectOne(id);
+    public ArticleVO getArticle(String id, String userId) {
+        ArticleVO article = articleMapper.selectOne(id);
 
         BrowsingHistory browsingHistory = new BrowsingHistory();
         browsingHistory.setId(UUID.randomUUID().toString());
@@ -114,8 +114,8 @@ public class HomePageServiceImpl implements HomePageService {
      * @return org.bearer.vo.Video
      */
     @Override
-    public Video getVideo(String id, String userId) {
-        Video video = videoMapper.selectOne(id);
+    public VideoVO getVideo(String id, String userId) {
+        VideoVO video = videoMapper.selectOne(id);
 
         BrowsingHistory browsingHistory = new BrowsingHistory();
         browsingHistory.setId(UUID.randomUUID().toString());
@@ -138,7 +138,7 @@ public class HomePageServiceImpl implements HomePageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Article> articles = articleMapper.selectByCuisine(id, start, end);
+        List<ArticleVO> articles = articleMapper.selectByCuisine(id, start, end);
 
         int total = articleMapper.selectCountByCuisine(id);
 
@@ -158,7 +158,7 @@ public class HomePageServiceImpl implements HomePageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Video> videos = videoMapper.selectByCuisine(id, start, end);
+        List<VideoVO> videos = videoMapper.selectByCuisine(id, start, end);
 
         int total = videoMapper.selectCountByCuisine(id);
 

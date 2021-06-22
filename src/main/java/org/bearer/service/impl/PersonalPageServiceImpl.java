@@ -1,10 +1,15 @@
 package org.bearer.service.impl;
 
-import org.bearer.entity.vo.Article;
+import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.VideoDTO;
+import org.bearer.entity.po.Article;
+import org.bearer.entity.po.Video;
+import org.bearer.entity.vo.ArticleVO;
 import org.bearer.entity.vo.BrowsingHistoryVO;
 import org.bearer.entity.vo.Page;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.BrowsingHistoryMapper;
+import org.bearer.mapper.VideoMapper;
 import org.bearer.service.PersonalPageService;
 import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
@@ -25,6 +30,8 @@ public class PersonalPageServiceImpl implements PersonalPageService {
     private ArticleMapper articleMapper;
     @Resource
     private BrowsingHistoryMapper browsingHistoryMapper;
+    @Resource
+    private VideoMapper videoMapper;
 
     /**
      * get the self articles
@@ -38,7 +45,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Article> articles = articleMapper.selectArticleSearchByAuthorId(authorId, start, end);
+        List<ArticleVO> articles = articleMapper.selectArticleSearchByAuthorId(authorId, start, end);
 
         int total = articleMapper.selectCountByAuthorId(authorId);
 
@@ -66,5 +73,27 @@ public class PersonalPageServiceImpl implements PersonalPageService {
         int total = browsingHistoryMapper.selectCountByUserId(userId);
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), browsingHistories);
+    }
+
+    /**
+     * upload user's article
+     *
+     * @param articleDTO
+     * @return if successful
+     */
+    @Override
+    public Boolean uploadArticle(ArticleDTO articleDTO) {
+        return articleMapper.update(new Article(articleDTO));
+    }
+
+    /**
+     * upload user's video
+     *
+     * @param videoDTO
+     * @return if successful
+     */
+    @Override
+    public Boolean uploadVideo(VideoDTO videoDTO) {
+        return videoMapper.update(new Video(videoDTO));
     }
 }

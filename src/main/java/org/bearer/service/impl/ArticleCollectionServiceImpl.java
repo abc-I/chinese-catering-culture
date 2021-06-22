@@ -2,7 +2,7 @@ package org.bearer.service.impl;
 
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.po.ArticleCollection;
-import org.bearer.entity.vo.Article;
+import org.bearer.entity.vo.ArticleVO;
 import org.bearer.entity.vo.Page;
 import org.bearer.mapper.ArticleCollectionMapper;
 import org.bearer.service.ArticleCollectionService;
@@ -40,7 +40,7 @@ public class ArticleCollectionServiceImpl implements ArticleCollectionService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Article> articles = articleCollectionMapper.selectList(userId, start, end);
+        List<ArticleVO> articles = articleCollectionMapper.selectList(userId, start, end);
 
         int total = articleCollectionMapper.selectCountById(userId);
 

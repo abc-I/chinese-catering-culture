@@ -169,7 +169,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 列出未审核的文章列表 需要`id`,`title`,`category`,`material`,`pictureUrl`
-        List<Article> articles = articleMapper.selectListByIsExamined(start, end);
+        List<ArticleVO> articles = articleMapper.selectListByIsExamined(start, end);
         int total = articleMapper.selectCountNotExamined();
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), articles);
@@ -199,7 +199,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         int end = PageUtil.getEnd(currentPage, pageSize);
 
         // 列出未审核的视频列表 需要`id`,`title`,`videoUrl`,`category`,`material`,`pictureUrl`
-        List<Video> videos = videoMapper.selectListByIsExamined(start,end);
+        List<VideoVO> videos = videoMapper.selectListByIsExamined(start,end);
         int total = videoMapper.selectCountNotExamined();
 
         return new Page(total, PageUtil.getPageCount(total, pageSize), videos);

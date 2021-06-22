@@ -34,7 +34,7 @@ public interface HomePageService {
      * @param end 区间结尾
      * @return List<Article>
      */
-    List<Article> getArticleRecommend(int start, int end);
+    List<ArticleVO> getArticleRecommend(int start, int end);
 
     /**
      * 通过文章id获取文章
@@ -43,7 +43,7 @@ public interface HomePageService {
      * @param userId 用户id
      * @return org.bearer.entity.vo.Article
      */
-    Article getArticle(String id, String userId);
+    ArticleVO getArticle(String id, String userId);
 
     /**
      * 通过视频id获取视频
@@ -52,7 +52,7 @@ public interface HomePageService {
      * @param userId 用户id
      * @return org.bearer.vo.Video
      */
-    Video getVideo(String id,String userId);
+    VideoVO getVideo(String id, String userId);
 
     /**
      * 通过菜系分类获取文章

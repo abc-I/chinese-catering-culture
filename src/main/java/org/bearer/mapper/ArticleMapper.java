@@ -2,7 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.PostId;
-import org.bearer.entity.vo.Article;
+import org.bearer.entity.vo.ArticleVO;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface ArticleMapper {
      * @param end 区间结尾
      * @return List<Article>
      */
-    List<Article> selectList(int start, int end);
+    List<ArticleVO> selectList(int start, int end);
 
     /**
      * 通过文章id获取文章信息
@@ -29,7 +29,7 @@ public interface ArticleMapper {
      * @param id 文章id
      * @return org.bearer.entity.vo.Article
      */
-    Article selectOne(String id);
+    ArticleVO selectOne(String id);
 
     /**
      * 通过标题查询文章(模糊查询)
@@ -39,7 +39,7 @@ public interface ArticleMapper {
      * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectArticleSearchByTitle(String searchContent, int start, int end);
+    List<ArticleVO> selectArticleSearchByTitle(String searchContent, int start, int end);
 
     /**
      * 通过作者id查询文章
@@ -49,7 +49,7 @@ public interface ArticleMapper {
      * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectArticleSearchByAuthorId(String authorId, int start, int end);
+    List<ArticleVO> selectArticleSearchByAuthorId(String authorId, int start, int end);
 
     /**
      * 通过文章id删除文章
@@ -74,7 +74,7 @@ public interface ArticleMapper {
      * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectListByIsExamined(int start, int end);
+    List<ArticleVO> selectListByIsExamined(int start, int end);
 
     /**
      * 统计未审核的文章数
@@ -113,7 +113,7 @@ public interface ArticleMapper {
      * @param end 最后一个index
      * @return List<Article>
      */
-    List<Article> selectByCuisine(String id, int start, int end);
+    List<ArticleVO> selectByCuisine(String id, int start, int end);
 
     /**
      * 通过菜系分类统计

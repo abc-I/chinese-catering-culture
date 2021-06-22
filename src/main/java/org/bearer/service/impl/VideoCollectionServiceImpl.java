@@ -3,7 +3,7 @@ package org.bearer.service.impl;
 import org.bearer.entity.dto.Ids;
 import org.bearer.entity.po.VideoCollection;
 import org.bearer.entity.vo.Page;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.VideoVO;
 import org.bearer.mapper.VideoCollectionMapper;
 import org.bearer.service.VideoCollectionService;
 import org.bearer.util.PageUtil;
@@ -40,7 +40,7 @@ public class VideoCollectionServiceImpl implements VideoCollectionService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Video> videos = videoCollectionMapper.selectList(userId, start, end);
+        List<VideoVO> videos = videoCollectionMapper.selectList(userId, start, end);
 
         int total = videoCollectionMapper.selectCountById(userId);
 

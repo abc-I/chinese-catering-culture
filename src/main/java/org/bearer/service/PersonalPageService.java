@@ -1,5 +1,8 @@
 package org.bearer.service;
 
+import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.VideoDTO;
+import org.bearer.entity.po.Article;
 import org.bearer.entity.vo.Page;
 
 /**
@@ -23,4 +26,18 @@ public interface PersonalPageService {
      * @return list of the BrowsingHistoryVO
      */
     Page getBrowsingHistory(String userId, int currentPage, int pageSize);
+
+    /**
+     * upload user's article
+     * @param article
+     * @return if successful
+     */
+    Boolean uploadArticle(ArticleDTO article);
+
+    /**
+     * upload user's video
+     * @param videoDTO
+     * @return if successful
+     */
+    Boolean uploadVideo(VideoDTO videoDTO);
 }

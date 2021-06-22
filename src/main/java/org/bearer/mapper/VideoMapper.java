@@ -2,7 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.PostId;
-import org.bearer.entity.vo.Video;
+import org.bearer.entity.vo.VideoVO;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface VideoMapper {
      * @param id 视频id
      * @return org.bearer.entity.vo.Video
      */
-    Video selectOne(String id);
+    VideoVO selectOne(String id);
 
     /**
      * 通过视频标题查询
@@ -30,7 +30,7 @@ public interface VideoMapper {
      * @param end 最后一个index
      * @return List<Video>
      */
-    List<Video> selectVideoSearchByTitle(String searchContent, int start, int end);
+    List<VideoVO> selectVideoSearchByTitle(String searchContent, int start, int end);
 
     /**
      * 通过视频id保存点赞数
@@ -47,7 +47,7 @@ public interface VideoMapper {
      * @param end 最后一个index
      * @return List<Video>
      */
-    List<Video> selectListByIsExamined(int start, int end);
+    List<VideoVO> selectListByIsExamined(int start, int end);
 
     /**
      * 统计为审核的视频
@@ -95,7 +95,7 @@ public interface VideoMapper {
      * @param end 最后一个index
      * @return List<Video>
      */
-    List<Video> selectByCuisine(String id, int start, int end);
+    List<VideoVO> selectByCuisine(String id, int start, int end);
 
     /**
      * 通过菜系id统计

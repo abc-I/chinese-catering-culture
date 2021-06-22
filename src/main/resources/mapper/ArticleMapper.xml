@@ -26,7 +26,7 @@
         where `id` = #{id};
     </delete>
 
-    <select id="selectList" resultType="org.bearer.entity.vo.Article">
+    <select id="selectList" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`
@@ -45,7 +45,7 @@
             LIMIT #{start}, #{end};
     </select>
 
-    <select id="selectOne" resultType="org.bearer.entity.vo.Article">
+    <select id="selectOne" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`,
                `art`.`title`,
                `art`.`article`,
@@ -67,7 +67,7 @@
           AND `art`.`is_examined` = 1;
     </select>
 
-    <select id="selectArticleSearchByTitle" resultType="org.bearer.entity.vo.Article">
+    <select id="selectArticleSearchByTitle" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`
@@ -84,7 +84,7 @@
         where `art`.`title` like "%"#{searchContent}"%" AND `art`.`is_examined` = 1 LIMIT #{start}, #{end};
     </select>
 
-    <select id="selectArticleSearchByAuthorId" resultType="org.bearer.entity.vo.Article">
+    <select id="selectArticleSearchByAuthorId" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`
@@ -102,7 +102,7 @@
           AND `art`.`is_examined` = 1 LIMIT #{start}, #{end};
     </select>
 
-    <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.Article">
+    <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`
@@ -132,7 +132,7 @@
             AND `is_examined` = 1;
     </select>
 
-    <select id="selectByCuisine" resultType="org.bearer.entity.vo.Article">
+    <select id="selectByCuisine" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`
              , `art`.`title`
              , `art`.`picture_url`

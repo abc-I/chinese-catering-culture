@@ -15,7 +15,7 @@
           and `video_id` = #{id};
     </delete>
 
-    <select id="selectList" resultType="org.bearer.entity.vo.Video">
+    <select id="selectList" resultType="org.bearer.entity.vo.VideoVO">
         select `video`.`id`,
                `video`.`title`,
                `video`.`picture_url`,

@@ -16,7 +16,7 @@
           and `article_id` = #{id};
     </delete>
 
-    <select id="selectList" resultType="org.bearer.entity.vo.Article">
+    <select id="selectList" resultType="org.bearer.entity.vo.ArticleVO">
         select `art`.`id`, `art`.`title`, `art`.`picture_url`, `user`.`username`, `cui`.`category`, `mat`.`material`
         from `cul_article` AS `art`
                  INNER JOIN `cul_article_collection` AS `ac`

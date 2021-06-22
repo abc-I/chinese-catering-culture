@@ -26,7 +26,7 @@
         where `id` = #{id};
     </delete>
 
-    <select id="selectOne" resultType="org.bearer.entity.vo.Video">
+    <select id="selectOne" resultType="org.bearer.entity.vo.VideoVO">
         select `video`.`id`
              , `video`.`title`
              , `video`.`video_url`
@@ -48,7 +48,7 @@
           AND `video`.is_examined = 1;
     </select>
 
-    <select id="selectVideoSearchByTitle" resultType="org.bearer.entity.vo.Video">
+    <select id="selectVideoSearchByTitle" resultType="org.bearer.entity.vo.VideoVO">
         select `video`.`id`
              , `video`.`title`
              , `video`.`picture_url`
@@ -67,7 +67,7 @@
             LIMIT #{start}, #{end};
     </select>
 
-    <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.Video">
+    <select id="selectListByIsExamined" resultType="org.bearer.entity.vo.VideoVO">
         select `video`.`id`
              , `video`.`title`
              , `video`.`picture_url`
@@ -98,7 +98,7 @@
           AND `title` like "%"#{searchContent}"%";
     </select>
 
-    <select id="selectByCuisine" resultType="org.bearer.entity.vo.Video">
+    <select id="selectByCuisine" resultType="org.bearer.entity.vo.VideoVO">
         select `video`.`id`
              , `video`.`title`
              , `video`.`picture_url`

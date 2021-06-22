@@ -5,6 +5,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
+import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.VideoDTO;
+import org.bearer.entity.po.Article;
 import org.bearer.entity.vo.Page;
 import org.bearer.service.PersonalPageService;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +49,25 @@ public class PersonalPageController {
                                      @PathVariable int currentPage, @PathVariable int pageSize) {
         Page page = personalService.getBrowsingHistory(userId, currentPage, pageSize);
         return Result.result200(page);
+    }
+
+    /**
+     * upload article
+     * @param article
+     * @return Result contains if successful
+     */
+    @PostMapping(value = "/uploadArticle")
+    public Result uploadArticle(@RequestBody ArticleDTO article) {
+        return Result.result200(personalService.uploadArticle(article));
+    }
+
+    /**
+     * upload video
+     * @param videoDTO
+     * @return Result contains if successful
+     */
+    @PostMapping(value = "/uploadVideo")
+    public Result uploadVideo(@RequestBody VideoDTO videoDTO) {
+        return Result.result200(personalService.uploadVideo(videoDTO));
     }
 }

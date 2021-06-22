@@ -61,7 +61,7 @@ public class HomePageController {
      */
     @GetMapping("/articleRecommend/{start}/{end}")
     public Result getArticleRecommend(@PathVariable int start, @PathVariable int end) {
-        List<Article> articles = homePageService.getArticleRecommend(start, end);
+        List<ArticleVO> articles = homePageService.getArticleRecommend(start, end);
         return Result.result200(articles);
     }
 
@@ -74,7 +74,7 @@ public class HomePageController {
      */
     @GetMapping("/article/{id}/{userId}")
     public Result getArticle(@PathVariable String id, @PathVariable String userId) {
-        Article article = homePageService.getArticle(id, userId);
+        ArticleVO article = homePageService.getArticle(id, userId);
         return Result.result200(article);
     }
 
@@ -87,7 +87,7 @@ public class HomePageController {
      */
     @GetMapping("/video/{id}/{userId}")
     public Result getVideo(@PathVariable String id, @PathVariable String userId) {
-        Video video = homePageService.getVideo(id, userId);
+        VideoVO video = homePageService.getVideo(id, userId);
         return Result.result200(video);
     }
 

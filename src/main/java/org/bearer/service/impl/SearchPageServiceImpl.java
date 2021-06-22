@@ -51,7 +51,7 @@ public class SearchPageServiceImpl implements SearchPageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Article> articles = articleMapper
+        List<ArticleVO> articles = articleMapper
                 .selectArticleSearchByTitle(searchContent, start, end);
 
         int total = articleMapper.selectCountByTitle(searchContent);
@@ -81,7 +81,7 @@ public class SearchPageServiceImpl implements SearchPageService {
         int start = PageUtil.getStart(currentPage, pageSize);
         int end = PageUtil.getEnd(currentPage, pageSize);
 
-        List<Video> videos = videoMapper.selectVideoSearchByTitle(searchContent, start, end);
+        List<VideoVO> videos = videoMapper.selectVideoSearchByTitle(searchContent, start, end);
 
         int total = videoMapper.selectCountByTitle(searchContent);
 
