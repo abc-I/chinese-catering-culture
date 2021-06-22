@@ -37,4 +37,4 @@
 - 6.21 12:30 abc-I Add swagger annotation
 - 6.21 16:35 abc-I Update Authority verification,perfect the details
 - 6.22 09:41 FanHoozy Update VideoPO,ArticlePO,PersonalPage
-- 6.22 11:00 abc-I Update upload
+- 6.22 11:00 abc-I Update upload;Add insert Video,insert Article
