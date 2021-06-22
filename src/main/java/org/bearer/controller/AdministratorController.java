@@ -33,7 +33,7 @@ public class AdministratorController {
      * @param id
      * @return Result contains ifDelete
      */
-    @RequiresRoles(value = {"admin"})
+    @RequiresRoles(value = {"admin","user"})
     @DeleteMapping(value = "/articleDelete")
     public Result deleteArticle(@RequestBody PostId id) {
         return Result.result200(administratorService.deleteArticle(id));
@@ -52,10 +52,11 @@ public class AdministratorController {
 
     /**
      * get users by account
+     *
      * @param account
      * @return Result contains specified user
      */
-    @RequiresRoles(value = {"admin"})
+    @RequiresRoles(value = {"admin", "administrator"}, logical = Logical.OR)
     @GetMapping(value = "/getUser/{account}")
     public Result getUsersByAccount(@PathVariable String account) {
         return Result.result200(administratorService.getUserByAccount(account));

@@ -4,7 +4,7 @@
 
     <insert id="insertArticle">
         insert into `cul_article`
-            (`id`, `title`, `article`, `pictureUrl`, `authorId`, `cuisineId`, `materialId`)
+            (`id`, `title`, `article`, `picture_url`, `author_id`, `cuisine_id`, `material_id`)
         values
             (#{id}, #{title}, #{article}, #{pictureUrl}, #{authorId}, #{cuisineId}, #{materialId});
     </insert>
@@ -170,6 +170,6 @@
         select count(*)
         from `cul_article`
         where `author_id` = #{authorId}
-          AND `is_examind` = 1;
+          AND `is_examined` = 1;
     </select>
 </mapper>

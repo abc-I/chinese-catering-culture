@@ -38,3 +38,4 @@
 - 6.21 16:35 abc-I Update Authority verification,perfect the details
 - 6.22 09:41 FanHoozy Update VideoPO,ArticlePO,PersonalPage
 - 6.22 11:00 abc-I Update upload;Add insert Video,insert Article
+- 6.22 18:48 abc-I Add CorsFilter;Update VideoMapper,ArticleMapper,Transactional

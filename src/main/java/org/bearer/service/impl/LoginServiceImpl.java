@@ -28,7 +28,7 @@ import java.util.UUID;
  * @date Created in 2021/6/15 9:44
  */
 @Service
-@Transactional(timeout = 5, rollbackFor = {Exception.class})
+@Transactional(rollbackFor = {Exception.class})
 public class LoginServiceImpl implements LoginService {
 
     /**

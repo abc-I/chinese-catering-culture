@@ -4,7 +4,7 @@
 
     <insert id="insertVideo">
         insert into `cul_video`
-            (`id`, `title`, `videoUrl`, `pictureUrl`, `authorId`, `cuisineId`, `materialId`)
+            (`id`, `title`, `video_url`, `picture_url`, `author_id`, `cuisine_id`, `material_id`)
         values
             (#{id}, #{title}, #{videoUrl}, #{pictureUrl}, #{authorId}, #{cuisineId}, #{materialId});
     </insert>
