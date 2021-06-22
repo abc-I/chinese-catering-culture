@@ -5,6 +5,8 @@ import org.bearer.entity.dto.ChangePassword;
 import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.*;
 
+import java.util.List;
+
 /**
  * @author fanyuhongzhe
  * @description
@@ -27,10 +29,10 @@ public interface AdministratorService {
 
     /**
      * get users by account
-     * @param id
+     * @param account
      * @return
      */
-    UserVO getUsersById(String id);
+    List<UserVO> getUserByAccount(String account);
 
     /**
      * lock users account
@@ -90,12 +92,4 @@ public interface AdministratorService {
      * @return if successful
      */
     Boolean examineVideo(PostId id);
-
-
-    /**
-     * reject and delete video by id
-     * @param id
-     * @return if successful
-     */
-    Boolean deleteVideo(PostId id);
 }

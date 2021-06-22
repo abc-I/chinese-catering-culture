@@ -12,18 +12,18 @@ public interface UserRoleMapper {
     /**
      * 修改账号权限为admin
      *
-     * @param account 账号
+     * @param id 账号
      * @return Boolean
      */
-    Boolean updateAdminByAccount(String account);
+    Boolean updateAdminById(String id);
 
     /**
      * 修改账号权限为user
      *
-     * @param account 账号
+     * @param id 账号
      * @return Boolean
      */
-    Boolean updateUserByAccount(String account);
+    Boolean updateUserById(String id);
 
     /**
      * 用户绑定权限

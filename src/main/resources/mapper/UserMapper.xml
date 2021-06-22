@@ -31,28 +31,28 @@
         values (#{id}, #{username}, #{account}, #{locked});
     </insert>
 
-    <update id="updateIsLockedByAccount">
+    <update id="updateIsLockedById">
         update `cul_user`
         set `is_locked` = 1
-        where `account` = #{account};
+        where `id` = #{id};
     </update>
 
-    <update id="updatePasswordByAccount">
+    <update id="updatePasswordById">
         update `cul_user`
         set `password`=#{password}
-        where `account` = #{account};
+        where `id` = #{id};
     </update>
 
-    <update id="updateNotLockedByAccount">
+    <update id="updateNotLockedById">
         update `cul_user`
         set `is_locked` = 0
-        where `account` = #{account};
+        where `id` = #{id};
     </update>
 
     <select id="selectOne" resultMap="userMap">
         select *
         from `cul_user`
-        where `account` = #{account};
+        where `id` = #{id};
     </select>
 
     <select id="selectUserList" resultMap="userVO">
@@ -65,14 +65,14 @@
         where `role`.`role` = 'user';
     </select>
 
-    <select id="selectUserById" resultMap="userVO">
+    <select id="selectUserByAccount" resultMap="userVO">
         select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
             INNER JOIN `cul_user_role` AS `ur`
                 ON `ur`.`user_id` = `user`.`id`
             INNER JOIN `cul_role` AS `role`
                 ON `ur`.`role_id` = `role`.`id`
-        where `user`.`id` = #{id}
+        where `user`.`account` like "%"#{account}"%"
           AND `role`.`role` = 'user';
     </select>
 
@@ -106,10 +106,10 @@
         where `role`.`role` = 'user';
     </select>
 
-    <select id="selectLockedByAccount" resultType="java.lang.Boolean">
+    <select id="selectLockedById" resultType="java.lang.Boolean">
         select `is_locked`
         from `cul_user`
-        where `account` = #{account};
+        where `id` = #{id};
     </select>
 
     <select id="selectIdByAccount" resultType="java.lang.String">

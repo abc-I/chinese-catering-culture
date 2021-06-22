@@ -2,6 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.PostId;
+import org.bearer.entity.po.Video;
 import org.bearer.entity.vo.VideoVO;
 
 import java.util.List;
@@ -104,4 +105,14 @@ public interface VideoMapper {
      * @return int
      */
     int selectCountByCuisine(String id);
+
+    /**
+     * 上传视频信息
+     *
+     * @param video JSON{"id":"视频id","title":"视频标题","videoUrl":"视频url",
+     *              "pictureUrl":"图片url","authorId":"作者id","cuisineId":"菜系分类id",
+     *              "materialId":"主材分类id"}
+     * @return Boolean
+     */
+    Boolean insertVideo(Video video);
 }

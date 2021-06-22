@@ -65,13 +65,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * get users by account
      *
-     * @param id
+     * @param account
      * @return list of UserVO
      */
     @Override
-    public UserVO getUsersById(String id) {
+    public List<UserVO> getUserByAccount(String account) {
         // 根据用户的account获取User对象
-        return userMapper.selectUserById(id);
+        return userMapper.selectUserByAccount(account);
     }
 
     /**
@@ -83,10 +83,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean lockUser(PostId id) {
         // 根据用户的account设置is_locked字段为1
-        if (userMapper.selectLockedByAccount(id.getId())) {
-            return userMapper.updateNotLockedByAccount(id.getId());
+        if (userMapper.selectLockedById(id.getId())) {
+            return userMapper.updateNotLockedById(id.getId());
         } else {
-           return userMapper.updateIsLockedByAccount(id.getId());
+           return userMapper.updateIsLockedById(id.getId());
         }
     }
 
@@ -116,7 +116,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean addAdmin(PostId id) {
         // 根据用户的account设置管理员
-        return userRoleMapper.updateAdminByAccount(id.getId());
+        return userRoleMapper.updateAdminById(id.getId());
     }
 
     /**
@@ -128,7 +128,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean deleteAdmin(PostId id) {
         // 根据用户的account删除管理员
-        return userRoleMapper.updateUserByAccount(id.getId());
+        return userRoleMapper.updateUserById(id.getId());
     }
 
     /**
@@ -139,7 +139,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Boolean changePassword(ChangePassword changePassword) {
-        User user = userMapper.selectOne(changePassword.getAccount());
+        User user = userMapper.selectOne(changePassword.getId());
 
         String oldPassword;
         if (user != null) {
@@ -152,7 +152,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         // 根据用户的account和password修改密码
         if (oldPassword.equals(user.getPassword())) {
-            return userMapper.updatePasswordByAccount(changePassword.getAccount(), password);
+            return userMapper.updatePasswordById(changePassword.getId(), password);
         }
         return false;
     }
@@ -215,16 +215,5 @@ public class AdministratorServiceImpl implements AdministratorService {
     public Boolean examineVideo(PostId id) {
         // 根据视频id通过审核
         return videoMapper.updateIsExaminedById(id.getId());
-    }
-
-    /**
-     * reject and delete video by id
-     *
-     * @param id
-     * @return if successful
-     */
-    @Override
-    public Boolean deleteVideo(PostId id) {
-        return videoMapper.deleteById(id.getId());
     }
 }

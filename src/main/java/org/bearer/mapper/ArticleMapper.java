@@ -2,6 +2,7 @@ package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bearer.entity.dto.PostId;
+import org.bearer.entity.po.Article;
 import org.bearer.entity.vo.ArticleVO;
 
 import java.util.List;
@@ -130,4 +131,14 @@ public interface ArticleMapper {
      * @return int
      */
     int selectCountByAuthorId(String authorId);
+
+    /**
+     * 上传文章
+     *
+     * @param article JSON{"id":"文章id","title":"文章标题","article":"文章内容",
+     *                "pictureUrl":"图片url","authorId":"作者id","cuisineId":"菜系分类id",
+     *                "materialId":"主材分类id"}
+     * @return Boolean
+     */
+    Boolean insertArticle(Article article);
 }

@@ -2,13 +2,14 @@ package org.bearer.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.service.UploadService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,24 +34,24 @@ public class UploadController {
     /**
      * 上传照片
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return org.bearer.entity.Result
      */
-    @PostMapping("/uploadPicture")
-    public Result uploadPicture(HttpServletRequest request) {
-        String url = uploadService.uploadPicture(request);
+    @PostMapping("/uploadPictureFile")
+    public Result uploadPictureFile(MultipartFile file) {
+        String url = uploadService.uploadPicture(file);
         return result(url);
     }
 
     /**
      * 上传视频
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return org.bearer.entity.Result
      */
-    @PostMapping("/uploadVideo")
-    public Result uploadVideo(HttpServletRequest request) {
-        String url = uploadService.uploadVideo(request);
+    @PostMapping("/uploadVideoFile")
+    public Result uploadVideoFile(MultipartFile file) {
+        String url = uploadService.uploadVideo(file);
         return result(url);
     }
 

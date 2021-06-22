@@ -18,7 +18,7 @@ import java.util.UUID;
  * @date Created in 2021/6/9 19:50
  */
 @Service
-@Transactional(timeout = 5, rollbackFor = {Exception.class})
+@Transactional(rollbackFor = {Exception.class})
 public class HomePageServiceImpl implements HomePageService {
 
     /**

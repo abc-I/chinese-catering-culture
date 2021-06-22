@@ -13,6 +13,6 @@
         select `search_content`
         from `cul_search_records`
         where `user_id` = #{userId}
-        order by `create_time` desc LIMIT 0,10;
+        order by `search_time` desc LIMIT 0,10;
     </select>
 </mapper>

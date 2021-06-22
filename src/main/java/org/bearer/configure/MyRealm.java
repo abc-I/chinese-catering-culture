@@ -50,9 +50,9 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
 
-        String account = (String) authenticationToken.getPrincipal();
+        String id = (String) authenticationToken.getPrincipal();
 
-        User user = userMapper.selectOne(account);
+        User user = userMapper.selectOne(id);
 
         if (user == null) {
             throw new UnknownAccountException("用户不存在！");

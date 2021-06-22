@@ -83,7 +83,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public Boolean uploadArticle(ArticleDTO articleDTO) {
-        return articleMapper.update(new Article(articleDTO));
+        return articleMapper.insertArticle(new Article(articleDTO));
     }
 
     /**
@@ -94,6 +94,6 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public Boolean uploadVideo(VideoDTO videoDTO) {
-        return videoMapper.update(new Video(videoDTO));
+        return videoMapper.insertVideo(new Video(videoDTO));
     }
 }
