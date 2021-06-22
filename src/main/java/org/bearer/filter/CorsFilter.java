@@ -1,6 +1,7 @@
 package org.bearer.filter;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.*;
@@ -14,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  * @date Created in 2021/4/11 10:57
  */
-@WebFilter("/*")
+@Component
 public class CorsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
