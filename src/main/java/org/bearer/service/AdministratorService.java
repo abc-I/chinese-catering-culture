@@ -27,10 +27,10 @@ public interface AdministratorService {
 
     /**
      * get users by account
-     * @param id
+     * @param account
      * @return
      */
-    UserVO getUsersById(String id);
+    UserVO getUserByAccount(String account);
 
     /**
      * lock users account
@@ -90,18 +90,4 @@ public interface AdministratorService {
      * @return if successful
      */
     Boolean examineVideo(PostId id);
-
-    /**
-     * reject article by id
-     * @param id
-     * @return if successful
-     */
-    Boolean rejectArticle(PostId id);
-
-    /**
-     * reject video by id
-     * @param id
-     * @return if successful
-     */
-    Boolean rejectVideo(PostId id);
 }

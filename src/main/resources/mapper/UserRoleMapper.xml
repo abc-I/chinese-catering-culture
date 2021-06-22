@@ -8,19 +8,19 @@
         values (#{id}, 'lsjfhf8f8udg8g04fhf6384guff79302');
     </insert>
 
-    <update id="updateAdminByAccount">
+    <update id="updateAdminById">
         update `cul_user_role` AS `ur`
         INNER JOIN `cul_user` AS `user`
             ON `user`.`id` = `ur`.`user_id`
         set `ur`.`role_id` = 'titjhdugig9y854jr9f7gtu59t9fjeht'
-        where `user`.`account` = #{account};
+        where `user`.`id` = #{id};
     </update>
 
-    <update id="updateUserByAccount">
+    <update id="updateUserById">
         update `cul_user_role` AS `ur`
         INNER JOIN `cul_user` AS `user`
             ON `user`.`id` = `ur`.`user_id`
         set `ur`.`role_id` = 'lsjfhf8f8udg8g04fhf6384guff79302'
-        where `user`.`account` = #{account};
+        where `user`.`id` = #{id};
     </update>
 </mapper>

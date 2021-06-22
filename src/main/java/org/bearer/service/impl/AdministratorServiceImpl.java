@@ -65,13 +65,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     /**
      * get users by account
      *
-     * @param id
+     * @param account
      * @return list of UserVO
      */
     @Override
-    public UserVO getUsersById(String id) {
+    public UserVO getUserByAccount(String account) {
         // 根据用户的account获取User对象
-        return userMapper.selectUserById(id);
+        return userMapper.selectUserByAccount(account);
     }
 
     /**
@@ -116,7 +116,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean addAdmin(PostId id) {
         // 根据用户的account设置管理员
-        return userRoleMapper.updateAdminByAccount(id.getId());
+        return userRoleMapper.updateAdminById(id.getId());
     }
 
     /**
@@ -128,7 +128,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean deleteAdmin(PostId id) {
         // 根据用户的account删除管理员
-        return userRoleMapper.updateUserByAccount(id.getId());
+        return userRoleMapper.updateUserById(id.getId());
     }
 
     /**
@@ -215,27 +215,5 @@ public class AdministratorServiceImpl implements AdministratorService {
     public Boolean examineVideo(PostId id) {
         // 根据视频id通过审核
         return videoMapper.updateIsExaminedById(id.getId());
-    }
-
-    /**
-     * reject article by id
-     *
-     * @param id
-     * @return if successful
-     */
-    @Override
-    public Boolean rejectArticle(PostId id) {
-        return articleMapper.deleteById(id.getId());
-    }
-
-    /**
-     * reject video by id
-     *
-     * @param id
-     * @return if successful
-     */
-    @Override
-    public Boolean rejectVideo(PostId id) {
-        return videoMapper.deleteById(id.getId());
     }
 }

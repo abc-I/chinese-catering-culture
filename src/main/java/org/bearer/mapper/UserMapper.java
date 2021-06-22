@@ -40,10 +40,10 @@ public interface UserMapper {
     /**
      * 通过账号查询user用户信息
      *
-     * @param id 用户id
+     * @param account 用户id
      * @return org.bearer.entity.vo.UserVO
      */
-    UserVO selectUserById(String id);
+    UserVO selectUserByAccount(String account);
 
     /**
      * 通过用户账号封号

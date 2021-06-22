@@ -52,13 +52,13 @@ public class AdministratorController {
 
     /**
      * get users by account
-     * @param id
+     * @param account
      * @return Result contains specified user
      */
     @RequiresRoles(value = {"admin"})
-    @GetMapping(value = "/getUsers/{id}")
-    public Result getUsersByAccount(@PathVariable String id) {
-        return Result.result200(administratorService.getUsersById(id));
+    @GetMapping(value = "/getUser/{account}")
+    public Result getUsersById(@PathVariable String account) {
+        return Result.result200(administratorService.getUserByAccount(account));
     }
 
     /**
