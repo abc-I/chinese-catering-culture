@@ -2,12 +2,9 @@ package org.bearer.service.impl;
 
 import org.bearer.service.UploadService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 import java.io.*;
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -21,76 +18,67 @@ public class UploadServiceImpl implements UploadService {
     /**
      * 上传图片
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return String
      */
     @Override
-    public String uploadPicture(HttpServletRequest request) {
+    public String uploadPicture(MultipartFile file) {
         String path = "./src/main/resources/static/image/";
-        String fileName = UUID.randomUUID().toString() + ".jpg";
-        if (upload(request, path, fileName)) {
-            return "/image/" + fileName;
-        } else {
-            return null;
-        }
+        return "/static/image/" + upload(file, path);
     }
 
     /**
      * 上传视频
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return String
      */
     @Override
-    public String uploadVideo(HttpServletRequest request) {
+    public String uploadVideo(MultipartFile file) {
         String path="./src/main/resources/static/video/";
-        String fileName = UUID.randomUUID().toString() + ".mp4";
-
-        if (upload(request, path, fileName)) {
-            return "/video/" + fileName;
-        } else {
-            return null;
-        }
+        return "/video/" + upload(file, path);
     }
 
     /**
      * 解析请求对象
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @param path 保存路径
-     * @param fileName 保存文件名
      * @return boolean
      */
-    private boolean upload(HttpServletRequest request, String path,String fileName) {
-        File file = new File(path);
-        if (!file.exists()) {
-            boolean bool = file.mkdirs();
-            if (!bool) {
-                return false;
-            }
+    private String upload(MultipartFile file, String path) {
+        if (file == null || file.isEmpty()) {
+            return null;
         }
 
-        try {
-            Collection<Part> parts = request.getParts();
-            for (Part part : parts) {
-                InputStream in = part.getInputStream();
-                OutputStream out = new FileOutputStream(path + fileName);
+        String name = file.getOriginalFilename();
 
-                int len;
-                byte[] buffer = new byte[1024 * 1024];
-                while ((len = in.read(buffer)) > 0) {
-                    out.write(buffer, 0, len);
-                }
+        String suffix = null;
+        if (name != null) {
+            suffix = name.substring(name.lastIndexOf("."));
+        }
 
-                out.flush();
-                out.close();
-                in.close();
+        String fileName = UUID.randomUUID().toString().replace("-", "") + suffix;
+
+        File placeFile = new File(path);
+        if (!placeFile.exists()) {
+            placeFile.mkdirs();
+        }
+
+        try (
+                InputStream in = file.getInputStream();
+                OutputStream out = new FileOutputStream(path + fileName)
+        ) {
+            int len;
+            byte[] buffer = new byte[1024 * 1024];
+            while ((len = in.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
             }
 
-            return true;
-        } catch (IOException | ServletException e) {
+            return fileName;
+        } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return fileName;
         }
     }
 }

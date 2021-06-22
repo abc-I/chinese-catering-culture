@@ -1,5 +1,7 @@
 package org.bearer.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -11,16 +13,16 @@ public interface UploadService {
     /**
      * 上传图片
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return String
      */
-    String uploadPicture(HttpServletRequest request);
+    String uploadPicture(MultipartFile file);
 
     /**
      * 上传视频
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return String
      */
-    String uploadVideo(HttpServletRequest request);
+    String uploadVideo(MultipartFile file);
 }

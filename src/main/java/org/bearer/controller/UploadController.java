@@ -9,6 +9,7 @@ import org.bearer.service.UploadService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,24 +34,24 @@ public class UploadController {
     /**
      * 上传照片
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return org.bearer.entity.Result
      */
     @PostMapping("/uploadPicture")
-    public Result uploadPicture(HttpServletRequest request) {
-        String url = uploadService.uploadPicture(request);
+    public Result uploadPicture(MultipartFile file) {
+        String url = uploadService.uploadPicture(file);
         return result(url);
     }
 
     /**
      * 上传视频
      *
-     * @param request 请求对象
+     * @param file 文件保存对象
      * @return org.bearer.entity.Result
      */
     @PostMapping("/uploadVideo")
-    public Result uploadVideo(HttpServletRequest request) {
-        String url = uploadService.uploadVideo(request);
+    public Result uploadVideo(MultipartFile file) {
+        String url = uploadService.uploadVideo(file);
         return result(url);
     }
 
