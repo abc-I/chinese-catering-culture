@@ -24,7 +24,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public String uploadPicture(MultipartFile file) {
         String path = "./src/main/resources/static/image/";
-        return "/static/image/" + upload(file, path);
+        return "/image/" + upload(file, path);
     }
 
     /**
