@@ -1,5 +1,9 @@
 package org.bearer.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.vo.*;
 import org.bearer.service.SearchPageService;
@@ -79,11 +83,17 @@ public class SearchPageController {
 
     /**
      * get search records
+     *
      * @param userId
      * @return Result contains the search search records of the user
      */
+    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
     @GetMapping("/records/{userId}")
-    public Result getSearchRecords(@PathVariable String userId){
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                    required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+    })
+    public Result getSearchRecords(@PathVariable String userId) {
         List<String> records = searchPageService.getSearchRecords(userId);
 //        List<String> records = searchPageService.getSearchRecords("dijfkfpjfwt806d37k0ur3ahl0t3");
         return Result.result200(records);
