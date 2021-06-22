@@ -1,8 +1,8 @@
 server:
-  port: 80
+  port: 443
   ssl:
-    key-store: classpath:www.lizhanfeng.xyz.jks
-    key-store-password: 4ok86us6853608
+    key-store: classpath:fyhz.xyz.jks
+    key-store-password: 8G9UMaKY
     key-store-type: JKS
 
 spring:
@@ -38,7 +38,7 @@ spring:
         # 设置最小空闲连接数
         min-idle: 8
         time-between-eviction-runs: 5
-    timeout: 10000
+    timeout: 5000
     database: 0
 
 logging:
