@@ -218,24 +218,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     /**
-     * reject article by id
+     * reject and delete video by id
      *
      * @param id
      * @return if successful
      */
     @Override
-    public Boolean rejectArticle(PostId id) {
-        return articleMapper.deleteById(id.getId());
-    }
-
-    /**
-     * reject video by id
-     *
-     * @param id
-     * @return if successful
-     */
-    @Override
-    public Boolean rejectVideo(PostId id) {
+    public Boolean deleteVideo(PostId id) {
         return videoMapper.deleteById(id.getId());
     }
 }

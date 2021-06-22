@@ -159,4 +159,16 @@ public class AdministratorController {
     public Result examineVideo(@RequestBody PostId id) {
         return Result.result200(administratorService.examineVideo(id));
     }
+
+    /**
+     * reject and delete video by id
+     * @param id
+     * @return
+     */
+    @RequiresRoles(value = {"admin"})
+    @PostMapping(value = "/deleteVideo")
+    public Result deleteVideo(@RequestBody PostId id) {
+        return Result.result200(administratorService.deleteVideo(id));
+    }
+
 }
