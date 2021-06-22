@@ -57,7 +57,7 @@ public class AdministratorController {
      */
     @RequiresRoles(value = {"admin"})
     @GetMapping(value = "/getUser/{account}")
-    public Result getUsersById(@PathVariable String account) {
+    public Result getUsersByAccount(@PathVariable String account) {
         return Result.result200(administratorService.getUserByAccount(account));
     }
 

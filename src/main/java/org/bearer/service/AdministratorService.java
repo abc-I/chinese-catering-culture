@@ -5,6 +5,8 @@ import org.bearer.entity.dto.ChangePassword;
 import org.bearer.entity.dto.PostId;
 import org.bearer.entity.vo.*;
 
+import java.util.List;
+
 /**
  * @author fanyuhongzhe
  * @description
@@ -30,7 +32,7 @@ public interface AdministratorService {
      * @param account
      * @return
      */
-    UserVO getUserByAccount(String account);
+    List<UserVO> getUserByAccount(String account);
 
     /**
      * lock users account

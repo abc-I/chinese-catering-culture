@@ -43,7 +43,7 @@ public interface UserMapper {
      * @param account 用户id
      * @return org.bearer.entity.vo.UserVO
      */
-    UserVO selectUserByAccount(String account);
+    List<UserVO> selectUserByAccount(String account);
 
     /**
      * 通过用户账号封号
