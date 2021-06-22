@@ -83,10 +83,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Boolean lockUser(PostId id) {
         // 根据用户的account设置is_locked字段为1
-        if (userMapper.selectLockedByAccount(id.getId())) {
-            return userMapper.updateNotLockedByAccount(id.getId());
+        if (userMapper.selectLockedById(id.getId())) {
+            return userMapper.updateNotLockedById(id.getId());
         } else {
-           return userMapper.updateIsLockedByAccount(id.getId());
+           return userMapper.updateIsLockedById(id.getId());
         }
     }
 
@@ -139,7 +139,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public Boolean changePassword(ChangePassword changePassword) {
-        User user = userMapper.selectOne(changePassword.getAccount());
+        User user = userMapper.selectOne(changePassword.getId());
 
         String oldPassword;
         if (user != null) {
@@ -152,7 +152,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         // 根据用户的account和password修改密码
         if (oldPassword.equals(user.getPassword())) {
-            return userMapper.updatePasswordByAccount(changePassword.getAccount(), password);
+            return userMapper.updatePasswordById(changePassword.getId(), password);
         }
         return false;
     }

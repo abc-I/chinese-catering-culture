@@ -113,7 +113,9 @@ public class LoginServiceImpl implements LoginService {
         String account = userLogin.getAccount();
         String password = userLogin.getPassword();
 
-        UsernamePasswordToken token = new UsernamePasswordToken(account, password);
+        String id = userMapper.selectIdByAccount(account);
+
+        UsernamePasswordToken token = new UsernamePasswordToken(id, password);
         Subject subject = SecurityUtils.getSubject();
 
         try {
@@ -127,8 +129,6 @@ public class LoginServiceImpl implements LoginService {
         } catch (AuthenticationException e) {
             throw new AuthenticationException("登录失败！");
         }
-
-        String id = userMapper.selectIdByAccount(account);
 
         String jwtToken = JwtUtil.createJwtToken(id);
 

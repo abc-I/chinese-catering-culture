@@ -1,5 +1,5 @@
 server:
-  port: 443
+  port: 80
   ssl:
     key-store: classpath:fyhz.xyz.jks
     key-store-password: 8G9UMaKY

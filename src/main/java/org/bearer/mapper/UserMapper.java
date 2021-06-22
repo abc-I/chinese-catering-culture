@@ -16,10 +16,10 @@ public interface UserMapper {
     /**
      * 通过账号查询用户信息
      *
-     * @param account 账号
+     * @param id 账号
      * @return org.bearer.entity.po.User
      */
-    User selectOne(String account);
+    User selectOne(String id);
 
     /**
      * 查询用户
@@ -48,10 +48,10 @@ public interface UserMapper {
     /**
      * 通过用户账号封号
      *
-     * @param account 用户账号
+     * @param id 用户id
      * @return Boolean
      */
-    Boolean updateIsLockedByAccount(String account);
+    Boolean updateIsLockedById(String id);
 
     /**
      * 查询所有admin账号
@@ -72,11 +72,11 @@ public interface UserMapper {
     /**
      * 根据账号更新密码
      *
-     * @param account 账号
+     * @param id 账号
      * @param password 密码
      * @return Boolean
      */
-    Boolean updatePasswordByAccount(String account, String password);
+    Boolean updatePasswordById(String id, String password);
 
     /**
      * 保存微信端用户信息
@@ -89,18 +89,18 @@ public interface UserMapper {
     /**
      * 通过账号锁定用户
      *
-     * @param account 账号
+     * @param id 用户id
      * @return Boolean
      */
-    Boolean selectLockedByAccount(String account);
+    Boolean selectLockedById(String id);
 
     /**
      * 通过账号解锁账号
      *
-     * @param account 账号
+     * @param id 账号
      * @return Boolean
      */
-    Boolean updateNotLockedByAccount(String account);
+    Boolean updateNotLockedById(String id);
 
     /**
      * 通过账号查找id
