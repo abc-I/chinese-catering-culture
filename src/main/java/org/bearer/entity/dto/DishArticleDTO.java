@@ -1,6 +1,5 @@
 package org.bearer.entity.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,12 +7,12 @@ import java.io.Serializable;
 /**
  * @author fanyuhongzhe
  * @description
- * @date 6/22/21 9:27 AM
+ * @date 6/23/21 9:19 AM
  */
 @Data
-public class VideoDTO implements Serializable {
+public class DishArticleDTO implements Serializable {
 
-    private static final long serialVersionUID = 4220432718859788043L;
+    private static final long serialVersionUID = 7609445704220365442L;
 
     /**
      * 标题
@@ -21,12 +20,12 @@ public class VideoDTO implements Serializable {
     private String title;
 
     /**
-     * 视频url
+     * 文章
      */
-    private String videoUrl;
+    private String article;
 
     /**
-     * 视频截图
+     * 图片url
      */
     private String pictureUrl;
 
@@ -44,4 +43,9 @@ public class VideoDTO implements Serializable {
      * 主材id
      */
     private String materialId;
+
+    /**
+     * 菜名
+     */
+    private String name;
 }

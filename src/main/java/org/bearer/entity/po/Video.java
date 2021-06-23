@@ -3,6 +3,7 @@ package org.bearer.entity.po;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.bearer.entity.dto.DishVideoDTO;
 import org.bearer.entity.dto.VideoDTO;
 
 import java.io.Serializable;
@@ -102,5 +103,15 @@ public class Video implements Serializable {
         this.authorId = videoDTO.getAuthorId();
         this.cuisineId = videoDTO.getCuisineId();
         this.materialId = videoDTO.getMaterialId();
+    }
+
+    public Video(DishVideoDTO dishVideoDTO) {
+        this.id = UUID.randomUUID().toString().replaceAll("-","");
+        this.title = dishVideoDTO.getTitle();
+        this.videoUrl = dishVideoDTO.getVideoUrl();
+        this.pictureUrl = dishVideoDTO.getPictureUrl();
+        this.authorId = dishVideoDTO.getAuthorId();
+        this.cuisineId = dishVideoDTO.getCuisineId();
+        this.materialId = dishVideoDTO.getMaterialId();
     }
 }
