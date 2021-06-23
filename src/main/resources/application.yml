@@ -41,6 +41,12 @@ spring:
     timeout: 5000
     database: 0
 
+  web:
+    resources:
+      static-locations: /static/**
+  mvc:
+    static-path-pattern: file:/home/static/
+
 logging:
   file:
     name: log/warn.log

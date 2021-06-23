@@ -23,7 +23,7 @@ public class UploadServiceImpl implements UploadService {
      */
     @Override
     public String uploadPicture(MultipartFile file) {
-        String path = "./src/main/resources/static/image/";
+        String path = "/home/static/image/";
         return "/image/" + upload(file, path);
     }
 
@@ -35,7 +35,7 @@ public class UploadServiceImpl implements UploadService {
      */
     @Override
     public String uploadVideo(MultipartFile file) {
-        String path="./src/main/resources/static/video/";
+        String path="/home/static/video/";
         return "/video/" + upload(file, path);
     }
 
