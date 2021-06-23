@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.DishArticleDTO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -95,12 +96,22 @@ public class Article implements Serializable {
     private Date modifyTime;
 
     public Article(ArticleDTO articleDTO) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString().replaceAll("-","");
         this.title = articleDTO.getTitle();
         this.article = articleDTO.getArticle();
         this.pictureUrl = articleDTO.getPictureUrl();
         this.authorId = articleDTO.getAuthorId();
         this.cuisineId = articleDTO.getAuthorId();
         this.materialId = articleDTO.getMaterialId();
+    }
+
+    public Article(DishArticleDTO dishArticleDTO) {
+        this.id = UUID.randomUUID().toString().replaceAll("-","");
+        this.title = dishArticleDTO.getTitle();
+        this.article = dishArticleDTO.getArticle();
+        this.pictureUrl = dishArticleDTO.getPictureUrl();
+        this.authorId = dishArticleDTO.getAuthorId();
+        this.cuisineId = dishArticleDTO.getAuthorId();
+        this.materialId = dishArticleDTO.getMaterialId();
     }
 }

@@ -6,6 +6,8 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.DishArticleDTO;
+import org.bearer.entity.dto.DishVideoDTO;
 import org.bearer.entity.dto.VideoDTO;
 import org.bearer.entity.po.Article;
 import org.bearer.entity.vo.Page;
@@ -69,5 +71,25 @@ public class PersonalPageController {
     @PostMapping(value = "/uploadVideo")
     public Result uploadVideo(@RequestBody VideoDTO videoDTO) {
         return Result.result200(personalService.uploadVideo(videoDTO));
+    }
+
+    /**
+     * upload article with dishname
+     * @param dishArticleDTO
+     * @return Result contains if successful
+     */
+    @PostMapping(value = "/uploadDishArticle")
+    public Result uploadDishArticle(@RequestBody DishArticleDTO dishArticleDTO) {
+        return Result.result200(personalService.uploadDishArticle(dishArticleDTO));
+    }
+
+    /**
+     * upload video wish dishname
+     * @param dishVideoDTO
+     * @return Result contains if successful
+     */
+    @PostMapping(value = "/uploadDishVideo")
+    public Result uploadDishVideo(@RequestBody DishVideoDTO dishVideoDTO) {
+        return Result.result200(personalService.uploadDishVideo(dishVideoDTO));
     }
 }

@@ -1,14 +1,18 @@
 package org.bearer.service.impl;
 
 import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.DishArticleDTO;
+import org.bearer.entity.dto.DishVideoDTO;
 import org.bearer.entity.dto.VideoDTO;
 import org.bearer.entity.po.Article;
+import org.bearer.entity.po.DishName;
 import org.bearer.entity.po.Video;
 import org.bearer.entity.vo.ArticleVO;
 import org.bearer.entity.vo.BrowsingHistoryVO;
 import org.bearer.entity.vo.Page;
 import org.bearer.mapper.ArticleMapper;
 import org.bearer.mapper.BrowsingHistoryMapper;
+import org.bearer.mapper.DishNameMapper;
 import org.bearer.mapper.VideoMapper;
 import org.bearer.service.PersonalPageService;
 import org.bearer.util.PageUtil;
@@ -32,6 +36,11 @@ public class PersonalPageServiceImpl implements PersonalPageService {
     private BrowsingHistoryMapper browsingHistoryMapper;
     @Resource
     private VideoMapper videoMapper;
+    @Resource
+    private DishNameMapper dishNameMapper;
+    @Resource
+    private MaterialNameMapper materialNameMapper;
+
 
     /**
      * get the self articles
@@ -95,5 +104,34 @@ public class PersonalPageServiceImpl implements PersonalPageService {
     @Override
     public Boolean uploadVideo(VideoDTO videoDTO) {
         return videoMapper.insertVideo(new Video(videoDTO));
+    }
+
+    /**
+     * upload user's article with dishname
+     *
+     * @param dishArticleDTO
+     * @return if successful
+     */
+    @Override
+    public Boolean uploadDishArticle(DishArticleDTO dishArticleDTO) {
+        articleMapper.insertArticle(new Article(dishArticleDTO));
+        DishName dishName = new DishName(dishArticleDTO.getName());
+        dishNameMapper.insertDishName(new DishName(dishArticleDTO.getName()));
+        return materialNameMapper.insertMaterialName(dishArticleDTO.getMaterialId(), dishName.getId());
+    }
+
+    /**
+     * upload user's video with dishname
+     *
+     * @param dishVideoDTO
+     * @return if successful
+     */
+    @Override
+    public Boolean uploadDishVideo(DishVideoDTO dishVideoDTO) {
+        videoMapper.insertVideo(new Video(dishVideoDTO));
+        DishName dishName = new DishName(dishVideoDTO.getName());
+        dishNameMapper.insertDishName(new DishName(dishVideoDTO.getName()));
+        return materialNameMapper.insertMaterialName(dishVideoDTO.getMaterialId(),dishName.getId());
+
     }
 }

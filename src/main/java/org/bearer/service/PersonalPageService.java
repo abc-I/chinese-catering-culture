@@ -1,6 +1,8 @@
 package org.bearer.service;
 
 import org.bearer.entity.dto.ArticleDTO;
+import org.bearer.entity.dto.DishArticleDTO;
+import org.bearer.entity.dto.DishVideoDTO;
 import org.bearer.entity.dto.VideoDTO;
 import org.bearer.entity.po.Article;
 import org.bearer.entity.vo.Page;
@@ -40,4 +42,18 @@ public interface PersonalPageService {
      * @return if successful
      */
     Boolean uploadVideo(VideoDTO videoDTO);
+
+    /**
+     * upload user's article with dishname
+     * @param dishArticleDTO
+     * @return if successful
+     */
+    Boolean uploadDishArticle(DishArticleDTO dishArticleDTO);
+
+    /**
+     * upload user's video with dishname
+     * @param dishVideoDTO
+     * @return if successful
+     */
+    Boolean uploadDishVideo(DishVideoDTO dishVideoDTO);
 }

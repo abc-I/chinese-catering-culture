@@ -92,4 +92,6 @@ public interface AdministratorService {
      * @return if successful
      */
     Boolean examineVideo(PostId id);
+
+    Boolean deleteVideo(PostId id);
 }
