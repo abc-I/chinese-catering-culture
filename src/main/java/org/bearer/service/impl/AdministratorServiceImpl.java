@@ -216,4 +216,15 @@ public class AdministratorServiceImpl implements AdministratorService {
         // 根据视频id通过审核
         return videoMapper.updateIsExaminedById(id.getId());
     }
+
+    /**
+     * reject and delete video by id
+     *
+     * @param id
+     * @return if successful
+     */
+    @Override
+    public Boolean deleteVideo(PostId id) {
+        return videoMapper.deleteById(id.getId());
+    }
 }
