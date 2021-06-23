@@ -85,7 +85,6 @@
             <version>3.4.2</version>
         </dependency>
 
-        <!--导入 丝袜哥 ( Swagger ) -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>

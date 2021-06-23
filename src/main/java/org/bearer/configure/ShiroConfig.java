@@ -64,6 +64,8 @@ public class ShiroConfig extends ShiroConfiguration {
         urls.put("/home/**", "anon");
         urls.put("/search/**", "anon");
         urls.put("/dynamic/getDynamic/**", "anon");
+        urls.put("/image/**", "anon");
+        urls.put("/video/**", "anon");
 
         urls.put("/logout", "logout");
         urls.put("/**", "jwtFilter,authc");

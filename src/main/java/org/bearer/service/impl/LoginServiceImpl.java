@@ -68,28 +68,30 @@ public class LoginServiceImpl implements LoginService {
 
                 User user = userMapper.selectOne(openId);
 
-                String id;
+                String account;
                 if (user == null) {
                     user = new User();
                     UserProfile userProfile = login.getUserProfile();
                     UserInfo userInfo = userProfile.getUserInfo();
 
-                    id = UUID.randomUUID().toString();
-                    user.setId(id);
-                    user.setAccount(openId);
+                    long min = 0L;
+                    long max = 99999999999L;
+
+                    account = String.valueOf(Math.random() * (max - min) + min);
+
+                    user.setId(openId);
+                    user.setAccount(account);
                     user.setUsername(userInfo.getNickName());
                     user.setLocked(false);
 
                     userMapper.insertWeChat(user);
 
-                    userRoleMapper.insertRole(id);
-                } else {
-                    id = user.getId();
+                    userRoleMapper.insertRole(openId);
                 }
 
-                String token = JwtUtil.createJwtToken(id);
+                String token = JwtUtil.createJwtToken(openId);
 
-                boolean bool = JedisUtil.set(id, token, 1000 * 60 * 60 * 24L);
+                boolean bool = JedisUtil.set(openId, token, 1000 * 60 * 60 * 24L);
 
                 if (bool) {
                     return Result.result200(new JwtToken(token));
