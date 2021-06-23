@@ -14,6 +14,7 @@ import org.bearer.mapper.*;
 import org.bearer.service.PersonalPageService;
 import org.bearer.util.PageUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import java.util.UUID;
  * @date 6/15/21 10:51 PM
  */
 @Service
+@Transactional(rollbackFor = {Exception.class})
 public class PersonalPageServiceImpl implements PersonalPageService {
 
     @Resource
@@ -112,7 +114,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public Boolean uploadDishArticle(DishArticleDTO dishArticleDTO) {
-        String id = UUID.randomUUID().toString().replaceAll("-","");
+        String id = UUID.randomUUID().toString().replaceAll("-", "");
         Article article = new Article(dishArticleDTO);
         article.setId(id);
 
@@ -133,7 +135,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
      */
     @Override
     public Boolean uploadDishVideo(DishVideoDTO dishVideoDTO) {
-        String id = UUID.randomUUID().toString().replaceAll("-","");
+        String id = UUID.randomUUID().toString().replaceAll("-", "");
         Video video = new Video(dishVideoDTO);
         video.setId(id);
 
@@ -143,7 +145,7 @@ public class PersonalPageServiceImpl implements PersonalPageService {
 
         dishNameMapper.insertDishName(dishName);
 
-        return materialNameMapper.insertMaterialName(dishVideoDTO.getMaterialId(),dishName.getId());
+        return materialNameMapper.insertMaterialName(dishVideoDTO.getMaterialId(), dishName.getId());
 
     }
 }
