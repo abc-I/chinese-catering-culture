@@ -43,7 +43,7 @@ public class SearchPageController {
      */
     @GetMapping("/dish/{id}")
     public Result getDishName(@PathVariable String id) {
-        List<DishName> dishName = searchPageService.getDishName(id);
+        List<DishNameVO> dishName = searchPageService.getDishName(id);
         return Result.result200(dishName);
     }
 

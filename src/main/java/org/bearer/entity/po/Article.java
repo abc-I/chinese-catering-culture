@@ -106,7 +106,6 @@ public class Article implements Serializable {
     }
 
     public Article(DishArticleDTO dishArticleDTO) {
-        this.id = UUID.randomUUID().toString().replaceAll("-","");
         this.title = dishArticleDTO.getTitle();
         this.article = dishArticleDTO.getArticle();
         this.pictureUrl = dishArticleDTO.getPictureUrl();

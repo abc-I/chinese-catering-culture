@@ -36,7 +36,7 @@ public interface SearchPageService {
      * get all dish name by material
      * @return list of dish name
      */
-    List<DishName> getDishName(String id);
+    List<DishNameVO> getDishName(String id);
 
     /**
      * get user's searchRecords(all now)

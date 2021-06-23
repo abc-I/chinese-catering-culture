@@ -33,6 +33,18 @@ public class DishName implements Serializable {
     private String name;
 
     /**
+     * 文章id
+     */
+    @TableField(value = "article_id")
+    private String articleId;
+
+    /**
+     * 视频id
+     */
+    @TableField(value = "video_id")
+    private String videoId;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -46,8 +58,10 @@ public class DishName implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modifyTime;
 
-    public DishName(String dishName) {
-        this.id = UUID.randomUUID().toString().replaceAll("-","");
+    public DishName(String dishName, String articleId, String videoId) {
+        this.id = UUID.randomUUID().toString().replaceAll("-", "");
         this.name = dishName;
+        this.articleId = articleId;
+        this.videoId = videoId;
     }
 }

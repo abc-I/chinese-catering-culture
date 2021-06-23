@@ -106,7 +106,6 @@ public class Video implements Serializable {
     }
 
     public Video(DishVideoDTO dishVideoDTO) {
-        this.id = UUID.randomUUID().toString().replaceAll("-","");
         this.title = dishVideoDTO.getTitle();
         this.videoUrl = dishVideoDTO.getVideoUrl();
         this.pictureUrl = dishVideoDTO.getPictureUrl();

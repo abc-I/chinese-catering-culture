@@ -105,7 +105,7 @@ public class SearchPageServiceImpl implements SearchPageService {
      * @return list of dish name with `id` `name`
      */
     @Override
-    public List<DishName> getDishName(String id) {
+    public List<DishNameVO> getDishName(String id) {
         return dishNameMapper.selectDishNameByMaterialId(id);
     }
 
