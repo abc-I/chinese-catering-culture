@@ -39,3 +39,4 @@
 - 6.22 09:41 FanHoozy Update VideoPO,ArticlePO,PersonalPage
 - 6.22 11:00 abc-I Update upload;Add insert Video,insert Article
 - 6.22 18:48 abc-I Add CorsFilter;Update VideoMapper,ArticleMapper,Transactional
+- 6.23 10:00 FanHoozy Update Article,Video,PersonalPage Add DishArticleDTO,DishVideoDTO
