@@ -95,7 +95,7 @@ public class Video implements Serializable {
     private Date modifyTime;
 
     public Video(VideoDTO videoDTO) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString().replaceAll("-","");
         this.title = videoDTO.getTitle();
         this.videoUrl = videoDTO.getVideoUrl();
         this.pictureUrl = videoDTO.getPictureUrl();

@@ -95,7 +95,7 @@ public class Article implements Serializable {
     private Date modifyTime;
 
     public Article(ArticleDTO articleDTO) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString().replaceAll("-","");
         this.title = articleDTO.getTitle();
         this.article = articleDTO.getArticle();
         this.pictureUrl = articleDTO.getPictureUrl();
