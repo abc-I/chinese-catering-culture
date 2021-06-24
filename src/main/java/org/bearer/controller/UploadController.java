@@ -38,7 +38,7 @@ public class UploadController {
      * @return org.bearer.entity.Result
      */
     @PostMapping("/uploadPictureFile")
-    public Result uploadPictureFile(MultipartFile file) {
+    public Result uploadPictureFile(@RequestPart MultipartFile file) {
         String url = uploadService.uploadPicture(file);
         return result(url);
     }
@@ -50,7 +50,7 @@ public class UploadController {
      * @return org.bearer.entity.Result
      */
     @PostMapping("/uploadVideoFile")
-    public Result uploadVideoFile(MultipartFile file) {
+    public Result uploadVideoFile(@RequestPart MultipartFile file) {
         String url = uploadService.uploadVideo(file);
         return result(url);
     }

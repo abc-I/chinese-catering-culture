@@ -43,9 +43,9 @@ spring:
 
   web:
     resources:
-      static-locations: /static/**
+      static-locations: file:/home/static/
   mvc:
-    static-path-pattern: file:/home/static/
+    static-path-pattern: /static/**
 
 logging:
   file:
