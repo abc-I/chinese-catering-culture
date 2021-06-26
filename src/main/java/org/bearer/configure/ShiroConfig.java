@@ -67,7 +67,7 @@ public class ShiroConfig extends ShiroConfiguration {
         urls.put("/dynamic/getDynamic/**", "anon");
         urls.put("/static/**", "anon");
 
-        urls.put("/logout", "jwtFilter,logout");
+        urls.put("/logout", "jwtFilter");
         urls.put("/**", "jwtFilter,authc");
 //        urls.put("/**","anon");
         factoryBean.setFilterChainDefinitionMap(urls);
