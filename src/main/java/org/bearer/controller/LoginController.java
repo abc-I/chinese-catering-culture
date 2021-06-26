@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
  * @date Created in 2021/6/15 9:20
  */
 @RestController
-@RequestMapping("/login")
 public class LoginController {
 
     @Resource

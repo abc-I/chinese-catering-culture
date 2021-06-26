@@ -57,7 +57,8 @@ public class ShiroConfig extends ShiroConfiguration {
         factoryBean.setFilters(filterMap);
 
         Map<String, String> urls = new LinkedHashMap<>();
-        urls.put("/login/**", "anon");
+        urls.put("/weChatLogin", "anon");
+        urls.put("/adminLogin", "anon");
         urls.put("/swagger-ui/**", "anon");
         urls.put("/swagger-resources/**", "anon");
         urls.put("/v2/**", "anon");
@@ -66,7 +67,7 @@ public class ShiroConfig extends ShiroConfiguration {
         urls.put("/dynamic/getDynamic/**", "anon");
         urls.put("/static/**", "anon");
 
-        urls.put("/logout", "logout");
+        urls.put("/logout", "jwtFilter,logout");
         urls.put("/**", "jwtFilter,authc");
 //        urls.put("/**","anon");
         factoryBean.setFilterChainDefinitionMap(urls);
