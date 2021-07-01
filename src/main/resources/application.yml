@@ -46,6 +46,10 @@ spring:
       static-locations: file:/home/static/
   mvc:
     static-path-pattern: /static/**
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
 
 logging:
   file:
