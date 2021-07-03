@@ -1,5 +1,6 @@
 package org.bearer.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -23,4 +24,9 @@ public class Cuisine implements Serializable {
      * 菜系分类
      */
     private String category;
+
+    /**
+     * 图片url
+     */
+    private String pictureUrl;
 }
