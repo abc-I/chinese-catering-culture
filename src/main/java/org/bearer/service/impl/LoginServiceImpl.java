@@ -1,11 +1,13 @@
 package org.bearer.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.SneakyThrows;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.*;
+import org.bearer.entity.po.UserRole;
 import org.bearer.entity.pojo.JwtToken;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
@@ -162,6 +164,7 @@ public class LoginServiceImpl implements LoginService {
      * @param signUp JSON{"username":"用户名","password":"密码"}
      * @return Result
      */
+    @SneakyThrows
     @Override
     public Result signUp(SignUp signUp) {
         String salt = UUID.randomUUID().toString().replace("-", "");
@@ -182,7 +185,14 @@ public class LoginServiceImpl implements LoginService {
         user.setId(id);
         user.setLocked(false);
 
-        boolean bool = userMapper.insertOne(user);
-        return Result.result200(account);
+        UserRole userRole = new UserRole();
+        userRole.setUserId(id);
+        userRole.setRoleId("titjhdugig9y854jr9f7gtu59t9fjeht");
+
+        if (userMapper.insertOne(user) && userRoleMapper.insertOne(userRole)) {
+            return Result.result200(account);
+        } else {
+            throw new Exception("保存用户、权限失败！");
+        }
     }
 }

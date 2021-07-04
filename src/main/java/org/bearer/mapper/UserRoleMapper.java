@@ -1,6 +1,7 @@
 package org.bearer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bearer.entity.po.UserRole;
 
 /**
  * @author Li
@@ -32,4 +33,12 @@ public interface UserRoleMapper {
      * @return int
      */
     int insertRole(String id);
+
+    /**
+     * 保存用户权限
+     *
+     * @param userRole JSON{"userId":"用户id","roleId":"前权限id"}
+     * @return boolean
+     */
+    boolean insertOne(UserRole userRole);
 }
