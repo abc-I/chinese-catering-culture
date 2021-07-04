@@ -4,7 +4,7 @@
 
     <insert id="insertDishName">
         insert into `cul_dish_name`
-            (`id`, `name`, `article_id`, `video_url`)
+            (`id`, `name`, `article_id`, `video_id`)
         values
             (#{id}, #{name}, #{articleId}, #{videoId});
     </insert>

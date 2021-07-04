@@ -101,7 +101,7 @@ public class Article implements Serializable {
         this.article = articleDTO.getArticle();
         this.pictureUrl = articleDTO.getPictureUrl();
         this.authorId = articleDTO.getAuthorId();
-        this.cuisineId = articleDTO.getAuthorId();
+        this.cuisineId = articleDTO.getCuisineId();
         this.materialId = articleDTO.getMaterialId();
     }
 
@@ -110,7 +110,7 @@ public class Article implements Serializable {
         this.article = dishArticleDTO.getArticle();
         this.pictureUrl = dishArticleDTO.getPictureUrl();
         this.authorId = dishArticleDTO.getAuthorId();
-        this.cuisineId = dishArticleDTO.getAuthorId();
+        this.cuisineId = dishArticleDTO.getCuisineId();
         this.materialId = dishArticleDTO.getMaterialId();
     }
 }
