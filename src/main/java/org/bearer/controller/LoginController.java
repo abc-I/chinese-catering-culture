@@ -55,6 +55,11 @@ public class LoginController {
      * @return Result
      */
     @PostMapping("/signUp")
+    @RequiresRoles(value = {"administrator"})
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "JwtToken", value = "JwtToken",
+                    required = true, paramType = "header", dataType = "String", dataTypeClass = String.class)
+    })
     public Result signUp(@RequestBody SignUp signUp) {
         return loginService.signUp(signUp);
     }
