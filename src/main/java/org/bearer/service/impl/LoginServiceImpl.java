@@ -11,6 +11,7 @@ import org.bearer.entity.po.UserRole;
 import org.bearer.entity.pojo.JwtToken;
 import org.bearer.entity.pojo.OpenIdJson;
 import org.bearer.entity.po.User;
+import org.bearer.entity.vo.UserVO;
 import org.bearer.mapper.UserMapper;
 import org.bearer.mapper.UserRoleMapper;
 import org.bearer.service.LoginService;
@@ -22,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -190,7 +192,9 @@ public class LoginServiceImpl implements LoginService {
         userRole.setRoleId("titjhdugig9y854jr9f7gtu59t9fjeht");
 
         if (userMapper.insertOne(user) && userRoleMapper.insertOne(userRole)) {
-            return Result.result200(account);
+            List<UserVO> users = userMapper.selectAdminByUserRole(0, 20);
+
+            return Result.result200(users);
         } else {
             throw new Exception("保存用户、权限失败！");
         }
