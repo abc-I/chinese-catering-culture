@@ -14,6 +14,7 @@
     </resultMap>
 
     <resultMap id="userVO" type="org.bearer.entity.vo.UserVO">
+        <result property="id" column="id"/>
         <result property="account" column="account"/>
         <result property="locked" column="is_locked"/>
         <result property="username" column="username"/>
@@ -56,7 +57,7 @@
     </select>
 
     <select id="selectUserList" resultMap="userVO">
-        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        select `user`.`id`, `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
                  INNER JOIN `cul_user_role` AS `ur`
                             ON `ur`.`user_id` = `user`.`id`
@@ -66,7 +67,7 @@
     </select>
 
     <select id="selectUserByAccount" resultMap="userVO">
-        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        select `user`.`id`, `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
             INNER JOIN `cul_user_role` AS `ur`
                 ON `ur`.`user_id` = `user`.`id`
@@ -77,7 +78,7 @@
     </select>
 
     <select id="selectAdminByUserRole" resultMap="userVO">
-        select `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
+        select `user`.`id`, `user`.`account`, `user`.`is_locked`, `user`.`username`,`role`.`role`
         from `cul_user` AS `user`
             INNER JOIN `cul_user_role` AS `ur`
                 ON `ur`.`user_id` = `user`.`id`
