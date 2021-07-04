@@ -7,6 +7,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChatLogin;
 import org.bearer.entity.dto.Login;
+import org.bearer.entity.dto.SignUp;
 import org.bearer.service.LoginService;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,18 @@ public class LoginController {
     @PostMapping("/adminLogin")
     public Result adminLogin(@RequestBody Login userLogin) {
         return loginService.adminLogin(userLogin);
+    }
+
+
+    /**
+     * 注册管理员用户
+     *
+     * @param signUp JSON{"username":"用户名","password":"密码"}
+     * @return Result
+     */
+    @PostMapping("/signUp")
+    public Result signUp(@RequestBody SignUp signUp) {
+        return loginService.signUp(signUp);
     }
 
     /**

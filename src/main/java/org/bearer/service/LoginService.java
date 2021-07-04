@@ -3,6 +3,7 @@ package org.bearer.service;
 import org.bearer.entity.Result;
 import org.bearer.entity.dto.ChatLogin;
 import org.bearer.entity.dto.Login;
+import org.bearer.entity.dto.SignUp;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,4 +36,12 @@ public interface LoginService {
      * @return org.bearer.entity.Result
      */
     Result logout(HttpServletRequest request);
+
+    /**
+     * 注册管理员用户
+     *
+     * @param signUp JSON{"username":"用户名","password":"密码"}
+     * @return Result
+     */
+    Result signUp(SignUp signUp);
 }

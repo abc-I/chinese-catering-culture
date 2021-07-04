@@ -117,4 +117,13 @@ public interface UserMapper {
      * @return org.bearer.entity.po.User
      */
     User selectById(String id);
+
+    /**
+     * 保存用户信息
+     *
+     * @param user JSON{"id":"用户id","username":"用户名","account":"账号",
+     *             "password":"密码","salt":"随机盐","locked":"是否封号"}
+     * @return boolean
+     */
+    boolean insertOne(User user);
 }

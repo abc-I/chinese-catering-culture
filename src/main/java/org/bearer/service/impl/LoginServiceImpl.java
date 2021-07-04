@@ -77,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
                     long min = 0L;
                     long max = 99999999999L;
 
-                    account = String.valueOf(Math.random() * (max - min) + min);
+                    account = String.valueOf((long) (Math.random() * (max - min)) + min);
 
                     user.setId(openId);
                     user.setAccount(account);
@@ -154,5 +154,35 @@ public class LoginServiceImpl implements LoginService {
         } else {
             return Result.result500("fail!");
         }
+    }
+
+    /**
+     * 注册管理员用户
+     *
+     * @param signUp JSON{"username":"用户名","password":"密码"}
+     * @return Result
+     */
+    @Override
+    public Result signUp(SignUp signUp) {
+        String salt = UUID.randomUUID().toString().replace("-", "");
+
+        long min = 0L;
+        long max = 99999999999L;
+        String account = String.valueOf((long) (Math.random() * (max - min)) + min);
+
+        String password = MD5Util.parse(signUp.getPassword(), salt);
+
+        String id = UUID.randomUUID().toString().replace("-", "");
+
+        User user = new User();
+        user.setUsername(signUp.getUsername());
+        user.setSalt(salt);
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setId(id);
+        user.setLocked(false);
+
+        boolean bool = userMapper.insertOne(user);
+        return Result.result200(account);
     }
 }

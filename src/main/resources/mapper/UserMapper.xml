@@ -32,6 +32,13 @@
         values (#{id}, #{username}, #{account}, #{locked});
     </insert>
 
+    <insert id="insertOne">
+        insert into `cul_user`
+            (`id`, `username`, `account`, `password`, `salt`, `is_locked`)
+        values
+            (#{id}, #{username}, #{account}, #{password}, #{salt}, #{locked});
+    </insert>
+
     <update id="updateIsLockedById">
         update `cul_user`
         set `is_locked` = 1
