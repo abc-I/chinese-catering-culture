@@ -169,7 +169,7 @@ public class LoginServiceImpl implements LoginService {
     @SneakyThrows
     @Override
     public Result signUp(SignUp signUp) {
-        String salt = UUID.randomUUID().toString().replace("-", "");
+        String salt = UUID.randomUUID().toString().replaceAll("-", "");
 
         long min = 0L;
         long max = 99999999999L;
@@ -177,7 +177,7 @@ public class LoginServiceImpl implements LoginService {
 
         String password = MD5Util.parse(signUp.getPassword(), salt);
 
-        String id = UUID.randomUUID().toString().replace("-", "");
+        String id = UUID.randomUUID().toString().replaceAll("-", "");
 
         User user = new User();
         user.setUsername(signUp.getUsername());
