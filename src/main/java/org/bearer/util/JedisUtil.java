@@ -28,7 +28,10 @@ public class JedisUtil {
     }
 
     public static Object get(String key) {
-        return jedisPool.getResource().get(key);
+        Jedis jedis = jedisPool.getResource();
+        Object o = jedis.get(key);
+        jedis.close();
+        return o;
     }
 
     public static boolean set(String key, String value,long time) {
